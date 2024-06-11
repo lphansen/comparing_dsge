@@ -34,13 +34,12 @@ for Delta in ${Deltaarray[@]}; do
                 tee -a ./bash/${action_name}/Delta_${Delta}/delta_${delta}/rho_${rho}_gamma_${gamma}_alpha_${alpha}.sh <<EOF
 #!/bin/bash
 
-#SBATCH --account=ssd
+#SBATCH --account=pi-lhansen
 #SBATCH --job-name=D_${Delta}_gamma_${gamma}_rho_${rho}_${action_name}
 #SBATCH --output=./job-outs/$job_name/${action_name}/Delta_${Delta}/delta_${delta}/rho_${rho}_gamma_${gamma}_alpha_${alpha}.out
 #SBATCH --error=./job-outs/$job_name/${action_name}/Delta_${Delta}/delta_${delta}/rho_${rho}_gamma_${gamma}_alpha_${alpha}.err
 #SBATCH --time=0-23:00:00
-#SBATCH --partition=ssd
-#SBATCH --qos=ssd
+#SBATCH --partition=caslake
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=15G
