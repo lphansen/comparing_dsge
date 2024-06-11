@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: modelSolnCore
+Version: 0.0.1
+Summary: Model solution to model comparison project run by MFM at BFI
+Home-page: https://bfi.uchicago.edu/mfm
+Author: Macro Finance Research (MFR) Program
+Author-email: jhuang12@uchicago.edu
+Requires-Dist: pybind11>=2.2

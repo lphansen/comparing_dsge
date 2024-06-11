@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: mfr_modelSoln
+Version: 0.1.1
+Author: Macro-Financial Modeling Team
+Author-email: jhuang12@uchicago.edu
+License: Apache Software License
+Requires-Dist: plotly

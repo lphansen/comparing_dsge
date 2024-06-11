@@ -1,0 +1,9 @@
+setup.py
+mfr/sdm/__init__.py
+mfr/sdm/stationaryDensityModules.py
+mfr_sdm.egg-info/PKG-INFO
+mfr_sdm.egg-info/SOURCES.txt
+mfr_sdm.egg-info/dependency_links.txt
+mfr_sdm.egg-info/not-zip-safe
+mfr_sdm.egg-info/requires.txt
+mfr_sdm.egg-info/top_level.txt
