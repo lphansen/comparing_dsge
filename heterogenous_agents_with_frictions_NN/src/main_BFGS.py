@@ -123,10 +123,10 @@ BFGS_ftol     = 1.0 * np.finfo(float).eps
 ## NN structure
 tf.keras.backend.set_floatx("float64") ## Use float64 by default
 sim_NN = DGMNet(layer_width = units, n_layers = n_layers, input_dim = dimension, activation = activation, final_trans = final_transformation, seed = seed)
-losses = [] 
-times = [] 
 
 ## Training
+losses = [] 
+times = [] 
 start = time.time()
 targets = tf.zeros(shape=(batchSize,1), dtype=tf.float64)
 for iter in range(iter_num):

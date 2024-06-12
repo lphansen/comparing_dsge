@@ -1,7 +1,6 @@
 import tensorflow as tf 
 import numpy as np
 np.set_printoptions(suppress=True, linewidth=200)
-from utils_para import setModelParameters
 from utils_DGM import DGMNet
 import time 
 import os
