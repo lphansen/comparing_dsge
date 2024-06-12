@@ -174,6 +174,7 @@ def marginal_quantile_func_factory(dent, statespace, statename):
         
     return inverseCDFs
 
+## Load results
 W = read_npy_state('W_NN')
 Z = read_npy_state('Z_NN')
 V = read_npy_state('V_NN')
@@ -193,23 +194,23 @@ logsdfe_diffusion = read_npy_diffusion_term('sigmalogSe_NN',[nW,nZ,nV])
 marginal_quantile = marginal_quantile_func_factory(dent, [W,Z,V], ['W','Z','V'])
 W_state = read_npy_drift_term('W_NN',[nW,nZ,nV])
 
+## Consutruct the log drift and diffusion terms for the response variable M
 mulogW = muW/W_state - 1/(2*W_state**2) *(sigmaW[0]**2+sigmaW[1]**2+sigmaW[2]**2)
 sigmalogW = [sigmaW[0]/W_state, sigmaW[1]/W_state, sigmaW[2]/W_state]
 
-sim_num = 100
-sim_length = 50
-shock_index = 0
-dx = [0.01,0.01,1e-7]
-
-dt = 1
-statespace = [W,Z,V]
-muX = [muW, muZ, muV]
-sigmaX = [sigmaW, sigmaZ, sigmaV]
-
-mulogM = mulogW
-sigmalogM = sigmalogW
-mulogS = logsdfe_drift
-sigmalogS = logsdfe_diffusion
+## Simulate elasticities
+sim_num = 100                       ## number of simulations, actual number of simulations is sim_num*100
+sim_length = 50                     ## simulation length
+shock_index = 0                     ## shock index, 0 for the capital shock
+dx = [0.01,0.01,1e-7]               ## state derivative 
+dt = 1                              ## time step
+statespace = [W,Z,V]                ## state space
+muX = [muW, muZ, muV]               ## state variable drift terms
+sigmaX = [sigmaW, sigmaZ, sigmaV]   ## state variable diffusion terms
+mulogM = mulogW                     ## log drift term for the response variable M
+sigmalogM = sigmalogW               ## log diffusion terms for the response variable M
+mulogS = logsdfe_drift              ## log drift term for the SDF
+sigmalogS = logsdfe_diffusion       ## log diffusion terms for the SDF
 
 print('Simulating elasticities for W')
 initial_point = [marginal_quantile['W'](args.W_percentile).item(), 0.0, marginal_quantile['V'](0.5).item()]

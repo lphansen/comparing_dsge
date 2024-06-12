@@ -260,10 +260,7 @@ def compute_pde_shock_elasticity(statespace, dt, muX, sigmaX, mulogM, sigmalogM,
 
     return {'exposure_elasticity':exposure_elasticity, 'price_elasticity':price_elasticity}
 
-## Generate parameter set
-params = setModelParameters(parameter_list, domain_list, nDims, datadir, shock_expo)
-sim_NN_tf = tf.saved_model.load(outputdir   + 'sim_NN')
-
+## Load results
 W = read_npy_state('W_NN')
 Z = read_npy_state('Z_NN')
 V = read_npy_state('V_NN')
@@ -297,17 +294,20 @@ ddlogxihddwdz = read_npy_drift_term('dWdZ_logXiE_NN',[nW,nZ,nV])
 ddlogxihddwdv = read_npy_drift_term('dWdV_logXiE_NN',[nW,nZ,nV])
 ddlogxihddzdv = read_npy_drift_term('dZdV_logXiE_NN',[nW,nZ,nV])
 
-logve_diffusion = [dlogxiedw * sigmaW[i] + dlogxiedz * sigmaZ[i] + dlogxiedv * sigmaV[i] for i in range(len(sigmaW))]
-logvh_diffusion = [dlogxihdw * sigmaW[i] + dlogxihdz * sigmaZ[i] + dlogxihdv * sigmaV[i] for i in range(len(sigmaW))]
-
 logce_drift = read_npy_drift_term('mulogCe_NN',[nW,nZ,nV])
 logce_diffusion = read_npy_diffusion_term('sigmalogCe_NN',[nW,nZ,nV])
-
 logch_drift = read_npy_drift_term('mulogCh_NN',[nW,nZ,nV])
 logch_diffusion = read_npy_diffusion_term('sigmalogCh_NN',[nW,nZ,nV])
-
 logsdfe_drift = read_npy_drift_term('mulogSe_NN',[nW,nZ,nV])
 logsdfe_diffusion = read_npy_diffusion_term('sigmalogSe_NN',[nW,nZ,nV])
+
+dent = read_npy_drift_term('dent_NN',[nW,nZ,nV])
+
+marginal_quantile = marginal_quantile_func_factory(dent, [W,Z,V], ['W','Z','V'])
+
+## Consutruct the log drift and diffusion terms for the response variable M and the SDF (compontents of the SDF)
+logve_diffusion = [dlogxiedw * sigmaW[i] + dlogxiedz * sigmaZ[i] + dlogxiedv * sigmaV[i] for i in range(len(sigmaW))]
+logvh_diffusion = [dlogxihdw * sigmaW[i] + dlogxihdz * sigmaZ[i] + dlogxihdv * sigmaV[i] for i in range(len(sigmaW))]
 
 logne_drift = -0.5*((1-gamma_e_val)**2)*np.sum([vd**2 for vd in logve_diffusion],axis=0)
 logne_diffusion = [(1-gamma_e_val)*logve_diffusion[i] for i in range(len(logve_diffusion))]
@@ -315,22 +315,19 @@ logne_diffusion = [(1-gamma_e_val)*logve_diffusion[i] for i in range(len(logve_d
 lognh_drift = -0.5*((1-gamma_h_val)**2)*np.sum([vd**2 for vd in logvh_diffusion],axis=0)
 lognh_diffusion = [(1-gamma_h_val)*logvh_diffusion[i] for i in range(len(logvh_diffusion))]
 
-dent = read_npy_drift_term('dent_NN',[nW,nZ,nV])
-
-marginal_quantile = marginal_quantile_func_factory(dent, [W,Z,V], ['W','Z','V'])
 W_state = read_npy_drift_term('W_NN',[nW,nZ,nV])
 
 logw_drift = muW/W_state - 1/(2*W_state**2) *(np.sum([sigmaW[i]**2 for i in range(len(sigmaW))],axis=0))
 logw_diffusion = [sigmaW[i]/W_state for i in range(len(sigmaW))]
 
+## Compute the shock elasticities
 bc = {}
 bc['natural'] = True ## natural boundary condition (see mfrSuite Readme p32/p37 for details)
-
-statespace = [np.unique(W), np.unique(Z), np.unique(V)]
-T = 45
-dt = 1
-muX = [muW, muZ, muV]
-sigmaX = [sigmaW, sigmaZ, sigmaV]
+statespace = [np.unique(W), np.unique(Z), np.unique(V)] ## statespace, unique grid points for each state variable
+T = 45      ## calculation period                                                      
+dt = 1      ## time step for the shock elasticity PDE
+muX = [muW, muZ, muV]              ## drift terms for the state variables
+sigmaX = [sigmaW, sigmaZ, sigmaV]  ## diffusion terms for the state variables
 
 if shock_expo == 'lower_triangular':
     initial_points = np.matrix([
