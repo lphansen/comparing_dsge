@@ -32,7 +32,7 @@ for nW in ${nWarray[@]}; do
                                         for delta_h in "${delta_harray[@]}"; do
                                             for lambda_d in "${lambda_darray[@]}"; do
                                                 for nu in "${nuarray[@]}"; do
-                                                    for shock_expo in "lower_triangular"; do
+                                                    for shock_expo in "${shock_expo_array[@]}"; do
                                                         for nu in "${nuarray[@]}"; do
 
                                                             count=0

@@ -56,9 +56,9 @@ nWealth           = args.nWealth         ## Number of points in the experts weal
 nZ                = args.nZ              ## Number of points in the long run risk validation sets
 nV                = args.nV              ## Number of points in the stochastic volatility validation sets
 V_bar             = args.V_bar           ## Mean of stochastic volatility
-sigma_K_norm      = args.sigma_K_norm    ## Normalized standard deviation of the experts wealth share exposure matrix
-sigma_Z_norm      = args.sigma_Z_norm    ## Normalized standard deviation of the long run risk exposure matrix
-sigma_V_norm      = args.sigma_V_norm    ## Normalized standard deviation of the stochastic volatility exposure matrix
+sigma_K_norm      = args.sigma_K_norm    ## Normalized standard deviation of the experts wealth share exposure matrix, see mfrSuite Readme p20/p21 for details
+sigma_Z_norm      = args.sigma_Z_norm    ## Normalized standard deviation of the long run risk exposure matrix, see mfrSuite Readme p20/p21 for details
+sigma_V_norm      = args.sigma_V_norm    ## Normalized standard deviation of the stochastic volatility exposure matrix, see mfrSuite Readme p20/p21 for details
 wMin              = args.wMin            ## Minimum wealth share
 wMax              = args.wMax            ## Maximum wealth share
 

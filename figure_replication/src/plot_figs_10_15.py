@@ -94,7 +94,7 @@ def return_fdm_solution(shock_expo, dt, nW, chiUnderline, a_e, a_h, gamma_e, gam
     lambda_d_t = "{:0.3f}".format(lambda_d)
     nu_t = "{:0.3f}".format(nu)
 
-    folder_name = ('../heterogenous_agents_with_frictions_FDM/output/' + action_name + '/' + shock_expo + '/dt_'+str(dt)+'/nW_'+str(nW)+'_nZ_'+str(nZ)+'/chiUnderline_' + chiUnderline_t + '/a_e_' + a_e_t + '_a_h_' + a_h_t  + '/gamma_e_' + gamma_e_t + '_gamma_h_' + gamma_h_t + '/rho_e_' + rho_e_t + '_rho_h_' + rho_h_t + '/delta_e_' + delta_e_t + '_delta_h_' + delta_h_t + '/lambda_d_' + lambda_d_t + '_nu_' + nu_t)
+    folder_name = ('../heterogenous_agents_with_frictions_FDM (mfrSuite)/output/' + action_name + '/' + shock_expo + '/dt_'+str(dt)+'/nW_'+str(nW)+'_nZ_'+str(nZ)+'/chiUnderline_' + chiUnderline_t + '/a_e_' + a_e_t + '_a_h_' + a_h_t  + '/gamma_e_' + gamma_e_t + '_gamma_h_' + gamma_h_t + '/rho_e_' + rho_e_t + '_rho_h_' + rho_h_t + '/delta_e_' + delta_e_t + '_delta_h_' + delta_h_t + '/lambda_d_' + lambda_d_t + '_nu_' + nu_t)
 
     def read_dat(filename):
         with open(folder_name + '/'+filename+'.dat', 'r') as file:
@@ -104,8 +104,8 @@ def return_fdm_solution(shock_expo, dt, nW, chiUnderline, a_e, a_h, gamma_e, gam
     W = read_dat('W')
     Z = read_dat('Z')
     
-    with open(folder_name + '/PiE_final_TFP.pkl' , 'rb') as file:
-        PiE_final_TFP = pickle.load(file)
+    with open(folder_name + '/PiE_final_capital.pkl' , 'rb') as file:
+        PiE_final_capital = pickle.load(file)
     with open(folder_name + '/kappa_final.pkl' , 'rb') as file:
         kappa_final = pickle.load(file)
 
@@ -122,7 +122,7 @@ def return_fdm_solution(shock_expo, dt, nW, chiUnderline, a_e, a_h, gamma_e, gam
         elasticities_W1 = None
         elasticities_W2 = None
     
-    return {'W':W, 'Z':Z, 'PiE_final_TFP':PiE_final_TFP, 'dents':dents, 'kappa_final':kappa_final, 'elasticities_W0':elasticities_W0, 'elasticities_W1':elasticities_W1, 'elasticities_W2':elasticities_W2}
+    return {'W':W, 'Z':Z, 'PiE_final_capital':PiE_final_capital, 'dents':dents, 'kappa_final':kappa_final, 'elasticities_W0':elasticities_W0, 'elasticities_W1':elasticities_W1, 'elasticities_W2':elasticities_W2}
             
 
 
@@ -372,7 +372,7 @@ fig, axes = plt.subplots(2, 3, figsize=(12, 7))
 W = model_070_lower_triangular['W']['W'].unique()
 W2 = model_070_upper_triangular['W']['W'].unique()
 
-sns.lineplot(x = W, y = model_070_lower_triangular['PiE_final_TFP'], ax = axes[0,0])
+sns.lineplot(x = W, y = model_070_lower_triangular['PiE_final_capital'], ax = axes[0,0])
 ax2 = axes[0,0].twinx()
 sns.lineplot(x = W2, y = model_070_upper_triangular['dents'].values, ax = ax2, ls='--', color='grey',lw=2.0, alpha=0.5)
 ax2.grid(False)
@@ -383,7 +383,7 @@ axes[0,0].set_ylim(0,1.0)
 axes[0,0].set_xlim(0,1.0)
 ax2.set_ylim([0,0.016])
 
-sns.lineplot(x = W, y = model_080_lower_triangular['PiE_final_TFP'], ax = axes[0,1])
+sns.lineplot(x = W, y = model_080_lower_triangular['PiE_final_capital'], ax = axes[0,1])
 ax2 = axes[0,1].twinx()
 sns.lineplot(x = W2, y = model_080_upper_triangular['dents'].values, ax = ax2, ls='--', color='grey',lw=2.0, alpha=0.5)
 ax2.grid(False)
@@ -394,7 +394,7 @@ axes[0,1].set_ylim(0,1.0)
 axes[0,1].set_xlim(0,1.0)
 ax2.set_ylim([0,0.016])
 
-sns.lineplot(x = W, y = model_085_lower_triangular['PiE_final_TFP'], ax = axes[0,2])
+sns.lineplot(x = W, y = model_085_lower_triangular['PiE_final_capital'], ax = axes[0,2])
 ax2 = axes[0,2].twinx()
 sns.lineplot(x = W2, y = model_085_upper_triangular['dents'].values, ax = ax2, ls='--', color='grey',lw=2.0, alpha=0.5)
 ax2.grid(False)

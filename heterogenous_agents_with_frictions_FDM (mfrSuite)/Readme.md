@@ -6,7 +6,7 @@ The subfolder solves two-dimensional heterogenous-agent production economies in 
 
 1. **run_1.sh**
    - **main_solve.py**: Solves the model IP using Finite Difference 
-     - **_mfrSuite_**: Independe modules to solve heterogenous-agent models, please run `install.sh` in the directory before solving the model
+     - **_mfrSuite_**: Independent module to solve heterogenous-agent models in the paper, please run `install.sh` in the directory before solving the model
    - **main_evaluate.py**: Evaluates the solved models on specific points we are insterested in
 2. **run_2.sh**
    - **main_sim_shock_elasticity.py**: Calculates shock elasticities by simulation

@@ -55,16 +55,16 @@ Z_sample = np.array([0])
 W_grid, Z_grid = np.meshgrid(W_sample, Z_sample, indexing='ij')
 grid_points = np.column_stack((W_grid.ravel(), Z_grid.ravel()))
 
-print('interpolating PiE_final_TFP')
+print('interpolating PiE_final_capital')
 
 PiE_final = read_dat('PiE_final')
-PiE_final_TFP = pd.concat([W,Z,PiE_final['PiE_final'][:len(PiE_final)//2]], axis=1)
-points = PiE_final_TFP[['W', 'Z']].values
-values = PiE_final_TFP['PiE_final'].values
-PiE_final_TFP = griddata(points, values, grid_points, method='linear')
+PiE_final_capital = pd.concat([W,Z,PiE_final['PiE_final'][:len(PiE_final)//2]], axis=1)
+points = PiE_final_capital[['W', 'Z']].values
+values = PiE_final_capital['PiE_final'].values
+PiE_final_capital = griddata(points, values, grid_points, method='linear')
 
-with open(os.getcwd()+"/" + folder_name + "/PiE_final_TFP.pkl", 'wb') as file:   
-    pickle.dump(PiE_final_TFP, file)
+with open(os.getcwd()+"/" + folder_name + "/PiE_final_capital.pkl", 'wb') as file:   
+    pickle.dump(PiE_final_capital, file)
 
 print('interpolating kappa_final')
 

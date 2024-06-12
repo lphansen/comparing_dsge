@@ -16,7 +16,7 @@ rho_h=1.0
 nu=0.1
 
 V_bar=0.0000063030303030303026
-sigma_K_norm=3.1707442821755683
+sigma_K_norm=3.1707442821755683 
 sigma_Z_norm=19.835431735873996
 sigma_V_norm=0.0010882177801089308
 wMin=0.01
@@ -36,7 +36,7 @@ penalization=10000
 BFGSmaxiter=100
 BFGSmaxfun=100
 
-Wpercentile_array=(0.05 0.1 0.5)
+Wpercentile_array=(0.05 0.1 0.5) # Shock elasticity initilization points
 
 # Run Model Execution
 # Loop through all configurations and execute the models.

@@ -44,9 +44,9 @@ params['nVtilde']           = 0 ## Number of grid points for idiosyncratic stoch
 params['Z_bar']             = 0.0 ## Mean of long run risk
 params['V_bar']             = 1.0 ## Mean of aggregate stochastic volatility
 params['Vtilde_bar']        = 0.0 ## Mean of individual stochastic volatility
-params['sigma_K_norm']      = 1*np.sqrt(12)*np.sqrt(muz2) ## Normalized standard deviation of the experts wealth share exposure matrix
-params['sigma_Z_norm']      = 2.30608/0.4027386142660167*np.sqrt(12)*np.sqrt(muz2) ## Normalized standard deviation of the long run risk exposure matrix
-params['sigma_V_norm']      = 0.0 ## Normalized standard deviation of the stochastic volatility exposure matrix
+params['sigma_K_norm']      = 1*np.sqrt(12)*np.sqrt(muz2) ## Normalized standard deviation of the experts wealth share exposure matrix, see mfrSuite Readme p20/p21 for details
+params['sigma_Z_norm']      = 2.30608/0.4027386142660167*np.sqrt(12)*np.sqrt(muz2) ## Normalized standard deviation of the long run risk exposure matrix, see mfrSuite Readme p20/p21 for details
+params['sigma_V_norm']      = 0.0 ## Normalized standard deviation of the stochastic volatility exposure matrix, see mfrSuite Readme p20/p21 for details
 params['sigma_Vtilde_norm'] = 0.0 ## Normalized standard deviation of the idiosyncratic stochastic volatility exposure matrix
 params['wMin']              = 0.001 ## Minimum wealth share
 params['wMax']              = 0.999 ## Maximum wealth share
@@ -91,7 +91,7 @@ params['CGscale']           = 1.0
 params['hhCap']             = 1
 params['precondFreq']       = -1
 
-## Shock correlation params
+## Shock correlation params, see mfrSuite Readme p20/p21 for details
 if args.shock_expo == 'lower_triangular':
     params['cov11']             = 1.0
     params['cov12']             = 0.0
