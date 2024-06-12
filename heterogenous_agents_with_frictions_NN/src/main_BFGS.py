@@ -109,9 +109,10 @@ tolerance = 1e-4
 params = setModelParameters(parameter_list, domain_list, nDims, datadir, shock_expo)
 batchSize = int(2**points_size)
 dimension = 3
-activation = 'tanh'
-final_transformation = 'sigmoid'
+activation = 'tanh'                 ## Activation function for the neural network
+final_transformation = 'sigmoid'    ## Output transformation kappa policy function dimension
 
+## scipy BFGS optimization parameters
 BFGS_maxiter  = args.BFGS_maxiter
 BFGS_maxfun   = args.BFGS_maxfun
 BFGS_gtol     = 1.0 * np.finfo(float).eps

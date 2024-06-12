@@ -7,7 +7,7 @@ The subfolder solves three-dimenisonal heterogenous-agent production economies i
 1. **run_1.sh**
    - **main_BFGS.py**: Solves the model RF / SG / PR using the scipy L-BFGS-B solver.
      - **utils_para.py**: Generates parameters in the model
-     - **utils_training.py**: Defines HJB and FOC loss functions
+     - **utils_training.py**: Defines HJB and FOC loss functions and BFGS training function
      - **utils_DGM.py**: Neural nets basic structures
 2. **run_2.sh**
    - **main_variable.py**: Evaluates the solved models on validation sets, calculate stationary densities and validation errors
@@ -54,5 +54,10 @@ Running the above bash scripts organizes the outputs and logs into specific dire
 
 Each task was tested on a single core of Intel Xeon Gold 6248R using the parameters in the bash file, with multiple tasks run simultaneously, except for **run_4.sh**, which was tested on 45 cores.
 
-## Notes
+## Neural Networks vs. Finite Difference 
+
 Neural networks and finite difference methods both provide solutions to the heterogeneous-agent model presented in the paper. Neural networks are faster; they do not rely on boundary conditions and capable of extending to solve a four-dimensional model with idiosyncratic volatility (not included in this repository). Finite difference solutions, on the other hand, are stable and can generate monotonic decreasing capital risk prices for the model IP, which neural networks cannot achieve directly. Therefore, we chose to use the finite difference method to produce results for the model IP.
+
+## Shock Elasticity PDE vs. Simulation Method
+
+Due to its parallelization potential, the simulation method achieves high speed in shock elasticity computation. When the initial points are not near the boundary, both simulation and PDE methods generate similar shock elasticity. However, PDE methods are influenced by the specified boundary conditions. For example, the capital shock price elasticity remains relatively flat when the initial expert wealth is 0.012 in model RF and SG, whereas the simulation method exhibits a stronger mean reversion, see online appendix for details.

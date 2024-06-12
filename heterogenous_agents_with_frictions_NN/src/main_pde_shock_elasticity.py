@@ -106,19 +106,71 @@ os.makedirs(datadir,exist_ok=True)
 os.makedirs(outputdir,exist_ok=True)
 
 def read_npy_state(filename):
+    """
+    Load state variable from .npy file, return unique grid points as flattened numpy array.
+
+    Parameters:
+    filename: str
+        The name of the .npy file to be loaded.
+
+    Returns:
+    numpy array
+        Unique grid points as flattened numpy array.
+    """
     data = np.load(outputdir + filename + '.npy')
     return np.unique(data)
 
 def read_npy_drift_term(filename, statespace_shape):
+    """
+    Load drift term from .npy file, return reshaped numpy array with the same shape as the state space grid.
+
+    Parameters:
+    filename: str
+        The name of the .npy file to be loaded.
+    statespace_shape: list of int
+        The shape of the state space grid.
+    
+    Returns:
+    numpy array
+        The drift term as a reshaped numpy array with the same shape as the state space grid.
+    """
     data = np.load(outputdir + filename + '.npy')
-    return data.reshape(statespace_shape,order='F')
+    return data.reshape(statespace_shape, order='F')
 
 def read_npy_diffusion_term(filename, statespace_shape):
+    """
+    Load diffusion term from .npy file, return the exposure to the shock as a reshaped numpy array with the same shape as the state space grid. 
+    Incorporate the shock exposure to all shocks as a list of numpy arrays.
+
+    Parameters:
+    filename: str
+        The name of the .npy file to be loaded.
+    statespace_shape: list of int
+        The shape of the state space grid.
+
+    Returns:
+    list of numpy arrays
+        The exposure to all shocks as a list of numpy arrays with the same shape as the state space grid.
+    """
     data = np.load(outputdir + filename + '.npy')
     return [data[:,col].reshape(statespace_shape,order='F') for col in range(data.shape[1])]
 
 def marginal_quantile_func_factory(dent, statespace, statename):
+    """
+    Load stationary density from .npy file, return the marginal quantile function for each state variable.
 
+    Parameters:
+    dent: numpy array
+        The stationary density as a numpy array, with the shape of the state space grid.
+    statespace: list of numpy arrays
+        List of state variables in numpy arrays for each state dimension. Grid points should be unique and sorted in ascending order.
+    statename: list of str
+        List of state variable names.
+    
+    Returns:
+    dict
+        The marginal quantile function for each state variable.
+    """
     inverseCDFs = {}
     
     nRange   = list(range(len(statespace)))
@@ -134,6 +186,7 @@ def marginal_quantile_func_factory(dent, statespace, statename):
 def compute_pde_shock_elasticity(statespace, dt, muX, sigmaX, mulogM, sigmalogM, mulogS, sigmalogS, initial_point, T, boundary_condition):
     """
     Computes the shock elasticity of the model using the PDE method. It uses an independent module from mfrSuite.
+    For the details of the PDE method, see the mfrSuite Readme file p34.
 
     Parameters:
     - statespace: list of flatten numpy arrays

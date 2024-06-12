@@ -55,7 +55,8 @@ def marginal_quantile_func_factory(dent, statespace, statename):
 def compute_pde_shock_elasticity(statespace, dt, muX, sigmaX, mulogM, sigmalogM, mulogS, sigmalogS, initial_point, T, boundary_condition):
     """
     Computes the shock elasticity of the model using the PDE method. It uses an independent module from mfrSuite.
-
+    For the details of the PDE method, see the mfrSuite Readme file p34.
+    
     Parameters:
     - statespace: list of flatten numpy arrays
         List of state variables in flattened numpy arrays for each state dimension. Grid points should be unique and sorted in ascending order.
