@@ -14,7 +14,7 @@ The subfolder solves three-dimenisonal heterogenous-agent production economies i
 3. **run_3.sh**
    - **main_pde_shock_elasticity.py**: Calculates shock elasticities by solving PDE
      - **utils_pde_shock_elasticity.py**: Contains source files for continuous-time shock elasticity PDE computations.
-4. **run_4.sh**
+4. **run_4.sh** (run_3.sh and run_4.sh can be run simultaneously)
    - **main_sim_shock_elasticity.py**: Calculates shock elasticities by simulation
      - **utils_sim_shock_elasticity.py**: Contains source files for continuous-time shock elasticity simulations.
 5. **results.ipynb**: Load model solution, plot risk prices, equilibrium varibles, shock elasticities.
