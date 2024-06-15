@@ -13,7 +13,7 @@ def return_solution(Delta, gamma, rho, kappa, beta1, beta2, alpha, action_name):
 
     zeta = 0.5
     
-    outputdir = "../heterogenous_capital_with_stochastic_volatility/output/"+action_name+"/Delta_"+str(Delta)+'/beta1_'+str(beta1)+'_beta2_'+str(beta2)+"/kappa_"+str(kappa)+"_zeta_"+str(zeta)+"/gamma_"+str(gamma)+"_rho_"+str(rho)+'_alpha_'+str(alpha)+"/"
+    outputdir = "../3_heterogenous_capital_with_stochastic_volatility/output/"+action_name+"/Delta_"+str(Delta)+'/beta1_'+str(beta1)+'_beta2_'+str(beta2)+"/kappa_"+str(kappa)+"_zeta_"+str(zeta)+"/gamma_"+str(gamma)+"_rho_"+str(rho)+'_alpha_'+str(alpha)+"/"
     res = np.load(outputdir + "res.npz")
     try:
         elasticity_logimo = np.load(outputdir + "elasticity_logimo.npz", allow_pickle=True)

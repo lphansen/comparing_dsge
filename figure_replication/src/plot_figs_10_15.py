@@ -29,7 +29,7 @@ def return_NN_solution(shock_expo, seed, chiUnderline, a_e, a_h, gamma_e, gamma_
         model_folder = 'chiUnderline_' + chiUnderline + '_a_e_' + a_e + '_a_h_' + a_h  + '_gamma_e_' + gamma_e + '_gamma_h_' + gamma_h + '_rho_e_' + psi_e + '_rho_h_' + psi_h + '_delta_e_' + delta_e + '_delta_h_' + delta_h + '_lambda_d_' + lambda_d + '_nu_' + nu
         layer_folder =  'seed_' + str(seed) + '_n_layers_' + str(n_layers) + '_units_' + str(units) +'_points_size_' + str(points_size) + '_iter_num_' + str(iter_num) + '_penalization_' + str(penalization)
 
-        outputdir = '../heterogenous_agents_with_frictions_NN/output/' + action_name + '/' + shock_expo + '/'+ domain_folder + '/' + model_folder + '/' + layer_folder + '/'
+        outputdir = '../4_heterogenous_agents_with_frictions_NN/output/' + action_name + '/' + shock_expo + '/'+ domain_folder + '/' + model_folder + '/' + layer_folder + '/'
 
         eva_V_10 = np.load(outputdir + 'eva_V_10.npz')
         eva_V_50 = np.load(outputdir + 'eva_V_50.npz')
@@ -94,7 +94,7 @@ def return_fdm_solution(shock_expo, dt, nW, chiUnderline, a_e, a_h, gamma_e, gam
     lambda_d_t = "{:0.3f}".format(lambda_d)
     nu_t = "{:0.3f}".format(nu)
 
-    folder_name = ('../heterogenous_agents_with_frictions_FDM (mfrSuite)/output/' + action_name + '/' + shock_expo + '/dt_'+str(dt)+'/nW_'+str(nW)+'_nZ_'+str(nZ)+'/chiUnderline_' + chiUnderline_t + '/a_e_' + a_e_t + '_a_h_' + a_h_t  + '/gamma_e_' + gamma_e_t + '_gamma_h_' + gamma_h_t + '/rho_e_' + rho_e_t + '_rho_h_' + rho_h_t + '/delta_e_' + delta_e_t + '_delta_h_' + delta_h_t + '/lambda_d_' + lambda_d_t + '_nu_' + nu_t)
+    folder_name = ('../5_heterogenous_agents_with_frictions_FDM (mfrSuite)/output/' + action_name + '/' + shock_expo + '/dt_'+str(dt)+'/nW_'+str(nW)+'_nZ_'+str(nZ)+'/chiUnderline_' + chiUnderline_t + '/a_e_' + a_e_t + '_a_h_' + a_h_t  + '/gamma_e_' + gamma_e_t + '_gamma_h_' + gamma_h_t + '/rho_e_' + rho_e_t + '_rho_h_' + rho_h_t + '/delta_e_' + delta_e_t + '_delta_h_' + delta_h_t + '/lambda_d_' + lambda_d_t + '_nu_' + nu_t)
 
     def read_dat(filename):
         with open(folder_name + '/'+filename+'.dat', 'r') as file:

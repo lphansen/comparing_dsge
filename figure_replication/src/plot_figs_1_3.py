@@ -12,7 +12,7 @@ from utils_pde_shock_elasticity import computeElas
 
 def return_solution(rho, gamma, Delta, delta, alpha, action_name):
 
-    outputdir = f"../single_capital_with_stochastic_volatility/output/{action_name}/Delta_{Delta}/delta_{delta}/gamma_{gamma}_rho_{rho}_alpha_{alpha}/"
+    outputdir = f"../1_single_capital_with_stochastic_volatility/output/{action_name}/Delta_{Delta}/delta_{delta}/gamma_{gamma}_rho_{rho}_alpha_{alpha}/"
     
     res = np.load(os.path.join(outputdir, "res.npz"))
     elasticity_logc = np.load(os.path.join(outputdir, "elasticity_logc.npz"), allow_pickle=True)

@@ -17,7 +17,7 @@ def return_solution(gamma, twoparameter, action_name):
     alpha = 0.0922
     q = 0.2
     
-    outputdir = f"../single_capital_with_structure_ambiguity/output/{action_name}/Delta_{Delta}_twoparameter_{twoparameter}/q_{q}_gamma_{gamma}_rho_{rho}_alpha_{alpha}/"
+    outputdir = f"../2_single_capital_with_structure_ambiguity/output/{action_name}/Delta_{Delta}_twoparameter_{twoparameter}/q_{q}_gamma_{gamma}_rho_{rho}_alpha_{alpha}/"
     res = np.load(outputdir + "res.npz")
 
     uncertainty_priceelas = np.load(outputdir + "uncertainty_priceelas.npz",allow_pickle=True)

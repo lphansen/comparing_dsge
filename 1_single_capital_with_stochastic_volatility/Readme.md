@@ -5,9 +5,9 @@ The subfolder solves single capital production economies with stochastic volatil
 ## Scripts Overview
 
 1. **run_1.sh**: solve for the $\rho=1$ case
-    - **main_onecapital.jl**: Solves the three dimensional model using Finite Diffence.
+    - **main_onecapital.jl**: Solves the three dimensional model using Finite Difference.
         - **utils_onecapital.jl**: Contains source files for HJB equation computations.
-    - **main_pde_shock_elasticity.py**: Solve the investment-output ratio, consumption, uncertainty price shock elasticity using Finite Diffence.
+    - **main_pde_shock_elasticity.py**: Solve the investment-output ratio, consumption, uncertainty price shock elasticity using Finite Difference.
         - **utils_pde_shock_elasticity.py**: Contains source files for continuous-time shock elasticity PDE computations.
         - **utils_FDM.py**: Computes finite differences for input data across various dimensions and orders.
 2. **run_2.sh**: Use $\rho=1$ result as preload to solve the case with $\rho = 0.67$ and $\rho = 1.5$
