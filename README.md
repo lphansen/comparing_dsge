@@ -8,7 +8,7 @@ This repository contains the replication files for the research conducted by [Ha
 4. **Sections 5.3.1, 5.3.2, 5.3.3:** [`4_heterogenous_agents_with_frictions_NN`](https://github.com/lphansen/macro-finance/tree/main/4_heterogenous_agents_with_frictions_NN)
 5. **Section 5.3.4:** [`5_heterogenous_agents_with_frictions_FDM (mfrSuite)`](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite))
 
-We recommend running the code on clusters; our computations were performed on [UChicago Midway3](https://rcc.uchicago.edu/midway3). To replicate the calibrations used in the paper, please refer to the environment settings and run the bash files in each subfolder sequentially. The results from each subfolder are independent and can be reviewed in the Jupyter notebook named `results.ipynb` located in each subfolder. 
+We recommend running the code on clusters; our computations were performed on [UChicago Midway3](https://rcc.uchicago.edu/midway3). To replicate the calibrations used in the paper, please refer to the environment settings and run the bash files in each subfolder sequentially. The results from each subfolder are independent and can be reviewed in the Jupyter notebook named `results.ipynb` located in each subfolder. The [`figure_replication`](https://github.com/lphansen/macro-finance/tree/main/figure_replication) subfolder contains the code used to generate all the figures in the paper.
 
 Readers can modify the bash files and main files directly to test customized parameters. Estimated running times for each bash file are included in the readme file of each subfolder.
 
@@ -27,4 +27,4 @@ Readers can modify the bash files and main files directly to test customized par
     Pkg.activate(".")
     Pkg.instantiate()
     ```
-- Please note that the [`5_heterogenous_agents_with_frictions_FDM (mfrSuite)`](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite)) subfolder requires the installation of the [_mfrSuite_](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite)/src/mfrSuite) module before solving the model. The [`figure_replication`](https://github.com/lphansen/macro-finance/tree/main/figure_replication) subfolder contains the code used to generate all the figures in the paper.
+- Please note that the [`5_heterogenous_agents_with_frictions_FDM (mfrSuite)`](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite)) subfolder requires the installation of the [_mfrSuite_](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite)/src/mfrSuite) module before solving the model. 
