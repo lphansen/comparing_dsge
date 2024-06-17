@@ -8,9 +8,9 @@ module.
 
 Questions/suggestions: please contact
 
-Joe Huang:       jhuang12@uchicago.edu
-Paymon Khorrami: paymon@uchicago.edu
-Fabrice Tourre:  fabrice@uchicago.edu
+Joe Huang:       jhuangsa@gmail.com
+Paymon Khorrami: paymon.khorrami@duke.edu
+Fabrice Tourre:  fabrice.tourre@gmail.com
 
 """
 
@@ -20,7 +20,6 @@ from scipy.sparse import csc_matrix, identity
 from scipy.sparse.linalg import factorized
 from scipy.interpolate import RegularGridInterpolator
 import warnings
-from pyMKL import pardisoSolver
 
 ######################################################
 ############## Stationary Density Module #############
@@ -148,7 +147,7 @@ def convertLogW(inputMat, stateGridW, stateMatLogW):
     return inputMat.copy()
 
 
-def computeDent(stateMat, model, bc = {'natural': True}, usePardiso = False, iparms = {}, \
+def computeDent(stateMat, model, bc = {'natural': True}, \
 explicit = False, dt = 0.1, tol = 1e-5, maxIters = 100000, verb = False, betterCP = True):
 
     ############################################################################################
@@ -180,15 +179,8 @@ explicit = False, dt = 0.1, tol = 1e-5, maxIters = 100000, verb = False, betterC
         ## Method (1)
         rhs = -linSys[1:,0]
         x   = None
-        if not usePardiso:
-            solve = factorized(linSysSub)
-            x     = solve(rhs.toarray())
-        else:
-            pSolve = pardisoSolver(linSysSub.tocsr(), mtype=11)
-            if bool(iparms):
-                for k, v in iparms.items(): pSolve.iparm[k] = v
-            pSolve.factor()
-            x      = pSolve.solve(rhs.toarray()).reshape(S - 1, 1)
+        solve = factorized(linSysSub)
+        x     = solve(rhs.toarray())
         dentPrime = np.insert(x,0,1)
     else:
         ## Method (2)
@@ -284,10 +276,6 @@ def createMatrixDent(upperLims, lowerLims, S, N, dVec, increVec, stateMat, model
                 upperLims, lowerLims, S, N, dVec, increVec, sigmaX,
                  firstCoefs, secondCoefs, a0, first, second, third, natural, betterCP)
     return vals, colInd, rowInd, atBounds, corners
-
-
-
-
 
 @jit(nopython=True)
 def createMatrixInnerDensity(stateMat, upperLims, lowerLims, S, N, dVec, increVec, sigmaX,

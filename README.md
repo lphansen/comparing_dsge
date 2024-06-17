@@ -14,7 +14,10 @@ Readers can modify the bash files and main files directly to test customized par
 
 ## Notes
 
-- Guidance on setting up a UChicago Midway Account can be found [here](https://rcc.uchicago.edu/accounts-allocations/request-account).
+- Guidance on setting up a UChicago Midway Account can be found [here](https://rcc.uchicago.edu/accounts-allocations/request-account). Please change the following line in your bash script to your account:
+  ```bash
+  #SBATCH --account=pi-lhansen
+  ```
 - Guidance on running Jupyter Notebooks on Midway can be found [here](https://rcc-uchicago.github.io/user-guide/software/apps-and-envs/python/).
 - We recommend configuring both Python and Julia environments before starting your work. 
   - **Python**: Use the `requirements.txt` file to set up your Python environment. Run the following command:

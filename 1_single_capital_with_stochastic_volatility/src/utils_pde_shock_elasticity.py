@@ -7,9 +7,9 @@ module.
 
 Questions/suggestions: please contact
 
-Joe Huang:       jhuang12@uchicago.edu
-Paymon Khorrami: paymon@uchicago.edu
-Fabrice Tourre:  fabrice@uchicago.edu
+Joe Huang:       jhuangsa@gmail.com
+Paymon Khorrami: paymon.khorrami@duke.edu
+Fabrice Tourre:  fabrice.tourre@gmail.com
 """
 
 from numba import jit
@@ -18,7 +18,6 @@ from scipy.sparse import csc_matrix
 from scipy.sparse.linalg import factorized
 import math
 from scipy.interpolate import RegularGridInterpolator
-from pyMKL import pardisoSolver
 
 def getStateMatInfo(stateMat):
 
@@ -418,7 +417,7 @@ def createMatrix(upperLims, lowerLims, S, N, dVec, increVec, stateMat, model,bc,
 ############Function to solve linear system through time########
 ################################################################
 
-def solvePhi(upperLims, lowerLims, S, N, numShocks, dVec, increVec, stateMat, model, bc, usePardiso, iparms, betterCP):
+def solvePhi(upperLims, lowerLims, S, N, numShocks, dVec, increVec, stateMat, model, bc, betterCP):
 
     #####Step 0: Construct linear system####
     linSys, atBounds, corners = createMatrix(upperLims, lowerLims, S, N, dVec, increVec,
@@ -429,13 +428,7 @@ def solvePhi(upperLims, lowerLims, S, N, numShocks, dVec, increVec, stateMat, mo
     solve  = None
     pSolve = None
 
-    if usePardiso:
-        pSolve = pardisoSolver(linSys.tocsr(), mtype=11)
-        if bool(iparms):
-            for k, v in iparms.items(): pSolve.iparm[k] = v
-        pSolve.factor()
-    else:
-        solve = factorized(linSys)
+    solve = factorized(linSys)
     for t in range(0,model['T']):
         if (t == 0):
             phit[:,:,t] = phi0
@@ -448,10 +441,7 @@ def solvePhi(upperLims, lowerLims, S, N, numShocks, dVec, increVec, stateMat, mo
                 phit[atBounds.astype(int), :, t] = -bc['a0']
 
             ######Solve the system#####
-            if usePardiso:
-                phit[:,:,t] = pSolve.solve(phit[:,:,t])
-            else:
-                phit[:,:,t] = solve(phit[:,:,t])
+            phit[:,:,t] = solve(phit[:,:,t])
 
             if (not bc['natural']):
                 ######Adjust corners######
@@ -466,7 +456,7 @@ def solvePhi(upperLims, lowerLims, S, N, numShocks, dVec, increVec, stateMat, mo
 class elas():  ####False class to store elasticities
     pass
 
-def computeElasSub(stateMat, model, bc, x0, usePardiso, iparms, betterCP):
+def computeElasSub(stateMat, model, bc, x0, betterCP):
 
     ############################################################################################
     #########Inner function that gets called twice for shock expo and price respectively########
@@ -480,7 +470,7 @@ def computeElasSub(stateMat, model, bc, x0, usePardiso, iparms, betterCP):
     numStarts = x0.shape[0]   ###number of starting points
     numShocks = (1 if len(model['sigmaC'](x0).shape) == 1 else model['sigmaC'](x0).shape[1]) ###number of shocks
     phit, linSys, atBounds = \
-    solvePhi(upperLims, lowerLims, S, N, numShocks, dVec, increVec, stateGrid, model, bc, usePardiso, iparms, betterCP)
+    solvePhi(upperLims, lowerLims, S, N, numShocks, dVec, increVec, stateGrid, model, bc, betterCP)
 
     ###Set up the points at which we want to interpolate
     x_evals = np.array([ np.matrix(np.zeros([2 * N + 1, N])) for i in range(numStarts)])
@@ -525,13 +515,13 @@ def computeElasSub(stateMat, model, bc, x0, usePardiso, iparms, betterCP):
 
     return firstType, secondType, phit, linSys, atBounds
 
-def computeElas(stateMat, model, bc, x0, usePardiso = False, iparms = {}, betterCP = True):
+def computeElas(stateMat, model, bc, x0, betterCP = True):
 
     ## This is the main function used to compute shock elasticities.
 
     #############Steo 1: Compute shock exposure elasticities
     expoElas = elas()
-    firstType, secondType, phit1, linSys1, atBounds = computeElasSub(stateMat, model, bc, x0, usePardiso, iparms, betterCP)
+    firstType, secondType, phit1, linSys1, atBounds = computeElasSub(stateMat, model, bc, x0, betterCP)
     expoElas.firstType = firstType; expoElas.secondType = secondType; 
 
     #############Steo 2: Compute shock cost elasticities
@@ -542,7 +532,7 @@ def computeElas(stateMat, model, bc, x0, usePardiso = False, iparms = {}, better
     modelCopy['sigmaC'] = (lambda f1, f2: lambda x: f1(x) + f2(x))(model['sigmaC'], model['sigmaS'])
 
     costElas = elas()
-    firstType, secondType, phit2, linSys2, atBounds = computeElasSub(stateMat, modelCopy, bc, x0, usePardiso, iparms, betterCP)
+    firstType, secondType, phit2, linSys2, atBounds = computeElasSub(stateMat, modelCopy, bc, x0, betterCP)
     costElas.firstType = firstType; costElas.secondType = secondType;
 
     #############Step 3: Compute shock price elasticities
