@@ -14,7 +14,7 @@ Readers can modify the bash files and main files directly to test customized par
 
 ## Notes
 
-- Guidance on setting up a UChicago Midway Account can be found [here](https://rcc.uchicago.edu/accounts-allocations/request-account). Please change the following line in your bash script to your account:
+- Guidance on setting up a UChicago Midway Account can be found [here](https://rcc.uchicago.edu/accounts-allocations/request-account). Please change the following line in the bash script to your account:
   ```bash
   #SBATCH --account=pi-lhansen
   ```
