@@ -277,41 +277,6 @@ function create_Aval!(Aval, d_, c_, e_, II)
     nothing
 end
 
-function create_Aval_natural!(Aval, d_, c_, e_, c_2, e_2, II)
-
-    iter = 1
-    j = 1
-    Aval[iter] = d_[j]; iter += 1;
-    Aval[iter] = e_[1+j]; iter += 1;
-    Aval[iter] = e_2[2+j]; iter += 1;
-
-    j = 2
-    Aval[iter] = c_[-1+j]; iter += 1;
-    Aval[iter] = d_[j]; iter += 1;
-    Aval[iter] = e_[1+j]; iter += 1;
-    Aval[iter] = e_2[2+j]; iter += 1;
-
-    for j=3:(II-2)
-        Aval[iter] = c_2[-2+j]; iter += 1;
-        Aval[iter] = c_[-1+j]; iter += 1;
-        Aval[iter] = d_[j]; iter += 1;
-        Aval[iter] = e_[1+j]; iter += 1;
-        Aval[iter] = e_2[2+j]; iter += 1;
-    end
-
-    j = II-1
-    Aval[iter] = c_2[-2+j]; iter += 1;
-    Aval[iter] = c_[-1+j]; iter += 1;
-    Aval[iter] = d_[j]; iter += 1;
-    Aval[iter] = e_[1+j]; iter += 1;
-
-    j = II
-    Aval[iter] = c_2[-2+j]; iter += 1;
-    Aval[iter] = c_[-1+j]; iter += 1;
-    Aval[iter] = d_[j]; iter += 1;
-
-    nothing
-end
 
 function value_function_onecapital(gamma::Float64,
                                     rho::Float64,

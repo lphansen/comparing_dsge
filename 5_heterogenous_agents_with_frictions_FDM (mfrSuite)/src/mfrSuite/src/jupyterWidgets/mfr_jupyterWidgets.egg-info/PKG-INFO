@@ -1,10 +1,6 @@
 Metadata-Version: 2.1
-Name: mfr_jupyterWidgets
+Name: mfr-jupyterWidgets
 Version: 0.1.1
 Author: Macro-Financial Modeling Team
 Author-email: jhuang12@uchicago.edu
 License: Apache Software License
-Requires-Dist: plotly
-Requires-Dist: nbconvert>=5.3.1
-Requires-Dist: jupyter>=1.0.0
-Requires-Dist: ipywidgets>=7.4.2

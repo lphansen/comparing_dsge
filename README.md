@@ -30,4 +30,33 @@ Readers can modify the bash files and main files directly to test customized par
     Pkg.activate(".")
     Pkg.instantiate()
     ```
+  - **One-Step Setup**: Run the `setup_environment.sh` script to set up all environments in one step.
+
 - Please note that the [`5_heterogenous_agents_with_frictions_FDM (mfrSuite)`](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite)) subfolder requires the installation of the [_mfrSuite_](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite)/src/mfrSuite) module before solving the model. 
+
+- To test customized parameters, we can modify the arrays at the beginning of the bash script. For example, consider `run_1.sh` in [`1_single_capital_with_stochastic_volatility`](https://github.com/lphansen/macro-finance/tree/main/1_single_capital_with_stochastic_volatility):
+  ```bash
+  Deltaarray=(1.0)
+  gammaarray=(1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0)
+  deltaarray=(0.01)
+  rhoarray=(0.67 1.0 1.5)
+  alphaarray=(0.0922)
+
+  for Delta in ${Deltaarray[@]}; do
+    for delta in ${deltaarray[@]}; do
+      for rho in ${rhoarray[@]}; do
+        for gamma in ${gammaarray[@]}; do
+          for alpha in ${alphaarray[@]}; do
+            ...
+              action_name="large_test"
+            ...
+          end
+        end
+      end
+    end
+  end
+  ```
+  This script runs every combination of `gamma` from 1.0 to 8.0 and `rho` equal to 0.67, 1.0, and 1.5, given delta equal to 0.01 and alpha equal to 0.0922.
+
+
+

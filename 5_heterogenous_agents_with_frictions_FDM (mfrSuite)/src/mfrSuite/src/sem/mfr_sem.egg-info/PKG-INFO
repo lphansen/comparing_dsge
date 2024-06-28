@@ -1,8 +1,6 @@
 Metadata-Version: 2.1
-Name: mfr_sem
+Name: mfr-sem
 Version: 0.1.1
 Author: Macro-Financial Modeling Team
 Author-email: jhuang12@uchicago.edu
 License: Apache Software License
-Requires-Dist: numba>=0.42.0
-Requires-Dist: pyMKL
