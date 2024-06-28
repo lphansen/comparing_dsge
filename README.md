@@ -10,7 +10,7 @@ This repository contains the replication files for the research conducted by [Ha
 
 We recommend running the code on clusters; our computations were performed on [UChicago Midway3](https://rcc.uchicago.edu/midway3). To replicate the calibrations used in the paper, please refer to the environment settings and run the bash files in each subfolder sequentially. The results from each subfolder are independent and can be reviewed in the Jupyter notebook named `results.ipynb` located in each subfolder. The [`figure_replication`](https://github.com/lphansen/macro-finance/tree/main/figure_replication) subfolder contains the code used to generate all the figures in the paper.
 
-Readers can modify the bash files and main files directly to test customized parameters. Estimated running times for each bash file are included in the readme file of each subfolder.
+Estimated running times for each bash file are included in the readme file of each subfolder.
 
 ## Notes
 
@@ -57,6 +57,11 @@ Readers can modify the bash files and main files directly to test customized par
   end
   ```
   This script runs every combination of `gamma` from 1.0 to 8.0 and `rho` equal to 0.67, 1.0, and 1.5, given delta equal to 0.01 and alpha equal to 0.0922.
+  - We can also add other parameters we want to iterate over into the bash files and use `ArgParse` (for Julia) or `argparse` (for Python) to pass them to the scripts.
 
+- If you encounter issues with scripts not being executable, please run
+  ```bash
+  chmod +x script_name.sh
+  ```
 
 
