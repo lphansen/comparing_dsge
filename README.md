@@ -14,11 +14,13 @@ Estimated running times for each bash file are included in the readme file of ea
 
 ## Notes
 
+
 - Guidance on setting up a UChicago Midway Account can be found [here](https://rcc.uchicago.edu/accounts-allocations/request-account). Please change the following line in the bash script to your account:
   ```bash
   #SBATCH --account=pi-lhansen
   ```
 - Guidance on running Jupyter Notebooks on Midway can be found [here](https://rcc-uchicago.github.io/user-guide/software/apps-and-envs/python/).
+- Please note that the [`5_heterogenous_agents_with_frictions_FDM (mfrSuite)`](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite)) subfolder requires the installation of the [_mfrSuite_](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite)/src/mfrSuite) module before solving the model. 
 - We recommend configuring both Python and Julia environments before starting your work. 
   - **Python**: Use the `requirements.txt` file to set up your Python environment. Run the following command:
     ```bash
@@ -32,9 +34,7 @@ Estimated running times for each bash file are included in the readme file of ea
     ```
   - **One-Step Setup**: Run the `setup_environment.sh` script to set up all environments in one step.
 
-- Please note that the [`5_heterogenous_agents_with_frictions_FDM (mfrSuite)`](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite)) subfolder requires the installation of the [_mfrSuite_](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite)/src/mfrSuite) module before solving the model. 
-
-- To test customized parameters, we can modify the arrays at the beginning of the bash script. For example, consider `run_1.sh` in [`1_single_capital_with_stochastic_volatility`](https://github.com/lphansen/macro-finance/tree/main/1_single_capital_with_stochastic_volatility):
+- To test customized parameters, a quick way is to modify the arrays at the beginning of the bash script. For example, consider `run_1.sh` in [`1_single_capital_with_stochastic_volatility`](https://github.com/lphansen/macro-finance/tree/main/1_single_capital_with_stochastic_volatility):
   ```bash
   Deltaarray=(1.0)
   gammaarray=(1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0)
@@ -57,7 +57,7 @@ Estimated running times for each bash file are included in the readme file of ea
   end
   ```
   This script runs every combination of `gamma` from 1.0 to 8.0 and `rho` equal to 0.67, 1.0, and 1.5, given delta equal to 0.01 and alpha equal to 0.0922.
-  - We can also add other parameters we want to iterate over into the bash files and use `ArgParse` (for Julia) or `argparse` (for Python) to pass them to the scripts.
+  - You can also add other parameters you want to iterate over into the bash files and use `ArgParse` (for Julia) or `argparse` (for Python) to pass them to the scripts.
 
 - If you encounter issues with scripts not being executable, please run
   ```bash
