@@ -32,7 +32,7 @@ Estimated running times for each bash file are included in the readme file of ea
     Pkg.activate(".")
     Pkg.instantiate()
     ```
-  - **One-Step Setup**: Run the `setup_environment.sh` script to set up all environments in one step.
+  - **One-Step Setup**: Run the `setup_environment.sh` script to set up all environments and `mfrSuite` in one step.
 
 - To test customized parameters, a quick way is to modify the arrays at the beginning of the bash script. For example, consider `run_1.sh` in [`1_single_capital_with_stochastic_volatility`](https://github.com/lphansen/macro-finance/tree/main/1_single_capital_with_stochastic_volatility):
   ```bash
