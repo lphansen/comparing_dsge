@@ -12,16 +12,25 @@ We recommend running the code on clusters; our computations were performed on [U
 
 Estimated running times for each bash file are included in the readme file of each subfolder.
 
-## Notes
+## Notes: Quick Start 
 
+### Connect to Uchicago Midway Server
 
 - Guidance on setting up a UChicago Midway Account can be found [here](https://rcc.uchicago.edu/accounts-allocations/request-account). Please change the following line in the bash script to your account:
   ```bash
   #SBATCH --account=pi-lhansen
   ```
 - Guidance on running Jupyter Notebooks on Midway can be found [here](https://rcc-uchicago.github.io/user-guide/software/apps-and-envs/python/).
+
+- Git clone the project in your local folder. 
+
+### Set up the environment
+
 - Please note that the [`5_heterogenous_agents_with_frictions_FDM (mfrSuite)`](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite)) subfolder requires the installation of the [_mfrSuite_](https://github.com/lphansen/macro-finance/tree/main/5_heterogenous_agents_with_frictions_FDM%20(mfrSuite)/src/mfrSuite) module before solving the model. 
 - We recommend configuring both Python and Julia environments before starting your work. 
+  - **One-Step Setup**: Run the `setup_environment.sh` script to set up all environments and `mfrSuite` in one step.
+
+  If you would prefer setting up each environment separately:
   - **Python**: Use the `requirements.txt` file to set up your Python environment. Run the following command:
     ```bash
     python -m pip install -r requirements.txt
@@ -32,8 +41,34 @@ Estimated running times for each bash file are included in the readme file of ea
     Pkg.activate(".")
     Pkg.instantiate()
     ```
-  - **One-Step Setup**: Run the `setup_environment.sh` script to set up all environments and `mfrSuite` in one step.
+  
+### Replicate the result in each subfolder 
+[To Edit] Before you customize parameters, we recommend you to first test the code in each subfolder to make sure your environment is correctly set up. For example, for the first subfolder:
 
+1. Run the following code in your terminal: 
+cd 1_single_capital_with_stochastic_volatility
+bash run_1.sh
+Once this has finished running, run:
+bash run_2.sh
+
+the error messages will be saved in job-outs folder. 
+
+2. Then run results.ipynb to view the plots.
+
+Please see the detailed instruction in subfolders' Readme file. 
+It is important that you do not run each bash file until the previous bash file has finished running.
+E.g., only execute run_3.sh once run_2.sh has successfully completed.
+
+
+
+### Test customized parameters
+
+# Simple customization
+In the first subfolder `1_single_capital_with_stochastic_volatility`, there is a bash file `simple.sh` which can be used
+to test a single specification in the first environment. More details can be found in the `Readme.md` for that environment.
+
+
+# Further customization
 - To test customized parameters, a quick way is to modify the arrays at the beginning of the bash script. For example, consider `run_1.sh` in [`1_single_capital_with_stochastic_volatility`](https://github.com/lphansen/macro-finance/tree/main/1_single_capital_with_stochastic_volatility):
   ```bash
   Deltaarray=(1.0)
