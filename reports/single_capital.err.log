@@ -1,0 +1,58 @@
+Traceback (most recent call last):
+  File "/home/chh/.local/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/software/python-anaconda-2020.11-el8-x86_64/lib/python3.8/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/software/python-anaconda-2020.11-el8-x86_64/lib/python3.8/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/software/python-anaconda-2020.11-el8-x86_64/lib/python3.8/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/software/python-anaconda-2020.11-el8-x86_64/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/software/python-anaconda-2020.11-el8-x86_64/lib/python3.8/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/software/python-anaconda-2020.11-el8-x86_64/lib/python3.8/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/software/python-anaconda-2020.11-el8-x86_64/lib/python3.8/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+using LinearAlgebra
+using SparseArrays
+using Interpolations
+using SuiteSparse
+include("../1_single_capital_with_stochastic_volatility/src/utils_onecapital.jl")
+include("../1_single_capital_with_stochastic_volatility/src/main_onecapital.jl")
+------------------
+
+LoadError: ArgParseError("too many arguments")
+in expression starting at /project/lhansen/macrofinance/1_single_capital_with_stochastic_volatility/src/main_onecapital.jl:42
+
+Stacktrace:
+  [1] argparse_error(x::Any)
+    @ ArgParse ~/.julia/packages/ArgParse/bylyV/src/parsing.jl:9
+  [2] parse_arg!(state::ArgParse.ParserState, settings::ArgParseSettings)
+    @ ArgParse ~/.julia/packages/ArgParse/bylyV/src/parsing.jl:918
+  [3] parse_args_unhandled(args_list::Vector, settings::ArgParseSettings, truncated_shopts::Bool)
+    @ ArgParse ~/.julia/packages/ArgParse/bylyV/src/parsing.jl:632
+  [4] parse_args_unhandled(args_list::Vector, settings::ArgParseSettings)
+    @ ArgParse ~/.julia/packages/ArgParse/bylyV/src/parsing.jl:595
+  [5] parse_args(args_list::Vector, settings::ArgParseSettings; as_symbols::Bool)
+    @ ArgParse ~/.julia/packages/ArgParse/bylyV/src/parsing.jl:469
+  [6] parse_args(args_list::Vector, settings::ArgParseSettings)
+    @ ArgParse ~/.julia/packages/ArgParse/bylyV/src/parsing.jl:466
+  [7] parse_args(settings::ArgParseSettings; kw::Base.Pairs{Symbol, V, Tuple{Vararg{Symbol, N}}, NamedTuple{names, T}} where {V, N, names, T<:Tuple{Vararg{Any, N}}})
+    @ ArgParse ~/.julia/packages/ArgParse/bylyV/src/parsing.jl:421
+  [8] parse_args(settings::ArgParseSettings)
+    @ ArgParse ~/.julia/packages/ArgParse/bylyV/src/parsing.jl:421
+  [9] parse_commandline()
+    @ Main /project/lhansen/macrofinance/1_single_capital_with_stochastic_volatility/src/main_onecapital.jl:39
+ [10] top-level scope
+    @ show.jl:1047
+ [11] include(fname::String)
+    @ Base.MainInclude ./client.jl:451
+ [12] top-level scope
+    @ In[1]:6
+LoadError: LoadError: ArgParseError("too many arguments")
+in expression starting at /project/lhansen/macrofinance/1_single_capital_with_stochastic_volatility/src/main_onecapital.jl:42
+
