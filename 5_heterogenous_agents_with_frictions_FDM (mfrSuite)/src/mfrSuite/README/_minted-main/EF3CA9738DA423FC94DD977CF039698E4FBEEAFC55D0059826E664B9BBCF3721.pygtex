@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{}\PYGZsh{} Solve model}
-\PYG{n}{testModel}\PYG{o}{.}\PYG{n}{solve}\PYG{p}{()}
-\end{Verbatim}
