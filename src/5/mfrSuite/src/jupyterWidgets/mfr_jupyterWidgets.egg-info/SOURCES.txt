@@ -1,0 +1,9 @@
+setup.py
+mfr/jupyterWidgets/__init__.py
+mfr/jupyterWidgets/jupyterWidgets.py
+mfr_jupyterWidgets.egg-info/PKG-INFO
+mfr_jupyterWidgets.egg-info/SOURCES.txt
+mfr_jupyterWidgets.egg-info/dependency_links.txt
+mfr_jupyterWidgets.egg-info/not-zip-safe
+mfr_jupyterWidgets.egg-info/requires.txt
+mfr_jupyterWidgets.egg-info/top_level.txt

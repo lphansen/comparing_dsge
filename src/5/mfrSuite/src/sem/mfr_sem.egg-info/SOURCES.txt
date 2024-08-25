@@ -1,0 +1,9 @@
+setup.py
+mfr/sem/__init__.py
+mfr/sem/shockElasModules.py
+mfr_sem.egg-info/PKG-INFO
+mfr_sem.egg-info/SOURCES.txt
+mfr_sem.egg-info/dependency_links.txt
+mfr_sem.egg-info/not-zip-safe
+mfr_sem.egg-info/requires.txt
+mfr_sem.egg-info/top_level.txt

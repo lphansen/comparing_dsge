@@ -1,0 +1,11 @@
+setup.py
+mfr/modelSoln/__init__.py
+mfr/modelSoln/helpers.py
+mfr/modelSoln/modelClass.py
+mfr/modelSoln/settings.py
+mfr_modelSoln.egg-info/PKG-INFO
+mfr_modelSoln.egg-info/SOURCES.txt
+mfr_modelSoln.egg-info/dependency_links.txt
+mfr_modelSoln.egg-info/not-zip-safe
+mfr_modelSoln.egg-info/requires.txt
+mfr_modelSoln.egg-info/top_level.txt

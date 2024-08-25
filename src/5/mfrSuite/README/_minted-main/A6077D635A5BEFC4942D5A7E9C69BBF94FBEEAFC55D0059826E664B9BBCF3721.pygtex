@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{mfr.modelSoln} \PYG{k}{as} \PYG{n+nn}{m}
+
+\PYG{n}{params} \PYG{o}{=} \PYG{n}{m}\PYG{o}{.}\PYG{n}{paramsDefault}\PYG{o}{.}\PYG{n}{copy}\PYG{p}{()}
+
+\PYG{n}{params}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}nV\PYGZsq{}}\PYG{p}{]}           \PYG{o}{=} \PYG{l+m+mi}{50}
+\PYG{n}{params}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}nWealth\PYGZsq{}}\PYG{p}{]}      \PYG{o}{=} \PYG{l+m+mi}{100}
+\PYG{n}{params}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}sigma\PYGZus{}V\PYGZus{}norm\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mf}{0.132}
+\PYG{n}{params}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}cov21\PYGZsq{}}\PYG{p}{]}        \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1}
+
+\PYG{n}{testModel} \PYG{o}{=} \PYG{n}{m}\PYG{o}{.}\PYG{n}{Model}\PYG{p}{(}\PYG{n}{params}\PYG{p}{)}
+\end{Verbatim}

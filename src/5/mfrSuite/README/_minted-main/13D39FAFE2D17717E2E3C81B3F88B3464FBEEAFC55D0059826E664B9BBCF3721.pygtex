@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{} Import modules}
+\PYG{k+kn}{import} \PYG{n+nn}{mfr.modelSoln} \PYG{k}{as} \PYG{n+nn}{m}
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{} Copy default parameters}
+\PYG{n}{params} \PYG{o}{=} \PYG{n}{m}\PYG{o}{.}\PYG{n}{paramsDefault}\PYG{o}{.}\PYG{n}{copy}\PYG{p}{()}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{} Modify copied dictionary}
+\PYG{n}{params}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}nV\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{50}
+\PYG{n}{params}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}nWealth\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{100}
+\PYG{n}{params}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}sigma\PYGZus{}V\PYGZus{}norm\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mf}{0.132}
+\PYG{n}{params}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}cov21\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.1}
+\end{Verbatim}
