@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1 Baseline Model &#8212; Quant Macro Finance</title>
+    <title>1 Baseline Model &#8212; Comparing DSGE Models</title>
   
   
   
@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'baseline';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Elasticities" href="elasticities.html" />
+    <link rel="next" title="2 Elasticities" href="elasticities.html" />
     <link rel="prev" title="Introduction" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -140,7 +140,7 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    <p class="title logo__title">Quant Macro Finance</p>
+    <p class="title logo__title">Comparing DSGE Models</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -148,7 +148,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">1 Baseline Model</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="elasticities.html">Elasticities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elasticities.html">2 Elasticities</a></li>
 
 
 </ul>
@@ -483,7 +483,7 @@ C_t + I_t = \alpha K_t
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>V</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">V</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(V\)</span></p></td>
 <td><p>Value function</p></td>
 </tr>
@@ -495,19 +495,19 @@ C_t + I_t = \alpha K_t
 <td><p><span class="math notranslate nohighlight">\(\frac{I}{K}\)</span></p></td>
 <td><p>Investment-capital ratio</p></td>
 </tr>
-<tr class="row-odd"><td><p>Vz</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Vz</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(\frac{\partial{v}}{\partial{z_1}}\)</span></p></td>
 <td><p>Derivative of <span class="math notranslate nohighlight">\(V\)</span> with respect to <span class="math notranslate nohighlight">\(Z^1\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>Vy</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Vy</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(\frac{\partial{v}}{\partial{z_2}}\)</span></p></td>
 <td><p>Derivative of <span class="math notranslate nohighlight">\(V\)</span> with respect to <span class="math notranslate nohighlight">\(Z^2\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>mu_k</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mu_k</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(\mu_{\hat{K}}\)</span></p></td>
 <td><p>Drift of <span class="math notranslate nohighlight">\(\log{K}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>g</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">g</span></code></p></td>
 <td></td>
 <td><p>Stationary density</p></td>
 </tr>
@@ -610,7 +610,10 @@ ymax = 2.0e-5, ymin = 5.0e-7, ylength = 201
 Iteration = 1
 Distance = 0.2253588241838127
 v max = -5.774641175816187
-v min = -6.149840658685116
+v min = 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-6.149840658685116
 ----------------------------------
 </pre></div>
 </div>
@@ -1916,7 +1919,9 @@ Distance = 0.007458554613030632
 v max = 0.09566548467365882
 v min = -5.964066917802052
 ----------------------------------
-----------------------------------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------
 Iteration = 165
 Distance = 0.007384415857668705
 v max = 0.10304990053132752
@@ -1978,7 +1983,9 @@ Distance = 0.006886034382423967
 v max = 0.15272704307371368
 v min = -5.9070733824950485
 ----------------------------------
-----------------------------------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------
 Iteration = 173
 Distance = 0.00681768090034654
 v max = 0.15954472397406022
@@ -2066,30 +2073,60 @@ v min = -5.835742134254255
 ----------------------------------
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------
+Iteration = 184
+Distance = 0.006109583198482871
+v max = 0.23021933249138304
+v min = -5.829635674854782
+----------------------------------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------
+Iteration = 185
+Distance = 0.006049011037105895
+v max = 0.23626834352848894
+v min = -5.823589594210744
+----------------------------------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------
+Iteration = 186
+Distance = 0.005989043629882285
+v max = 0.24225738715837122
+v min = -5.81760329954246
+----------------------------------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------
+Iteration = 187
+Distance = 0.0059296746777343645
+v max = 0.2481870618361056
+v min = -5.8116762036279495
+----------------------------------
+</pre></div>
+</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>InterruptException:
 
 Stacktrace:
-  [1] umfpack_symbolic!(U::SuiteSparse.UMFPACK.UmfpackLU{Float64, Int64})
-    @ SuiteSparse.UMFPACK /software/julia-1.7.3-el8-x86_64/share/julia/stdlib/v1.7/SuiteSparse/src/umfpack.jl:365
-  [2] umfpack_numeric!(U::SuiteSparse.UMFPACK.UmfpackLU{Float64, Int64}; reuse_numeric::Bool)
-    @ SuiteSparse.UMFPACK /software/julia-1.7.3-el8-x86_64/share/julia/stdlib/v1.7/SuiteSparse/src/umfpack.jl:386
-  [3] umfpack_numeric!
+  [1] umfpack_numeric!(U::SuiteSparse.UMFPACK.UmfpackLU{Float64, Int64}; reuse_numeric::Bool)
+    @ SuiteSparse.UMFPACK /software/julia-1.7.3-el8-x86_64/share/julia/stdlib/v1.7/SuiteSparse/src/umfpack.jl:388
+  [2] umfpack_numeric!
     @ /software/julia-1.7.3-el8-x86_64/share/julia/stdlib/v1.7/SuiteSparse/src/umfpack.jl:385 [inlined]
-  [4] lu(S::SparseMatrixCSC{Float64, Int64}; check::Bool)
+  [3] lu(S::SparseMatrixCSC{Float64, Int64}; check::Bool)
     @ SuiteSparse.UMFPACK /software/julia-1.7.3-el8-x86_64/share/julia/stdlib/v1.7/SuiteSparse/src/umfpack.jl:202
-  [5] lu
+  [4] lu
     @ /software/julia-1.7.3-el8-x86_64/share/julia/stdlib/v1.7/SuiteSparse/src/umfpack.jl:196 [inlined]
-  [6] \(A::SparseMatrixCSC{Float64, Int64}, B::Vector{Float64})
+  [5] \(A::SparseMatrixCSC{Float64, Int64}, B::Vector{Float64})
     @ SparseArrays /software/julia-1.7.3-el8-x86_64/share/julia/stdlib/v1.7/SparseArrays/src/linalg.jl:1554
-  [7] value_function_onecapital(gamma::Float64, rho::Float64, model::OneCapitalEconomy{Float64}, grid::Grid_zy{Float64}, params::FinDiffMethod, preloadV0::Matrix{Float64}, preloadcons::Matrix{Float64}, ymean::Float64)
+  [6] value_function_onecapital(gamma::Float64, rho::Float64, model::OneCapitalEconomy{Float64}, grid::Grid_zy{Float64}, params::FinDiffMethod, preloadV0::Matrix{Float64}, preloadcons::Matrix{Float64}, ymean::Float64)
     @ Main /project/lhansen/macrofinance/src/1/utils_onecapital.jl:418
-  [8] macro expansion
+  [7] macro expansion
     @ /project/lhansen/macrofinance/src/1/main_onecapital.jl:101 [inlined]
-  [9] macro expansion
+  [8] macro expansion
     @ ./timing.jl:299 [inlined]
- [10] main(gamma::Float64, rho::Float64, Delta::Float64, delta::Float64, alpha::Float64, action_name::String)
+  [9] main(gamma::Float64, rho::Float64, Delta::Float64, delta::Float64, alpha::Float64, action_name::String)
     @ Main /project/lhansen/macrofinance/src/1/main_onecapital.jl:100
- [11] top-level scope
+ [10] top-level scope
     @ In[3]:1
 </pre></div>
 </div>
@@ -2110,6 +2147,18 @@ Stacktrace:
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="model-ambiguity">
 <h1>1.4 Model Ambiguity<a class="headerlink" href="#model-ambiguity" title="Permalink to this heading">#</a></h1>
+<p>Now we abstract away from stochastic volatility (set <span class="math notranslate nohighlight">\(\sigma_2\)</span> to 0) and introduce model ambiguity. The agents now form the following collection of structured models parameterized by <span class="math notranslate nohighlight">\((\phi_1,\beta_1,\eta_k,\beta_k)\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+d Z_{t}^1 =  \phi_1 - \beta_1 Z_t^1 dt +  \sqrt{Z_t^2} \sigma_1 \cdot d B_{t}^S, \\
+dK_t = K_t\left[ \Phi \left( \frac{I_t}{K_t} \right) + \beta_k Z_t^1 - \eta_k \right] dt  + K_t \sqrt{Z_t^2}  {\sigma}_k \cdot dB_t^S
+\end{split}\]</div>
+<p>Where:</p>
+<div class="math notranslate nohighlight">
+\[
+dB_t^S = H_t dt + dB_t
+\]</div>
+<p>Such that <span class="math notranslate nohighlight">\(H_t\)</span> is the drift distortion implied by the parameters.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -2157,7 +2206,7 @@ Stacktrace:
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Elasticities</p>
+        <p class="prev-next-title">2 Elasticities</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2200,7 +2249,7 @@ Stacktrace:
   <div class="footer-item">
     
 <p class="component-author">
-By Lars Peter Hansen
+By Lars Peter Hansen, Paymon Khorrami and Fabrice Toure
 </p>
 
   </div>
