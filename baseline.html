@@ -610,10 +610,7 @@ ymax = 2.0e-5, ymin = 5.0e-7, ylength = 201
 Iteration = 1
 Distance = 0.2253588241838127
 v max = -5.774641175816187
-v min = 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-6.149840658685116
+v min = -6.149840658685116
 ----------------------------------
 </pre></div>
 </div>
@@ -2105,29 +2102,79 @@ v min = -5.8116762036279495
 ----------------------------------
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>InterruptException:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------
+Iteration = 188
+Distance = 0.005870897963233063
+v max = 0.25405795979933865
+v min = -5.805807724767172
+----------------------------------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------
+Iteration = 189
+Distance = 0.005812707348594015
+v max = 0.25987066714793267
+v min = -5.7999972867454765
+----------------------------------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------
+Iteration = 190
+Distance = 0.005755096773770563
+v max = 0.26562576392170323
+v min = -5.794244318796178
+----------------------------------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------
+Iteration = 191
+Distance = 0.005698060254634096
+v max = 0.2713238241763373
+v min = -5.788548255562618
+----------------------------------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------
+Iteration = 192
+Distance = 0.005641591881234476
+v max = 0.2769654160575718
+v min = -5.78290853705951
+----------------------------------
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">InterruptException</span>:
 
-Stacktrace:
-  [1] umfpack_numeric!(U::SuiteSparse.UMFPACK.UmfpackLU{Float64, Int64}; reuse_numeric::Bool)
-    @ SuiteSparse.UMFPACK /software/julia-1.7.3-el8-x86_64/share/julia/stdlib/v1.7/SuiteSparse/src/umfpack.jl:388
-  [2] umfpack_numeric!
-    @ /software/julia-1.7.3-el8-x86_64/share/julia/stdlib/v1.7/SuiteSparse/src/umfpack.jl:385 [inlined]
-  [3] lu(S::SparseMatrixCSC{Float64, Int64}; check::Bool)
-    @ SuiteSparse.UMFPACK /software/julia-1.7.3-el8-x86_64/share/julia/stdlib/v1.7/SuiteSparse/src/umfpack.jl:202
-  [4] lu
-    @ /software/julia-1.7.3-el8-x86_64/share/julia/stdlib/v1.7/SuiteSparse/src/umfpack.jl:196 [inlined]
-  [5] \(A::SparseMatrixCSC{Float64, Int64}, B::Vector{Float64})
-    @ SparseArrays /software/julia-1.7.3-el8-x86_64/share/julia/stdlib/v1.7/SparseArrays/src/linalg.jl:1554
-  [6] value_function_onecapital(gamma::Float64, rho::Float64, model::OneCapitalEconomy{Float64}, grid::Grid_zy{Float64}, params::FinDiffMethod, preloadV0::Matrix{Float64}, preloadcons::Matrix{Float64}, ymean::Float64)
-    @ Main /project/lhansen/macrofinance/src/1/utils_onecapital.jl:418
-  [7] macro expansion
-    @ /project/lhansen/macrofinance/src/1/main_onecapital.jl:101 [inlined]
-  [8] macro expansion
-    @ ./timing.jl:299 [inlined]
-  [9] main(gamma::Float64, rho::Float64, Delta::Float64, delta::Float64, alpha::Float64, action_name::String)
-    @ Main /project/lhansen/macrofinance/src/1/main_onecapital.jl:100
- [10] top-level scope
-    @ In[3]:1
+<span class="ne">Stacktrace</span>:
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">Array</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">457</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">BitMatrix</span><span class="p">(::</span><span class="n">UndefInitializer</span><span class="p">,</span> <span class="p">::</span><span class="n">Int64</span><span class="p">,</span> <span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">bitarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">37</span>
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">BitArray</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">bitarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">71</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">similar</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">abstractarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">829</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">similar</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">abstractarray</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">828</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">similar</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">broadcast</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">214</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">similar</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">broadcast</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">211</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">copy</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">broadcast</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">885</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">materialize</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">broadcast</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">860</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">upwind_transform</span><span class="o">!(</span>var::Matrix<span class="o">{</span>Float64<span class="o">}</span>,<span class="w"> </span>var_F::Matrix<span class="o">{</span>Float64<span class="o">}</span>,<span class="w"> </span>var_B::Matrix<span class="o">{</span>Float64<span class="o">}</span>,<span class="w"> </span>drift_F::Matrix<span class="o">{</span>Float64<span class="o">}</span>,<span class="w"> </span>drift_B::Matrix<span class="o">{</span>Float64<span class="o">}</span>,<span class="w"> </span>IJ::Int64,<span class="w"> </span>dim::Int64<span class="o">)</span><span class="w"> </span><span class="o">(</span>repeats<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="nb">times</span><span class="o">)</span>
+    <span class="o">@</span> <span class="n">Main</span> <span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">lhansen</span><span class="o">/</span><span class="n">macrofinance</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">utils_onecapital</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span>
+ <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="n">value_function_onecapital</span><span class="p">(</span><span class="n">gamma</span><span class="p">::</span><span class="n">Float64</span><span class="p">,</span> <span class="n">rho</span><span class="p">::</span><span class="n">Float64</span><span class="p">,</span> <span class="n">model</span><span class="p">::</span><span class="n">OneCapitalEconomy</span><span class="p">{</span><span class="n">Float64</span><span class="p">},</span> <span class="n">grid</span><span class="p">::</span><span class="n">Grid_zy</span><span class="p">{</span><span class="n">Float64</span><span class="p">},</span> <span class="n">params</span><span class="p">::</span><span class="n">FinDiffMethod</span><span class="p">,</span> <span class="n">preloadV0</span><span class="p">::</span><span class="n">Matrix</span><span class="p">{</span><span class="n">Float64</span><span class="p">},</span> <span class="n">preloadcons</span><span class="p">::</span><span class="n">Matrix</span><span class="p">{</span><span class="n">Float64</span><span class="p">},</span> <span class="n">ymean</span><span class="p">::</span><span class="n">Float64</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Main</span> <span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">lhansen</span><span class="o">/</span><span class="n">macrofinance</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">utils_onecapital</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">367</span>
+ <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+    <span class="o">@</span> <span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">lhansen</span><span class="o">/</span><span class="n">macrofinance</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">main_onecapital</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">101</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="n">macro</span> <span class="n">expansion</span>
+    <span class="o">@</span> <span class="o">./</span><span class="n">timing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">299</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">14</span><span class="p">]</span> <span class="n">main</span><span class="p">(</span><span class="n">gamma</span><span class="p">::</span><span class="n">Float64</span><span class="p">,</span> <span class="n">rho</span><span class="p">::</span><span class="n">Float64</span><span class="p">,</span> <span class="n">Delta</span><span class="p">::</span><span class="n">Float64</span><span class="p">,</span> <span class="n">delta</span><span class="p">::</span><span class="n">Float64</span><span class="p">,</span> <span class="n">alpha</span><span class="p">::</span><span class="n">Float64</span><span class="p">,</span> <span class="n">action_name</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Main</span> <span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">lhansen</span><span class="o">/</span><span class="n">macrofinance</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="n">main_onecapital</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">100</span>
+ <span class="p">[</span><span class="mi">15</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+    <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -2147,7 +2194,7 @@ Stacktrace:
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="model-ambiguity">
 <h1>1.4 Model Ambiguity<a class="headerlink" href="#model-ambiguity" title="Permalink to this heading">#</a></h1>
-<p>Now we abstract away from stochastic volatility (set <span class="math notranslate nohighlight">\(\sigma_2\)</span> to 0) and introduce model ambiguity. The agents now form the following collection of structured models parameterized by <span class="math notranslate nohighlight">\((\phi_1,\beta_1,\eta_k,\beta_k)\)</span></p>
+<p>Now we abstract away from stochastic volatility (set <span class="math notranslate nohighlight">\(\sigma_2\)</span> to 0) and introduce model ambiguity, following Hansen and Sargent (2021). The agents now form the following collection of structured models parameterized by <span class="math notranslate nohighlight">\((\phi_1,\beta_1,\eta_k,\beta_k)\)</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 d Z_{t}^1 =  \phi_1 - \beta_1 Z_t^1 dt +  \sqrt{Z_t^2} \sigma_1 \cdot d B_{t}^S, \\
@@ -2158,7 +2205,15 @@ dK_t = K_t\left[ \Phi \left( \frac{I_t}{K_t} \right) + \beta_k Z_t^1 - \eta_k \r
 \[
 dB_t^S = H_t dt + dB_t
 \]</div>
-<p>Such that <span class="math notranslate nohighlight">\(H_t\)</span> is the drift distortion implied by the parameters.</p>
+<p>And <span class="math notranslate nohighlight">\(H_t\)</span> is the drift distortion implied by the parameters, with the form:</p>
+<div class="math notranslate nohighlight">
+\[
+H_t = \eta_0 + \eta_1 (Z_t - \bar{z})
+\]</div>
+<!-- We deduce the following restrictions for $\eta_0$ and $\eta_1$:
+$$
+\sigma
+$$ -->
 </section>
 
     <script type="text/x-thebe-config">
