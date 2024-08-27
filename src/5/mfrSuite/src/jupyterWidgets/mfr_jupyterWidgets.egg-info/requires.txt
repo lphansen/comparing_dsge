@@ -1,0 +1,4 @@
+plotly
+nbconvert>=5.3.1
+jupyter>=1.0.0
+ipywidgets>=7.4.2
