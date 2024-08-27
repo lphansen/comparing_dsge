@@ -4,7 +4,8 @@
 format: jb-book
 root: intro
 chapters:
-      - file: single_capital
+      - file: baseline
+      - file: elasticities
 
 #   - caption: Risk, Uncertainty, and Value 
 #     numbered: true
