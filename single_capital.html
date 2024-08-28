@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Single Capital Model &#8212; Quant Macro Finance</title>
+    <title>1 Single Capital Model &#8212; Comparing DSGE Models</title>
   
   
   
@@ -67,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'single_capital';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2 Model Ambiguity" href="model_ambiguity.html" />
     <link rel="prev" title="Introduction" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -139,13 +140,17 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
-    <p class="title logo__title">Quant Macro Finance</p>
+    <p class="title logo__title">Comparing DSGE Models</p>
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Single Capital Model</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1 Single Capital Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_ambiguity.html">2 Model Ambiguity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twocapital.html">3 Two Capital Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneous_agents.html">4 Heterogeneous Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elasticities.html">2 Elasticities</a></li>
 
 
 </ul>
@@ -284,7 +289,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Single Capital Model</h1>
+    <h1>1 Single Capital Model</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -294,11 +299,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Single Capital Model</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">Solution Overview</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">1.2 Solution Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">1.3 Quick Start</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -310,8 +313,8 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="single-capital-model">
-<h1>Single Capital Model<a class="headerlink" href="#single-capital-model" title="Permalink to this heading">#</a></h1>
-<p>This notebook describes the code used to solve the model in Section 4.5. That is, suppose that the logarithm of continuation utility <span class="math notranslate nohighlight">\(V\)</span> evolves as:</p>
+<h1>1 Single Capital Model<a class="headerlink" href="#single-capital-model" title="Permalink to this heading">#</a></h1>
+<p>This notebook describes the code used to solve the model described in Section 4.4. That is, we first abstract away from model ambiguity and restrict to a single capital stock. Suppose that the logarithm of continuation utility <span class="math notranslate nohighlight">\(V\)</span> evolves as:</p>
 <div class="math notranslate nohighlight">
 \[
 d {\widehat V}_t = {\hat \mu}_{v,t} dt + \sigma_{v,t} \cdot dB_t
@@ -364,10 +367,9 @@ C_t + I_t = \alpha K_t
 | $\sigma_k$     | $\sqrt{12} \times [0.92, 0.40, 0]$                                |
 | $\sigma_1$     | $\sqrt{12} \times [0, 5.7, 0]$                                    |
 | **Lower triangular** | $\sqrt{12} \times [2.3, 5.2, 0]$                                |
-| $\sigma_2$     | $\sqrt{12} \times [0, 0, 0.00031]$                                | --></section>
-<section class="tex2jax_ignore mathjax_ignore" id="solution-overview">
-<h1>Solution Overview<a class="headerlink" href="#solution-overview" title="Permalink to this heading">#</a></h1>
-<p>The function <code class="docutils literal notranslate"><span class="pre">main_one_capital</span></code> takes in the following inputs:</p>
+| $\sigma_2$     | $\sqrt{12} \times [0, 0, 0.00031]$                                | --><section id="solution-overview">
+<h2>1.2 Solution Overview<a class="headerlink" href="#solution-overview" title="Permalink to this heading">#</a></h2>
+<p>The function <code class="docutils literal notranslate"><span class="pre">main_one_capital</span></code> solves the above HJB equation. It uses functions from <code class="docutils literal notranslate"><span class="pre">utils_onecapital</span></code>, which first-time users should not change. <code class="docutils literal notranslate"><span class="pre">main_onecapital</span></code> takes in the following inputs:</p>
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Input</p></th>
@@ -401,7 +403,7 @@ C_t + I_t = \alpha K_t
 <p>The user can also edit the <code class="docutils literal notranslate"><span class="pre">main_onecapital</span></code> Julia file to change model parameters which are held fixed in the paper, including:</p>
 <table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Output</p></th>
+<tr class="row-odd"><th class="head"><p>Input</p></th>
 <th class="head"><p>Notation in paper</p></th>
 <th class="head"><p>Description</p></th>
 </tr>
@@ -472,13 +474,13 @@ C_t + I_t = \alpha K_t
 <p><code class="docutils literal notranslate"><span class="pre">main_onecapital</span></code> outputs a dictionary that contains the above parameters, as well as the following outputs:</p>
 <table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Input</p></th>
+<tr class="row-odd"><th class="head"><p>Output</p></th>
 <th class="head"><p>Notation in paper</p></th>
 <th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>V</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">V</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(V\)</span></p></td>
 <td><p>Value function</p></td>
 </tr>
@@ -490,19 +492,19 @@ C_t + I_t = \alpha K_t
 <td><p><span class="math notranslate nohighlight">\(\frac{I}{K}\)</span></p></td>
 <td><p>Investment-capital ratio</p></td>
 </tr>
-<tr class="row-odd"><td><p>Vz</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Vz</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(\frac{\partial{v}}{\partial{z_1}}\)</span></p></td>
 <td><p>Derivative of <span class="math notranslate nohighlight">\(V\)</span> with respect to <span class="math notranslate nohighlight">\(Z^1\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>Vy</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Vy</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(\frac{\partial{v}}{\partial{z_2}}\)</span></p></td>
 <td><p>Derivative of <span class="math notranslate nohighlight">\(V\)</span> with respect to <span class="math notranslate nohighlight">\(Z^2\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>mu_k</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mu_k</span></code></p></td>
 <td><p><span class="math notranslate nohighlight">\(\mu_{\hat{K}}\)</span></p></td>
 <td><p>Drift of <span class="math notranslate nohighlight">\(\log{K}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>g</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">g</span></code></p></td>
 <td></td>
 <td><p>Stationary density</p></td>
 </tr>
@@ -533,8 +535,8 @@ C_t + I_t = \alpha K_t
 </tbody>
 </table>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="quick-start">
-<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading">#</a></h1>
+<section id="quick-start">
+<h2>1.3 Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading">#</a></h2>
 <p>We begin by importing required libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -542,8 +544,9 @@ C_t + I_t = \alpha K_t
 <span class="k">using</span><span class="w"> </span><span class="n">SparseArrays</span>
 <span class="k">using</span><span class="w"> </span><span class="n">Interpolations</span>
 <span class="k">using</span><span class="w"> </span><span class="n">SuiteSparse</span>
-<span class="n">include</span><span class="p">(</span><span class="s">&quot;../1_single_capital_with_stochastic_volatility/src/utils_onecapital.jl&quot;</span><span class="p">)</span>
-<span class="n">include</span><span class="p">(</span><span class="s">&quot;../1_single_capital_with_stochastic_volatility/src/main_onecapital.jl&quot;</span><span class="p">)</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+<span class="n">include</span><span class="p">(</span><span class="s">&quot;src/1/utils_onecapital.jl&quot;</span><span class="p">)</span>
+<span class="n">include</span><span class="p">(</span><span class="s">&quot;src/1/main_onecapital.jl&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -553,45 +556,15 @@ C_t + I_t = \alpha K_t
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  Activating</span> new project at `/project/lhansen/macrofinance/notebook`
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: ArgParseError(&quot;too many arguments&quot;)
-<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">lhansen</span><span class="o">/</span><span class="n">macrofinance</span><span class="o">/</span><span class="mi">1</span><span class="n">_single_capital_with_stochastic_volatility</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">main_onecapital</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">42</span>
-
-<span class="ne">Stacktrace</span>:
-  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">argparse_error</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Any</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">9</span>
-  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">parse_arg</span><span class="o">!(</span>state::ArgParse.ParserState,<span class="w"> </span>settings::ArgParseSettings<span class="o">)</span>
-    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">918</span>
-  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">parse_args_unhandled</span><span class="p">(</span><span class="n">args_list</span><span class="p">::</span><span class="n">Vector</span><span class="p">,</span> <span class="n">settings</span><span class="p">::</span><span class="n">ArgParseSettings</span><span class="p">,</span> <span class="n">truncated_shopts</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">632</span>
-  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">parse_args_unhandled</span><span class="p">(</span><span class="n">args_list</span><span class="p">::</span><span class="n">Vector</span><span class="p">,</span> <span class="n">settings</span><span class="p">::</span><span class="n">ArgParseSettings</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">595</span>
-  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">parse_args</span><span class="p">(</span><span class="n">args_list</span><span class="p">::</span><span class="n">Vector</span><span class="p">,</span> <span class="n">settings</span><span class="p">::</span><span class="n">ArgParseSettings</span><span class="p">;</span> <span class="n">as_symbols</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">469</span>
-  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">parse_args</span><span class="p">(</span><span class="n">args_list</span><span class="p">::</span><span class="n">Vector</span><span class="p">,</span> <span class="n">settings</span><span class="p">::</span><span class="n">ArgParseSettings</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">466</span>
-  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">parse_args</span><span class="p">(</span><span class="n">settings</span><span class="p">::</span><span class="n">ArgParseSettings</span><span class="p">;</span> <span class="n">kw</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Pairs</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Vararg</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">N</span><span class="p">}},</span> <span class="n">NamedTuple</span><span class="p">{</span><span class="n">names</span><span class="p">,</span> <span class="n">T</span><span class="p">}}</span> <span class="n">where</span> <span class="p">{</span><span class="n">V</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">T</span><span class="o">&lt;</span><span class="p">:</span><span class="n">Tuple</span><span class="p">{</span><span class="n">Vararg</span><span class="p">{</span><span class="n">Any</span><span class="p">,</span> <span class="n">N</span><span class="p">}}})</span>
-    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">421</span>
-  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">parse_args</span><span class="p">(</span><span class="n">settings</span><span class="p">::</span><span class="n">ArgParseSettings</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">421</span>
-  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">parse_commandline</span><span class="p">()</span>
-    <span class="o">@</span> <span class="n">Main</span> <span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">lhansen</span><span class="o">/</span><span class="n">macrofinance</span><span class="o">/</span><span class="mi">1</span><span class="n">_single_capital_with_stochastic_volatility</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">main_onecapital</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">39</span>
- <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-    <span class="o">@</span> <span class="n">show</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1047</span>
- <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="n">include</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-    <span class="o">@</span> <span class="n">Base</span><span class="o">.</span><span class="n">MainInclude</span> <span class="o">./</span><span class="n">client</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">451</span>
- <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-    <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="mi">6</span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  Activating</span> project at `/project/lhansen/macrofinance`
 </pre></div>
 </div>
 </div>
 </details>
 </div>
 <p>Next we set parameters, including an <code class="docutils literal notranslate"><span class="pre">action_name</span></code> which determines where the file is saved:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0922</span>
 <span class="n">delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.01</span>
 <span class="n">gamma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
@@ -601,15 +574,5045 @@ C_t + I_t = \alpha K_t
 </pre></div>
 </div>
 </div>
-</div>
-<p>Now we can run our main function:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">mainonecapital</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">,</span><span class="w"> </span><span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span><span class="w"> </span><span class="n">Delta</span><span class="o">=</span><span class="n">Delta</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="o">=</span><span class="n">rho</span><span class="p">,</span><span class="n">action_name</span><span class="o">=</span><span class="n">action_name</span><span class="p">)</span>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;test&quot;
 </pre></div>
 </div>
 </div>
+</details>
 </div>
+<p>Now we can run our main function:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">Delta</span><span class="p">,</span><span class="w"> </span><span class="n">delta</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">action_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zmax = 5.0, zmin = -5.0, zlength = 201
+ymax = 2.0e-5, ymin = 5.0e-7, ylength = 201
+----------------------------------
+Iteration = 1
+Distance = 0.2253588241838127
+v max = -5.774641175816187
+v min = -6.149840658685116
+----------------------------------
+----------------------------------
+Iteration = 2
+Distance = 0.21336164298098925
+v max = -5.561279532835198
+v min = -6.28844158588914
+----------------------------------
+----------------------------------
+Iteration = 3
+Distance = 0.2020913901009722
+v max = -5.359188142734226
+v min = -6.416520157178582
+----------------------------------
+----------------------------------
+Iteration = 4
+Distance = 0.19150073759421993
+v max = -5.167687405140006
+v min = -6.534747094790304
+----------------------------------
+----------------------------------
+Iteration = 5
+Distance = 0.1815472483518974
+v max = -4.9861401567881085
+v min = -6.643751090716898
+----------------------------------
+----------------------------------
+Iteration = 6
+Distance = 0.17219150143816453
+v max = -4.813948655349944
+v min = -6.744121723370125
+----------------------------------
+----------------------------------
+Iteration = 7
+Distance = 0.1633965997756075
+v max = -4.6505520555743365
+v min = -6.836411926841702
+----------------------------------
+----------------------------------
+Iteration = 8
+Distance = 0.15512795340565422
+v max = -4.495424102168682
+v min = -6.921140261314288
+----------------------------------
+----------------------------------
+Iteration = 9
+Distance = 0.14735312333239836
+v max = -4.348070978836284
+v min = -6.998793036482345
+----------------------------------
+----------------------------------
+Iteration = 10
+Distance = 0.1400416845395922
+v max = -4.208029294296692
+v min = -7.069826303616259
+----------------------------------
+----------------------------------
+Iteration = 11
+Distance = 0.13316509964973378
+v max = -4.074864194646958
+v min = -7.134667725232818
+----------------------------------
+----------------------------------
+Iteration = 12
+Distance = 0.12669660102532898
+v max = -3.948167593621629
+v min = -7.193718329897394
+----------------------------------
+----------------------------------
+Iteration = 13
+Distance = 0.12061108042061086
+v max = -3.827556513201018
+v min = -7.247354159129413
+----------------------------------
+----------------------------------
+Iteration = 14
+Distance = 0.11488498560899219
+v max = -3.712671527592026
+v min = -7.295927812969371
+----------------------------------
+----------------------------------
+Iteration = 15
+Distance = 0.10949622351522592
+v max = -3.6031753040768
+v min = -7.339769900381859
+----------------------------------
+----------------------------------
+Iteration = 16
+Distance = 0.10442406943040172
+v max = -3.4987512346463983
+v min = -7.379190400302026
+----------------------------------
+----------------------------------
+Iteration = 17
+Distance = 0.09964908192078292
+v max = -3.3991021527256153
+v min = -7.4144799387851545
+----------------------------------
+----------------------------------
+Iteration = 18
+Distance = 0.09515302306783768
+v max = -3.3039491296577777
+v min = -7.44591098739077
+----------------------------------
+----------------------------------
+Iteration = 19
+Distance = 0.09091878370068551
+v max = -3.213030345957092
+v min = -7.473738987623915
+----------------------------------
+----------------------------------
+Iteration = 20
+Distance = 0.08693031330387813
+v max = -3.126100032653214
+v min = -7.498203405965285
+----------------------------------
+----------------------------------
+Iteration = 21
+Distance = 0.08317255430379822
+v max = -3.042927478349416
+v min = -7.519528723748951
+----------------------------------
+----------------------------------
+Iteration = 22
+Distance = 0.0796313804564881
+v max = -2.9632960978929277
+v min = -7.53792536588859
+----------------------------------
+----------------------------------
+Iteration = 23
+Distance = 0.07629353907716885
+v max = -2.887002558815759
+v min = -7.5535905722111645
+----------------------------------
+----------------------------------
+Iteration = 24
+Distance = 0.07314659686922065
+v max = -2.813855961946538
+v min = -7.566709214928967
+----------------------------------
+----------------------------------
+Iteration = 25
+Distance = 0.07017888912550507
+v max = -2.743677072821033
+v min = -7.577454565566124
+----------------------------------
+----------------------------------
+Iteration = 26
+Distance = 0.06737947209015971
+v max = -2.6762976007308734
+v min = -7.585989014454071
+----------------------------------
+----------------------------------
+Iteration = 27
+Distance = 0.06473807828212008
+v max = -2.6115595224487533
+v min = -7.592464745719907
+----------------------------------
+----------------------------------
+Iteration = 28
+Distance = 0.06224507459499318
+v max = -2.54931444785376
+v min = -7.597024370513247
+----------------------------------
+----------------------------------
+Iteration = 29
+Distance = 0.059891422999243105
+v max = -2.489423024854517
+v min = -7.599801521049017
+----------------------------------
+----------------------------------
+Iteration = 30
+Distance = 0.05766864368421043
+v max = -2.4317543811703066
+v min = -7.600921407885455
+----------------------------------
+----------------------------------
+Iteration = 31
+Distance = 0.05556878048748404
+v max = -2.3761856006828226
+v min = -7.600501342708155
+----------------------------------
+----------------------------------
+Iteration = 32
+Distance = 0.05358436846908354
+v max = -2.322601232213739
+v min = -7.598651228751441
+----------------------------------
+----------------------------------
+Iteration = 33
+Distance = 0.05170840349672812
+v max = -2.270892828717011
+v min = -7.595474020857287
+----------------------------------
+----------------------------------
+Iteration = 34
+Distance = 0.04993431371706736
+v max = -2.2209585149999436
+v min = -7.591066157048856
+----------------------------------
+----------------------------------
+Iteration = 35
+Distance = 0.048255932795452594
+v max = -2.172702582204491
+v min = -7.5855179633796945
+----------------------------------
+----------------------------------
+Iteration = 36
+Distance = 0.04666747481441469
+v max = -2.1260351073900763
+v min = -7.578914033711891
+----------------------------------
+----------------------------------
+Iteration = 37
+Distance = 0.04516351072766778
+v max = -2.0808715966624085
+v min = -7.571333585973548
+----------------------------------
+----------------------------------
+Iteration = 38
+Distance = 0.043738946273102375
+v max = -2.037132650389306
+v min = -7.562850796350842
+----------------------------------
+----------------------------------
+Iteration = 39
+Distance = 0.042389001254186987
+v max = -1.9947436491351191
+v min = -7.553535112779956
+----------------------------------
+----------------------------------
+Iteration = 40
+Distance = 0.041109190104831494
+v max = -1.9536344590302877
+v min = -7.543451549019663
+----------------------------------
+----------------------------------
+Iteration = 41
+Distance = 0.03989530365810845
+v max = -1.9137391553721792
+v min = -7.53266096050653
+----------------------------------
+----------------------------------
+Iteration = 42
+Distance = 0.038743392044169545
+v max = -1.8749957633280097
+v min = -7.521220303119955
+----------------------------------
+----------------------------------
+Iteration = 43
+Distance = 0.03764974864731441
+v max = -1.8373460146806952
+v min = -7.5091828759150285
+----------------------------------
+----------------------------------
+Iteration = 44
+Distance = 0.036610895056615744
+v max = -1.8007351196240795
+v min = -7.496598548815609
+----------------------------------
+----------------------------------
+Iteration = 45
+Distance = 0.03562356694842772
+v max = -1.7651115526756518
+v min = -7.483513976198523
+----------------------------------
+----------------------------------
+Iteration = 46
+Distance = 0.03468470084309461
+v max = -1.7304268518325572
+v min = -7.469972797242244
+----------------------------------
+----------------------------------
+Iteration = 47
+Distance = 0.033791421681681255
+v max = -1.696635430150876
+v min = -7.456015823859638
+----------------------------------
+----------------------------------
+Iteration = 48
+Distance = 0.03294103117188052
+v max = -1.6636943989789954
+v min = -7.441681216983331
+----------------------------------
+----------------------------------
+Iteration = 49
+Distance = 0.03213099685550613
+v max = -1.6315634021234893
+v min = -7.4270046519247765
+----------------------------------
+----------------------------------
+Iteration = 50
+Distance = 0.03135894185280175
+v max = -1.6002044602706875
+v min = -7.412019473483759
+----------------------------------
+----------------------------------
+Iteration = 51
+Distance = 0.030622635241715823
+v max = -1.5695818250289717
+v min = -7.3967568414425955
+----------------------------------
+----------------------------------
+Iteration = 52
+Distance = 0.029919983032741015
+v max = -1.5396618419962307
+v min = -7.381245867040775
+----------------------------------
+----------------------------------
+Iteration = 53
+Distance = 0.029249019702527246
+v max = -1.5104128222937034
+v min = -7.365513740988268
+----------------------------------
+----------------------------------
+Iteration = 54
+Distance = 0.02860790025154758
+v max = -1.4818049220421559
+v min = -7.349585853541605
+----------------------------------
+----------------------------------
+Iteration = 55
+Distance = 0.0279948927534579
+v max = -1.453810029288698
+v min = -7.333485907134195
+----------------------------------
+----------------------------------
+Iteration = 56
+Distance = 0.027408371365667206
+v max = -1.4264016579230308
+v min = -7.317236022021857
+----------------------------------
+----------------------------------
+Iteration = 57
+Distance = 0.026846809772549163
+v max = -1.3995548481504816
+v min = -7.300856835376259
+----------------------------------
+----------------------------------
+Iteration = 58
+Distance = 0.02630877503451834
+v max = -1.3732460731159633
+v min = -7.284367594231941
+----------------------------------
+----------------------------------
+Iteration = 59
+Distance = 0.025792921817834547
+v max = -1.3474531512981287
+v min = -7.267786242667573
+----------------------------------
+----------------------------------
+Iteration = 60
+Distance = 0.02529798698158081
+v max = -1.322155164316548
+v min = -7.251129503578547
+----------------------------------
+----------------------------------
+Iteration = 61
+Distance = 0.024822784499650252
+v max = -1.2973323798168976
+v min = -7.234412955375855
+----------------------------------
+----------------------------------
+Iteration = 62
+Distance = 0.024366200697069074
+v max = -1.2729661791198286
+v min = -7.217651103925473
+----------------------------------
+----------------------------------
+Iteration = 63
+Distance = 0.02392718978111419
+v max = -1.2490389893387144
+v min = -7.2008574500230385
+----------------------------------
+----------------------------------
+Iteration = 64
+Distance = 0.023504769649075996
+v max = -1.2255342196896384
+v min = -7.184044552680418
+----------------------------------
+----------------------------------
+Iteration = 65
+Distance = 0.02309801795540123
+v max = -1.2024362017342372
+v min = -7.167224088483433
+----------------------------------
+----------------------------------
+Iteration = 66
+Distance = 0.02270606842229106
+v max = -1.179730133311946
+v min = -7.150406907264158
+----------------------------------
+----------------------------------
+Iteration = 67
+Distance = 0.022328107378614792
+v max = -1.1574020259333313
+v min = -7.133603084316123
+----------------------------------
+----------------------------------
+Iteration = 68
+Distance = 0.02196337051298136
+v max = -1.13543865542035
+v min = -7.11682196936655
+----------------------------------
+----------------------------------
+Iteration = 69
+Distance = 0.021611139827782733
+v max = -1.1138275155925672
+v min = -7.100072232506306
+----------------------------------
+----------------------------------
+Iteration = 70
+Distance = 0.021270740781687225
+v max = -1.09255677481088
+v min = -7.083361907266405
+----------------------------------
+----------------------------------
+Iteration = 71
+Distance = 0.02094153960900469
+v max = -1.0716152352018753
+v min = -7.066698431017431
+----------------------------------
+----------------------------------
+Iteration = 72
+Distance = 0.020622940804844392
+v max = -1.050992294397031
+v min = -7.05008868285802
+----------------------------------
+----------------------------------
+Iteration = 73
+Distance = 0.020314384765976135
+v max = -1.0306779096310548
+v min = -7.033539019147796
+----------------------------------
+----------------------------------
+Iteration = 74
+Distance = 0.020015345577565347
+v max = -1.0106625640534894
+v min = -7.017055306830777
+----------------------------------
+----------------------------------
+Iteration = 75
+Distance = 0.01972532893693102
+v max = -0.9909372351165584
+v min = -7.000642954686102
+----------------------------------
+----------------------------------
+Iteration = 76
+Distance = 0.01944387020568139
+v max = -0.971493364910877
+v min = -6.984306942634507
+----------------------------------
+----------------------------------
+Iteration = 77
+Distance = 0.019170532582414745
+v max = -0.9523228323284623
+v min = -6.96805184922102
+----------------------------------
+----------------------------------
+Iteration = 78
+Distance = 0.018904905388429705
+v max = -0.9334179269400326
+v min = -6.9518818773869455
+----------------------------------
+----------------------------------
+Iteration = 79
+Distance = 0.018646602459504003
+v max = -0.9147713244805286
+v min = -6.935800878636964
+----------------------------------
+----------------------------------
+Iteration = 80
+Distance = 0.01839526063711794
+v max = -0.8963760638434106
+v min = -6.919812375701071
+----------------------------------
+----------------------------------
+Iteration = 81
+Distance = 0.018150538353060797
+v max = -0.8782255254903498
+v min = -6.903919583784454
+----------------------------------
+----------------------------------
+Iteration = 82
+Distance = 0.017912114301523063
+v max = -0.8603134111888268
+v min = -6.88812543049272
+----------------------------------
+----------------------------------
+Iteration = 83
+Distance = 0.01767968619335092
+v max = -0.8426337249954758
+v min = -6.8724325745149315
+----------------------------------
+----------------------------------
+Iteration = 84
+Distance = 0.017452969587335554
+v max = -0.8251807554081403
+v min = -6.856843423141071
+----------------------------------
+----------------------------------
+Iteration = 85
+Distance = 0.0172316967937729
+v max = -0.8079490586143674
+v min = -6.841360148686399
+----------------------------------
+----------------------------------
+Iteration = 86
+Distance = 0.017015615845813237
+v max = -0.7909334427685542
+v min = -6.825984703890388
+----------------------------------
+----------------------------------
+Iteration = 87
+Distance = 0.016804489534440137
+v max = -0.774128953234114
+v min = -6.810718836353903
+----------------------------------
+----------------------------------
+Iteration = 88
+Distance = 0.01659809450308869
+v max = -0.7575308587310253
+v min = -6.795564102074019
+----------------------------------
+----------------------------------
+Iteration = 89
+Distance = 0.01639622039825306
+v max = -0.7411346383327723
+v min = -6.780521878132813
+----------------------------------
+----------------------------------
+Iteration = 90
+Distance = 0.016198669072584826
+v max = -0.7249359692601874
+v min = -6.765593374592156
+----------------------------------
+----------------------------------
+Iteration = 91
+Distance = 0.016005253837276356
+v max = -0.7089307154229111
+v min = -6.750779645644121
+----------------------------------
+----------------------------------
+Iteration = 92
+Distance = 0.01581579876061634
+v max = -0.6931149166622947
+v min = -6.736081600062917
+----------------------------------
+----------------------------------
+Iteration = 93
+Distance = 0.01563013800992663
+v max = -0.6774847786523681
+v min = -6.721500011001778
+----------------------------------
+----------------------------------
+Iteration = 94
+Distance = 0.01544811523414713
+v max = -0.662036663418221
+v min = -6.707035525175505
+----------------------------------
+----------------------------------
+Iteration = 95
+Distance = 0.015269582984566377
+v max = -0.6467670804336546
+v min = -6.692688671466613
+----------------------------------
+----------------------------------
+Iteration = 96
+Distance = 0.015094402171357713
+v max = -0.6316726782622969
+v min = -6.678459868990997
+----------------------------------
+----------------------------------
+Iteration = 97
+Distance = 0.014922441553671506
+v max = -0.6167502367086254
+v min = -6.6643494346566134
+----------------------------------
+----------------------------------
+Iteration = 98
+Distance = 0.014753577261219508
+v max = -0.6019966594474059
+v min = -6.65035759024651
+----------------------------------
+----------------------------------
+Iteration = 99
+Distance = 0.014587692345422343
+v max = -0.5874089671019835
+v min = -6.6364844690559694
+----------------------------------
+----------------------------------
+Iteration = 100
+Distance = 0.014424676358253175
+v max = -0.5729842907437304
+v min = -6.62273012211131
+----------------------------------
+----------------------------------
+Iteration = 101
+Distance = 0.01426442495710134
+v max = -0.558719865786629
+v min = -6.60909452399623
+----------------------------------
+----------------------------------
+Iteration = 102
+Distance = 0.01410683953401115
+v max = -0.5446130262526179
+v min = -6.5955775783102695
+----------------------------------
+----------------------------------
+Iteration = 103
+Distance = 0.013951826867819817
+v max = -0.530661199384798
+v min = -6.582179122782088
+----------------------------------
+----------------------------------
+Iteration = 104
+Distance = 0.01379929879774977
+v max = -0.5168619005870483
+v min = -6.56889893405903
+----------------------------------
+----------------------------------
+Iteration = 105
+Distance = 0.013649171917140768
+v max = -0.5032127286699075
+v min = -6.555736732193195
+----------------------------------
+----------------------------------
+Iteration = 106
+Distance = 0.013501367286081922
+v max = -0.4897113613838256
+v min = -6.542692184842672
+----------------------------------
+----------------------------------
+Iteration = 107
+Distance = 0.013355810161766402
+v max = -0.4763555512220592
+v min = -6.529764911205817
+----------------------------------
+----------------------------------
+Iteration = 108
+Distance = 0.013212429745457
+v max = -0.4631431214766022
+v min = -6.516954485705131
+----------------------------------
+----------------------------------
+Iteration = 109
+Distance = 0.013071158945074157
+v max = -0.45007196253152804
+v min = -6.504260441436194
+----------------------------------
+----------------------------------
+Iteration = 110
+Distance = 0.012931934152393909
+v max = -0.4371400283791341
+v min = -6.491682273396496
+----------------------------------
+----------------------------------
+Iteration = 111
+Distance = 0.012794695033988834
+v max = -0.4243453333451453
+v min = -6.479219441507639
+----------------------------------
+----------------------------------
+Iteration = 112
+Distance = 0.012659384335043267
+v max = -0.411685949010102
+v min = -6.466871373443819
+----------------------------------
+----------------------------------
+Iteration = 113
+Distance = 0.012525947695243789
+v max = -0.39916000131485824
+v min = -6.454637467278804
+----------------------------------
+----------------------------------
+Iteration = 114
+Distance = 0.012394333476012043
+v max = -0.3867656678388462
+v min = -6.442517093962476
+----------------------------------
+----------------------------------
+Iteration = 115
+Distance = 0.01226449259836676
+v max = -0.37450117524047943
+v min = -6.4305095996377295
+----------------------------------
+----------------------------------
+Iteration = 116
+Distance = 0.01213637839076065
+v max = -0.3623647968497188
+v min = -6.4186143078075935
+----------------------------------
+----------------------------------
+Iteration = 117
+Distance = 0.012009946446281838
+v max = -0.35035485040343695
+v min = -6.4068305213619015
+----------------------------------
+----------------------------------
+Iteration = 118
+Distance = 0.01188515448862243
+v max = -0.3384696959148145
+v min = -6.395157524472323
+----------------------------------
+----------------------------------
+Iteration = 119
+Distance = 0.011761962246296553
+v max = -0.32670773366851796
+v min = -6.383594584363977
+----------------------------------
+----------------------------------
+Iteration = 120
+Distance = 0.011640331334580312
+v max = -0.31506740233393765
+v min = -6.372140952971205
+----------------------------------
+----------------------------------
+Iteration = 121
+Distance = 0.01152022514469997
+v max = -0.3035471771892377
+v min = -6.360795868484845
+----------------------------------
+----------------------------------
+Iteration = 122
+Distance = 0.011401608739821933
+v max = -0.29214556844941575
+v min = -6.349558556797881
+----------------------------------
+----------------------------------
+Iteration = 123
+Distance = 0.011284448757426235
+v max = -0.2808611196919895
+v min = -6.338428232855514
+----------------------------------
+----------------------------------
+Iteration = 124
+Distance = 0.01116871331766206
+v max = -0.26969240637432745
+v min = -6.327404101915955
+----------------------------------
+----------------------------------
+Iteration = 125
+Distance = 0.011054371937325558
+v max = -0.2586380344370019
+v min = -6.316485360727328
+----------------------------------
+----------------------------------
+Iteration = 126
+Distance = 0.010941395449097141
+v max = -0.24769663898790475
+v min = -6.305671198625969
+----------------------------------
+----------------------------------
+Iteration = 127
+Distance = 0.010829755925734652
+v max = -0.2368668830621701
+v min = -6.2949607985611475
+----------------------------------
+----------------------------------
+Iteration = 128
+Distance = 0.01071942660889047
+v max = -0.22614745645327963
+v min = -6.284353338050678
+----------------------------------
+----------------------------------
+Iteration = 129
+Distance = 0.010610381842291267
+v max = -0.21553707461098837
+v min = -6.273847990071817
+----------------------------------
+----------------------------------
+Iteration = 130
+Distance = 0.010502597008996611
+v max = -0.20503447760199175
+v min = -6.263443923891542
+----------------------------------
+----------------------------------
+Iteration = 131
+Distance = 0.010396048472485181
+v max = -0.19463842912950657
+v min = -6.253140305840012
+----------------------------------
+----------------------------------
+Iteration = 132
+Distance = 0.010290713521336453
+v max = -0.18434771560817012
+v min = -6.242936300030643
+----------------------------------
+----------------------------------
+Iteration = 133
+Distance = 0.010186570317287008
+v max = -0.1741611452908831
+v min = -6.232831069030405
+----------------------------------
+----------------------------------
+Iteration = 134
+Distance = 0.010083597846441944
+v max = -0.16407754744444117
+v min = -6.222823774483261
+----------------------------------
+----------------------------------
+Iteration = 135
+Distance = 0.009981775873467352
+v max = -0.15409577157097382
+v min = -6.212913577689792
+----------------------------------
+----------------------------------
+Iteration = 136
+Distance = 0.009881084898553244
+v max = -0.14421468667242057
+v min = -6.20309964014584
+----------------------------------
+----------------------------------
+Iteration = 137
+Distance = 0.009781506117000044
+v max = -0.13443318055542053
+v min = -6.193381124042535
+----------------------------------
+----------------------------------
+Iteration = 138
+Distance = 0.009683021381251516
+v max = -0.12475015917416901
+v min = -6.183757192730421
+----------------------------------
+----------------------------------
+Iteration = 139
+Distance = 0.009585613165231696
+v max = -0.11516454600893732
+v min = -6.174227011149746
+----------------------------------
+----------------------------------
+Iteration = 140
+Distance = 0.009489264530835442
+v max = -0.10567528147810187
+v min = -6.164789746229195
+----------------------------------
+----------------------------------
+Iteration = 141
+Distance = 0.009393959096448898
+v max = -0.09628132238165298
+v min = -6.1554445672549525
+----------------------------------
+----------------------------------
+Iteration = 142
+Distance = 0.009299681007367847
+v max = -0.08698164137428513
+v min = -6.146190646212138
+----------------------------------
+----------------------------------
+Iteration = 143
+Distance = 0.009206414907999408
+v max = -0.07777522646628572
+v min = -6.137027158100155
+----------------------------------
+----------------------------------
+Iteration = 144
+Distance = 0.009114145915738447
+v max = -0.06866108055054727
+v min = -6.127953281223828
+----------------------------------
+----------------------------------
+Iteration = 145
+Distance = 0.009022859596413246
+v max = -0.05963822095413403
+v min = -6.118968197461763
+----------------------------------
+----------------------------------
+Iteration = 146
+Distance = 0.008932541941202417
+v max = -0.05070567901293161
+v min = -6.110071092513383
+----------------------------------
+----------------------------------
+Iteration = 147
+Distance = 0.008843179344940152
+v max = -0.04186249966799146
+v min = -6.101261156126053
+----------------------------------
+----------------------------------
+Iteration = 148
+Distance = 0.008754758585712542
+v max = -0.033107741082278916
+v min = -6.092537582303588
+----------------------------------
+----------------------------------
+Iteration = 149
+Distance = 0.008667266805675946
+v max = -0.02444047427660297
+v min = -6.083899569497201
+----------------------------------
+----------------------------------
+Iteration = 150
+Distance = 0.008580691493015935
+v max = -0.015859782783587035
+v min = -6.075346320780258
+----------------------------------
+----------------------------------
+Iteration = 151
+Distance = 0.008495020464979757
+v max = -0.007364762318607278
+v min = -6.066877044007655
+----------------------------------
+----------------------------------
+Iteration = 152
+Distance = 0.00841024185191394
+v max = 0.0010454795333066608
+v min = -6.058490951960966
+----------------------------------
+----------------------------------
+Iteration = 153
+Distance = 0.008326344082248482
+v max = 0.009371823615555143
+v min = -6.050187262480246
+----------------------------------
+----------------------------------
+Iteration = 154
+Distance = 0.00824331586836554
+v max = 0.017615139483920683
+v min = -6.0419651985833
+----------------------------------
+----------------------------------
+Iteration = 155
+Distance = 0.008161146193300137
+v max = 0.02577628567722082
+v min = -6.033823988573313
+----------------------------------
+----------------------------------
+Iteration = 156
+Distance = 0.008079824298223338
+v max = 0.03385610997544416
+v min = -6.0257628661356
+----------------------------------
+----------------------------------
+Iteration = 157
+Distance = 0.00799933967065871
+v max = 0.04185544964610287
+v min = -6.017781070424158
+----------------------------------
+----------------------------------
+Iteration = 158
+Distance = 0.007919682033385105
+v max = 0.04977513167948797
+v min = -6.009877846138623
+----------------------------------
+----------------------------------
+Iteration = 159
+Distance = 0.007840841333985216
+v max = 0.05761597301347319
+v min = -6.002052443592506
+----------------------------------
+----------------------------------
+Iteration = 160
+Distance = 0.0077628077350029925
+v max = 0.06537878074847618
+v min = -5.994304118772934
+----------------------------------
+----------------------------------
+Iteration = 161
+Distance = 0.007685571604667069
+v max = 0.07306435235314325
+v min = -5.986632133392875
+----------------------------------
+----------------------------------
+Iteration = 162
+Distance = 0.007609123508151128
+v max = 0.08067347586129438
+v min = -5.979035754935954
+----------------------------------
+----------------------------------
+Iteration = 163
+Distance = 0.007533454199333808
+v max = 0.08820693006062819
+v min = -5.971514256694618
+----------------------------------
+----------------------------------
+Iteration = 164
+Distance = 0.007458554613030632
+v max = 0.09566548467365882
+v min = -5.964066917802052
+----------------------------------
+----------------------------------
+Iteration = 165
+Distance = 0.007384415857668705
+v max = 0.10304990053132752
+v min = -5.956693023258141
+----------------------------------
+----------------------------------
+Iteration = 166
+Distance = 0.0073110292083753
+v max = 0.11036092973970282
+v min = -5.949391863950095
+----------------------------------
+----------------------------------
+Iteration = 167
+Distance = 0.0072383861004576555
+v max = 0.11759931584016048
+v min = -5.942162736667951
+----------------------------------
+----------------------------------
+Iteration = 168
+Distance = 0.007166478123246764
+v max = 0.12476579396340724
+v min = -5.935004944115355
+----------------------------------
+----------------------------------
+Iteration = 169
+Distance = 0.007095297014287502
+v max = 0.13186109097769474
+v min = -5.927917794915952
+----------------------------------
+----------------------------------
+Iteration = 170
+Distance = 0.007024834653849954
+v max = 0.1388859256315447
+v min = -5.920900603615646
+----------------------------------
+----------------------------------
+Iteration = 171
+Distance = 0.006955083059745015
+v max = 0.14584100869128971
+v min = -5.913952690681159
+----------------------------------
+----------------------------------
+Iteration = 172
+Distance = 0.006886034382423967
+v max = 0.15272704307371368
+v min = -5.9070733824950485
+----------------------------------
+----------------------------------
+Iteration = 173
+Distance = 0.00681768090034654
+v max = 0.15954472397406022
+v min = -5.900262011347326
+----------------------------------
+----------------------------------
+Iteration = 174
+Distance = 0.006750015015600019
+v max = 0.16629473898966024
+v min = -5.893517915424264
+----------------------------------
+----------------------------------
+Iteration = 175
+Distance = 0.0066830292497530586
+v max = 0.1729777682394133
+v min = -5.886840438794146
+----------------------------------
+----------------------------------
+Iteration = 176
+Distance = 0.006616716239934289
+v max = 0.1795944844793476
+v min = -5.880228931390657
+----------------------------------
+----------------------------------
+Iteration = 177
+Distance = 0.00655106873511635
+v max = 0.18614555321446394
+v min = -5.873682748993655
+----------------------------------
+----------------------------------
+Iteration = 178
+Distance = 0.0064860795925986425
+v max = 0.19263163280706258
+v min = -5.867201253207918
+----------------------------------
+----------------------------------
+Iteration = 179
+Distance = 0.0064217417746716965
+v max = 0.19905337458173428
+v min = -5.8607838114396955
+----------------------------------
+----------------------------------
+Iteration = 180
+Distance = 0.006358048345457168
+v max = 0.20541142292719144
+v min = -5.854429796871383
+----------------------------------
+----------------------------------
+Iteration = 181
+Distance = 0.0062949924679076286
+v max = 0.21170641539509907
+v min = -5.848138588434572
+----------------------------------
+----------------------------------
+Iteration = 182
+Distance = 0.006232567400961286
+v max = 0.21793898279606036
+v min = -5.841909570781355
+----------------------------------
+----------------------------------
+Iteration = 183
+Distance = 0.0061707664968398135
+v max = 0.22410974929290017
+v min = -5.835742134254255
+----------------------------------
+----------------------------------
+Iteration = 184
+Distance = 0.006109583198482871
+v max = 0.23021933249138304
+v min = -5.829635674854782
+----------------------------------
+----------------------------------
+Iteration = 185
+Distance = 0.006049011037105895
+v max = 0.23626834352848894
+v min = -5.823589594210744
+----------------------------------
+----------------------------------
+Iteration = 186
+Distance = 0.005989043629882285
+v max = 0.24225738715837122
+v min = -5.81760329954246
+----------------------------------
+----------------------------------
+Iteration = 187
+Distance = 0.0059296746777343645
+v max = 0.2481870618361056
+v min = -5.8116762036279495
+----------------------------------
+----------------------------------
+Iteration = 188
+Distance = 0.005870897963233063
+v max = 0.25405795979933865
+v min = -5.805807724767172
+----------------------------------
+----------------------------------
+Iteration = 189
+Distance = 0.005812707348594015
+v max = 0.25987066714793267
+v min = -5.7999972867454765
+----------------------------------
+----------------------------------
+Iteration = 190
+Distance = 0.005755096773770563
+v max = 0.26562576392170323
+v min = -5.794244318796178
+----------------------------------
+----------------------------------
+Iteration = 191
+Distance = 0.005698060254634096
+v max = 0.2713238241763373
+v min = -5.788548255562618
+----------------------------------
+----------------------------------
+Iteration = 192
+Distance = 0.005641591881234476
+v max = 0.2769654160575718
+v min = -5.78290853705951
+----------------------------------
+----------------------------------
+Iteration = 193
+Distance = 0.0055856858161431044
+v max = 0.2825511018737149
+v min = -5.777324608633727
+----------------------------------
+----------------------------------
+Iteration = 194
+Distance = 0.0055303362928671995
+v max = 0.2880814381665821
+v min = -5.771795920924683
+----------------------------------
+----------------------------------
+Iteration = 195
+Distance = 0.005475537614334558
+v max = 0.29355697578091666
+v min = -5.766321929824251
+----------------------------------
+----------------------------------
+Iteration = 196
+Distance = 0.005421284151441441
+v max = 0.2989782599323581
+v min = -5.760902096436337
+----------------------------------
+----------------------------------
+Iteration = 197
+Distance = 0.005367570341665795
+v max = 0.3043458302740239
+v min = -5.7555358870360624
+----------------------------------
+----------------------------------
+Iteration = 198
+Distance = 0.005314390687735149
+v max = 0.30966022096175905
+v min = -5.750222773028802
+----------------------------------
+----------------------------------
+Iteration = 199
+Distance = 0.005261739756350192
+v max = 0.31492196071810924
+v min = -5.744962230908911
+----------------------------------
+----------------------------------
+Iteration = 200
+Distance = 0.00520961217696253
+v max = 0.32013157289507177
+v min = -5.739753742218301
+----------------------------------
+----------------------------------
+Iteration = 201
+Distance = 0.005158002640595127
+v max = 0.3252895755356669
+v min = -5.734596793504883
+----------------------------------
+----------------------------------
+Iteration = 202
+Distance = 0.00510690589871754
+v max = 0.33039648143438444
+v min = -5.729490876280817
+----------------------------------
+----------------------------------
+Iteration = 203
+Distance = 0.005056316762155677
+v max = 0.3354527981965401
+v min = -5.724435486980803
+----------------------------------
+----------------------------------
+Iteration = 204
+Distance = 0.005006230100048137
+v max = 0.34045902829658825
+v min = -5.7194301269202885
+----------------------------------
+----------------------------------
+Iteration = 205
+Distance = 0.004956640838838677
+v max = 0.34541566913542693
+v min = -5.714474302253623
+----------------------------------
+----------------------------------
+Iteration = 206
+Distance = 0.004907543961306993
+v max = 0.3503232130967339
+v min = -5.709567523932255
+----------------------------------
+----------------------------------
+Iteration = 207
+Distance = 0.004858934505633572
+v max = 0.3551821476023675
+v min = -5.704709307662964
+----------------------------------
+----------------------------------
+Iteration = 208
+Distance = 0.004810807564493813
+v max = 0.3599929551668613
+v min = -5.6998991738661395
+----------------------------------
+----------------------------------
+Iteration = 209
+Distance = 0.004763158284189495
+v max = 0.3647561134510508
+v min = -5.695136647634174
+----------------------------------
+----------------------------------
+Iteration = 210
+Distance = 0.004715981863804619
+v max = 0.3694720953148554
+v min = -5.690421258689911
+----------------------------------
+----------------------------------
+Iteration = 211
+Distance = 0.004669273554390285
+v max = 0.3741413688692457
+v min = -5.685752541345215
+----------------------------------
+----------------------------------
+Iteration = 212
+Distance = 0.0046230286581727675
+v max = 0.3787643975274185
+v min = -5.681130034459735
+----------------------------------
+----------------------------------
+Iteration = 213
+Distance = 0.0045772425277957884
+v max = 0.38334164005521426
+v min = -5.676553281399761
+----------------------------------
+----------------------------------
+Iteration = 214
+Distance = 0.0045319105655746705
+v max = 0.38787355062078893
+v min = -5.672021829997245
+----------------------------------
+----------------------------------
+Iteration = 215
+Distance = 0.0044870282227783
+v max = 0.39236057884356723
+v min = -5.667535232509042
+----------------------------------
+----------------------------------
+Iteration = 216
+Distance = 0.004442590998935347
+v max = 0.3968031698425026
+v min = -5.663093045576329
+----------------------------------
+----------------------------------
+Iteration = 217
+Distance = 0.00439859444115176
+v max = 0.40120176428365434
+v min = -5.658694830184136
+----------------------------------
+----------------------------------
+Iteration = 218
+Distance = 0.004355034143458836
+v max = 0.4055567984271132
+v min = -5.654340151621321
+----------------------------------
+----------------------------------
+Iteration = 219
+Distance = 0.004311905746168521
+v max = 0.4098687041732817
+v min = -5.6500285794404785
+----------------------------------
+----------------------------------
+Iteration = 220
+Distance = 0.004269204935249571
+v max = 0.41413790910853127
+v min = -5.645759687418313
+----------------------------------
+----------------------------------
+Iteration = 221
+Distance = 0.004226927441727646
+v max = 0.4183648365502589
+v min = -5.641533053516068
+----------------------------------
+----------------------------------
+Iteration = 222
+Distance = 0.0041850690410872304
+v max = 0.42254990559134614
+v min = -5.637348259840351
+----------------------------------
+----------------------------------
+Iteration = 223
+Distance = 0.004143625552697927
+v max = 0.42669353114404407
+v min = -5.633204892604139
+----------------------------------
+----------------------------------
+Iteration = 224
+Distance = 0.004102592839257901
+v max = 0.43079612398330197
+v min = -5.629102542088016
+----------------------------------
+----------------------------------
+Iteration = 225
+Distance = 0.004061966806235162
+v max = 0.43485809078953713
+v min = -5.6250408026017995
+----------------------------------
+----------------------------------
+Iteration = 226
+Distance = 0.004021743401339317
+v max = 0.43887983419087645
+v min = -5.621019272446262
+----------------------------------
+----------------------------------
+Iteration = 227
+Distance = 0.003981918613997104
+v max = 0.44286175280487355
+v min = -5.617037553875234
+----------------------------------
+----------------------------------
+Iteration = 228
+Distance = 0.003942488474836414
+v max = 0.44680424127970997
+v min = -5.6130952530579625
+----------------------------------
+----------------------------------
+Iteration = 229
+Distance = 0.0039034490551921874
+v max = 0.45070769033490216
+v min = -5.609191980041771
+----------------------------------
+----------------------------------
+Iteration = 230
+Distance = 0.003864796466613918
+v max = 0.4545724868015161
+v min = -5.605327348714926
+----------------------------------
+----------------------------------
+Iteration = 231
+Distance = 0.003826526860379653
+v max = 0.4583990136618957
+v min = -5.601500976769899
+----------------------------------
+----------------------------------
+Iteration = 232
+Distance = 0.0037886364270374173
+v max = 0.46218765008893314
+v min = -5.5977124856668405
+----------------------------------
+----------------------------------
+Iteration = 233
+Distance = 0.003751121395939472
+v max = 0.4659387714848726
+v min = -5.593961500597337
+----------------------------------
+----------------------------------
+Iteration = 234
+Distance = 0.0037139780347833495
+v max = 0.46965274951965597
+v min = -5.590247650448511
+----------------------------------
+----------------------------------
+Iteration = 235
+Distance = 0.003677202649186251
+v max = 0.4733299521688422
+v min = -5.58657056776737
+----------------------------------
+----------------------------------
+Iteration = 236
+Distance = 0.0036407915822320724
+v max = 0.4769707437510743
+v min = -5.582929888725526
+----------------------------------
+----------------------------------
+Iteration = 237
+Distance = 0.0036047412140595703
+v max = 0.48057548496513386
+v min = -5.579325253084072
+----------------------------------
+----------------------------------
+Iteration = 238
+Distance = 0.0035690479614304826
+v max = 0.48414453292656434
+v min = -5.575756304158857
+----------------------------------
+----------------------------------
+Iteration = 239
+Distance = 0.0035337082773308492
+v max = 0.4876782412038952
+v min = -5.572222688786037
+----------------------------------
+----------------------------------
+Iteration = 240
+Distance = 0.003498718650556454
+v max = 0.49117695985445164
+v min = -5.568724057287932
+----------------------------------
+----------------------------------
+Iteration = 241
+Distance = 0.0034640756053206934
+v max = 0.49464103545977234
+v min = -5.56526006343913
+----------------------------------
+----------------------------------
+Iteration = 242
+Distance = 0.0034297757008613927
+v max = 0.49807081116063373
+v min = -5.561830364432931
+----------------------------------
+----------------------------------
+Iteration = 243
+Distance = 0.0033958155310563343
+v max = 0.5014666266916901
+v min = -5.558434620848093
+----------------------------------
+----------------------------------
+Iteration = 244
+Distance = 0.0033621917240461707
+v max = 0.5048288184157362
+v min = -5.5550724966158125
+----------------------------------
+----------------------------------
+Iteration = 245
+Distance = 0.0033289009418605575
+v max = 0.5081577193575968
+v min = -5.551743658987061
+----------------------------------
+----------------------------------
+Iteration = 246
+Distance = 0.0032959398800520567
+v max = 0.5114536592376488
+v min = -5.548447778500157
+----------------------------------
+----------------------------------
+Iteration = 247
+Distance = 0.0032633052673342045
+v max = 0.514716964504983
+v min = -5.545184528948736
+----------------------------------
+----------------------------------
+Iteration = 248
+Distance = 0.0032309938652238523
+v max = 0.5179479583702069
+v min = -5.5419535873498456
+----------------------------------
+----------------------------------
+Iteration = 249
+Distance = 0.00319900246769822
+v max = 0.5211469608379051
+v min = -5.538754633912483
+----------------------------------
+----------------------------------
+Iteration = 250
+Distance = 0.0031673279008387345
+v max = 0.5243142887387439
+v min = -5.535587352006312
+----------------------------------
+----------------------------------
+Iteration = 251
+Distance = 0.0031359670224981873
+v max = 0.527450255761242
+v min = -5.532451428130783
+----------------------------------
+----------------------------------
+Iteration = 252
+Distance = 0.0031049167219624474
+v max = 0.5305551724832045
+v min = -5.529346551884411
+----------------------------------
+----------------------------------
+Iteration = 253
+Distance = 0.0030741739196171736
+v max = 0.5336293464028217
+v min = -5.526272415934389
+----------------------------------
+----------------------------------
+Iteration = 254
+Distance = 0.003043735566625405
+v max = 0.5366730819694471
+v min = -5.523228715986519
+----------------------------------
+----------------------------------
+Iteration = 255
+Distance = 0.0030135986446021557
+v max = 0.5396866806140492
+v min = -5.520215150755379
+----------------------------------
+----------------------------------
+Iteration = 256
+Distance = 0.0029837601652972223
+v max = 0.5426704407793465
+v min = -5.517231421934804
+----------------------------------
+----------------------------------
+Iteration = 257
+Distance = 0.0029542171702812148
+v max = 0.5456246579496277
+v min = -5.514277234168569
+----------------------------------
+----------------------------------
+Iteration = 258
+Distance = 0.002924966730636913
+v max = 0.5485496246802646
+v min = -5.511352295021472
+----------------------------------
+----------------------------------
+Iteration = 259
+Distance = 0.002896005946649738
+v max = 0.5514456306269143
+v min = -5.508456314950561
+----------------------------------
+----------------------------------
+Iteration = 260
+Distance = 0.0028673319475122083
+v max = 0.5543129625744265
+v min = -5.505589007276729
+----------------------------------
+----------------------------------
+Iteration = 261
+Distance = 0.0028389418910199637
+v max = 0.5571519044654465
+v min = -5.502750088156514
+----------------------------------
+----------------------------------
+Iteration = 262
+Distance = 0.0028108329632797746
+v max = 0.5599627374287263
+v min = -5.499939276554216
+----------------------------------
+----------------------------------
+Iteration = 263
+Distance = 0.0027830023784197744
+v max = 0.562745739807146
+v min = -5.497156294214238
+----------------------------------
+----------------------------------
+Iteration = 264
+Distance = 0.002755447378297582
+v max = 0.5655011871854436
+v min = -5.494400865633736
+----------------------------------
+----------------------------------
+Iteration = 265
+Distance = 0.0027281652322264094
+v max = 0.56822935241767
+v min = -5.491672718035456
+----------------------------------
+----------------------------------
+Iteration = 266
+Distance = 0.0027011532366777447
+v max = 0.5709305056543478
+v min = -5.488971581340944
+----------------------------------
+----------------------------------
+Iteration = 267
+Distance = 0.0026744087150243345
+v max = 0.5736049143693721
+v min = -5.4862971881438956
+----------------------------------
+----------------------------------
+Iteration = 268
+Distance = 0.0026479290172503056
+v max = 0.5762528433866224
+v min = -5.483649273683841
+----------------------------------
+----------------------------------
+Iteration = 269
+Distance = 0.0026217115196882634
+v max = 0.5788745549063107
+v min = -5.481027575820063
+----------------------------------
+----------------------------------
+Iteration = 270
+Distance = 0.002595753624747954
+v max = 0.5814703085310586
+v min = -5.478431835005738
+----------------------------------
+----------------------------------
+Iteration = 271
+Distance = 0.0025700527606571377
+v max = 0.5840403612917158
+v min = -5.475861794262362
+----------------------------------
+----------------------------------
+Iteration = 272
+Distance = 0.0025446063811948028
+v max = 0.5865849676729106
+v min = -5.473317199154418
+----------------------------------
+----------------------------------
+Iteration = 273
+Distance = 0.002519411965432261
+v max = 0.5891043796383428
+v min = -5.47079779776426
+----------------------------------
+----------------------------------
+Iteration = 274
+Distance = 0.00249446701748246
+v max = 0.5915988466558253
+v min = -5.4683033406673065
+----------------------------------
+----------------------------------
+Iteration = 275
+Distance = 0.0024697690662444094
+v max = 0.5940686157220697
+v min = -5.465833580907363
+----------------------------------
+----------------------------------
+Iteration = 276
+Distance = 0.0024453156651499386
+v max = 0.5965139313872196
+v min = -5.463388273972333
+----------------------------------
+----------------------------------
+Iteration = 277
+Distance = 0.00242110439192178
+v max = 0.5989350357791414
+v min = -5.460967177770015
+----------------------------------
+----------------------------------
+Iteration = 278
+Distance = 0.0023971328483268772
+v max = 0.6013321686274683
+v min = -5.4585700526042435
+----------------------------------
+----------------------------------
+Iteration = 279
+Distance = 0.002373398659934245
+v max = 0.6037055672874025
+v min = -5.456196661151219
+----------------------------------
+----------------------------------
+Iteration = 280
+Distance = 0.0023498994758761604
+v max = 0.6060554667632787
+v min = -5.453846768436038
+----------------------------------
+----------------------------------
+Iteration = 281
+Distance = 0.0023266329686103537
+v max = 0.6083820997318891
+v min = -5.451520141809537
+----------------------------------
+----------------------------------
+Iteration = 282
+Distance = 0.002303596833688082
+v max = 0.6106856965655771
+v min = -5.449216550925306
+----------------------------------
+----------------------------------
+Iteration = 283
+Distance = 0.0022807887895220924
+v max = 0.6129664853550992
+v min = -5.4469357677168855
+----------------------------------
+----------------------------------
+Iteration = 284
+Distance = 0.00225820657715492
+v max = 0.6152246919322542
+v min = -5.444677566375284
+----------------------------------
+----------------------------------
+Iteration = 285
+Distance = 0.0022358479600353975
+v max = 0.6174605398922896
+v min = -5.442441723326645
+----------------------------------
+----------------------------------
+Iteration = 286
+Distance = 0.0022137107237915066
+v max = 0.6196742506160811
+v min = -5.44022801721017
+----------------------------------
+----------------------------------
+Iteration = 287
+Distance = 0.0021917926760135487
+v max = 0.6218660432920946
+v min = -5.438036228856222
+----------------------------------
+----------------------------------
+Iteration = 288
+Distance = 0.002170091646028438
+v max = 0.624036134938123
+v min = -5.435866141264655
+----------------------------------
+----------------------------------
+Iteration = 289
+Distance = 0.0021486054846849845
+v max = 0.626184740422808
+v min = -5.433717539583407
+----------------------------------
+----------------------------------
+Iteration = 290
+Distance = 0.002127332064140952
+v max = 0.628312072486949
+v min = -5.431590211087227
+----------------------------------
+----------------------------------
+Iteration = 291
+Distance = 0.0021062692776473435
+v max = 0.6304183417645963
+v min = -5.429483945156632
+----------------------------------
+----------------------------------
+Iteration = 292
+Distance = 0.0020854150393391224
+v max = 0.6325037568039354
+v min = -5.427398533257107
+----------------------------------
+----------------------------------
+Iteration = 293
+Distance = 0.002064767284027824
+v max = 0.6345685240879633
+v min = -5.425333768918502
+----------------------------------
+----------------------------------
+Iteration = 294
+Distance = 0.0020443239669906133
+v max = 0.6366128480549539
+v min = -5.423289447714566
+----------------------------------
+----------------------------------
+Iteration = 295
+Distance = 0.0020240830637777707
+v max = 0.6386369311187317
+v min = -5.42126536724278
+----------------------------------
+----------------------------------
+Iteration = 296
+Distance = 0.0020040425699954234
+v max = 0.6406409736887271
+v min = -5.419261327104296
+----------------------------------
+----------------------------------
+Iteration = 297
+Distance = 0.0019842005011176944
+v max = 0.6426251741898448
+v min = -5.417277128884148
+----------------------------------
+----------------------------------
+Iteration = 298
+Distance = 0.0019645548922817557
+v max = 0.6445897290821265
+v min = -5.4153125761316065
+----------------------------------
+----------------------------------
+Iteration = 299
+Distance = 0.0019451037980984243
+v max = 0.646534832880225
+v min = -5.413367474340775
+----------------------------------
+----------------------------------
+Iteration = 300
+Distance = 0.001925845292449102
+v max = 0.648460678172674
+v min = -5.41144163093131
+----------------------------------
+----------------------------------
+Iteration = 301
+Distance = 0.0019067774683070304
+v max = 0.6503674556409811
+v min = -5.409534855229406
+----------------------------------
+----------------------------------
+Iteration = 302
+Distance = 0.001887898437533675
+v max = 0.6522553540785148
+v min = -5.407646958448906
+----------------------------------
+----------------------------------
+Iteration = 303
+Distance = 0.0018692063307039763
+v max = 0.6541245604092187
+v min = -5.4057777536726555
+----------------------------------
+----------------------------------
+Iteration = 304
+Distance = 0.001850699296903513
+v max = 0.6559752597061222
+v min = -5.403927055833959
+----------------------------------
+----------------------------------
+Iteration = 305
+Distance = 0.001832375503566852
+v max = 0.6578076352096891
+v min = -5.402094681698314
+----------------------------------
+----------------------------------
+Iteration = 306
+Distance = 0.0018142331362732689
+v max = 0.6596218683459624
+v min = -5.400280449845269
+----------------------------------
+----------------------------------
+Iteration = 307
+Distance = 0.0017962703985822115
+v max = 0.6614181387445446
+v min = -5.398484180650469
+----------------------------------
+----------------------------------
+Iteration = 308
+Distance = 0.001778485511844785
+v max = 0.6631966242563894
+v min = -5.396705696267873
+----------------------------------
+----------------------------------
+Iteration = 309
+Distance = 0.0017608767150331106
+v max = 0.6649575009714225
+v min = -5.394944820612175
+----------------------------------
+----------------------------------
+Iteration = 310
+Distance = 0.001743442264562578
+v max = 0.666700943235985
+v min = -5.393201379341354
+----------------------------------
+----------------------------------
+Iteration = 311
+Distance = 0.0017261804341190956
+v max = 0.6684271236701042
+v min = -5.391475199839445
+----------------------------------
+----------------------------------
+Iteration = 312
+Distance = 0.001709089514489004
+v max = 0.6701362131845932
+v min = -5.389766111199462
+----------------------------------
+----------------------------------
+Iteration = 313
+Distance = 0.0016921678133844376
+v max = 0.6718283809979776
+v min = -5.388073944206432
+----------------------------------
+----------------------------------
+Iteration = 314
+Distance = 0.0016754136552840082
+v max = 0.6735037946532616
+v min = -5.3863985313207134
+----------------------------------
+----------------------------------
+Iteration = 315
+Distance = 0.0016588253812583886
+v max = 0.67516262003452
+v min = -5.3847397066613665
+----------------------------------
+----------------------------------
+Iteration = 316
+Distance = 0.001642401348807554
+v max = 0.6768050213833275
+v min = -5.383097305989789
+----------------------------------
+----------------------------------
+Iteration = 317
+Distance = 0.0016261399317021308
+v max = 0.6784311613150297
+v min = -5.381471166693383
+----------------------------------
+----------------------------------
+Iteration = 318
+Distance = 0.0016100395198169748
+v max = 0.6800412008348466
+v min = -5.379861127769538
+----------------------------------
+----------------------------------
+Iteration = 319
+Distance = 0.0015940985189739632
+v max = 0.6816352993538206
+v min = -5.378267029809621
+----------------------------------
+----------------------------------
+Iteration = 320
+Distance = 0.0015783153507824554
+v max = 0.6832136147046031
+v min = -5.376688714983286
+----------------------------------
+----------------------------------
+Iteration = 321
+Distance = 0.001562688452481087
+v max = 0.6847763031570842
+v min = -5.375126027022779
+----------------------------------
+----------------------------------
+Iteration = 322
+Distance = 0.001547216276791219
+v max = 0.6863235194338754
+v min = -5.373578811207505
+----------------------------------
+----------------------------------
+Iteration = 323
+Distance = 0.001531897291750739
+v max = 0.6878554167256261
+v min = -5.37204691434868
+----------------------------------
+----------------------------------
+Iteration = 324
+Distance = 0.0015167299805732837
+v max = 0.6893721467061994
+v min = -5.370530184774246
+----------------------------------
+----------------------------------
+Iteration = 325
+Distance = 0.0015017128414903658
+v max = 0.6908738595476898
+v min = -5.369028472313755
+----------------------------------
+----------------------------------
+Iteration = 326
+Distance = 0.0014868443876077109
+v max = 0.6923607039352975
+v min = -5.367541628283546
+----------------------------------
+----------------------------------
+Iteration = 327
+Distance = 0.001472123146752491
+v max = 0.69383282708205
+v min = -5.3660695054720575
+----------------------------------
+----------------------------------
+Iteration = 328
+Distance = 0.0014575476613321037
+v max = 0.6952903747433821
+v min = -5.36461195812525
+----------------------------------
+----------------------------------
+Iteration = 329
+Distance = 0.0014431164881890668
+v max = 0.6967334912315711
+v min = -5.363168841932104
+----------------------------------
+----------------------------------
+Iteration = 330
+Distance = 0.0014288281984544682
+v max = 0.6981623194300256
+v min = -5.361740014010422
+----------------------------------
+----------------------------------
+Iteration = 331
+Distance = 0.0014146813774111866
+v max = 0.6995770008074368
+v min = -5.36032533289266
+----------------------------------
+----------------------------------
+Iteration = 332
+Distance = 0.0014006746243470092
+v max = 0.7009776754317838
+v min = -5.358924658511878
+----------------------------------
+----------------------------------
+Iteration = 333
+Distance = 0.0013868065524245132
+v max = 0.7023644819842083
+v min = -5.357537852187947
+----------------------------------
+----------------------------------
+Iteration = 334
+Distance = 0.0013730757885385136
+v max = 0.7037375577727468
+v min = -5.356164776613749
+----------------------------------
+----------------------------------
+Iteration = 335
+Distance = 0.0013594809731760638
+v max = 0.7050970387459229
+v min = -5.354805295841647
+----------------------------------
+----------------------------------
+Iteration = 336
+Distance = 0.0013460207602912222
+v max = 0.7064430595062141
+v min = -5.353459275269979
+----------------------------------
+----------------------------------
+Iteration = 337
+Distance = 0.0013326938171652758
+v max = 0.7077757533233794
+v min = -5.352126581629756
+----------------------------------
+----------------------------------
+Iteration = 338
+Distance = 0.0013194988242757333
+v max = 0.7090952521476551
+v min = -5.350807082971467
+----------------------------------
+----------------------------------
+Iteration = 339
+Distance = 0.0013064344751635426
+v max = 0.7104016866228187
+v min = -5.349500648652018
+----------------------------------
+----------------------------------
+Iteration = 340
+Distance = 0.0012934994763104113
+v max = 0.7116951860991291
+v min = -5.348207149321782
+----------------------------------
+----------------------------------
+Iteration = 341
+Distance = 0.0012806925470034702
+v max = 0.7129758786461325
+v min = -5.346926456911802
+----------------------------------
+----------------------------------
+Iteration = 342
+Distance = 0.001268012419211817
+v max = 0.7142438910653444
+v min = -5.345658444621134
+----------------------------------
+----------------------------------
+Iteration = 343
+Distance = 0.00125545783745995
+v max = 0.7154993489028043
+v min = -5.344402986904249
+----------------------------------
+----------------------------------
+Iteration = 344
+Distance = 0.0012430275587075323
+v max = 0.7167423764615118
+v min = -5.343159959458652
+----------------------------------
+----------------------------------
+Iteration = 345
+Distance = 0.0012307203522141652
+v max = 0.717973096813726
+v min = -5.341929239212556
+----------------------------------
+----------------------------------
+Iteration = 346
+Distance = 0.0012185349994326966
+v max = 0.7191916318131587
+v min = -5.340710704312661
+----------------------------------
+----------------------------------
+Iteration = 347
+Distance = 0.0012064702938795469
+v max = 0.7203981021070383
+v min = -5.339504234112168
+----------------------------------
+----------------------------------
+Iteration = 348
+Distance = 0.0011945250410162478
+v max = 0.7215926271480545
+v min = -5.338309709158751
+----------------------------------
+----------------------------------
+Iteration = 349
+Distance = 0.001182698058135645
+v max = 0.7227753252061901
+v min = -5.337127011182787
+----------------------------------
+----------------------------------
+Iteration = 350
+Distance = 0.0011709881742324457
+v max = 0.7239463133804226
+v min = -5.335956023085655
+----------------------------------
+----------------------------------
+Iteration = 351
+Distance = 0.0011593942299102933
+v max = 0.7251057076103329
+v min = -5.334796628928052
+----------------------------------
+----------------------------------
+Iteration = 352
+Distance = 0.001147915077236994
+v max = 0.7262536226875699
+v min = -5.333648713918657
+----------------------------------
+----------------------------------
+Iteration = 353
+Distance = 0.0011365495796593628
+v max = 0.7273901722672292
+v min = -5.332512164402634
+----------------------------------
+----------------------------------
+Iteration = 354
+Distance = 0.0011252966118692198
+v max = 0.7285154688790985
+v min = -5.331386867850463
+----------------------------------
+----------------------------------
+Iteration = 355
+Distance = 0.0011141550597043581
+v max = 0.7296296239388028
+v min = -5.330272712846766
+----------------------------------
+----------------------------------
+Iteration = 356
+Distance = 0.0011031238200327476
+v max = 0.7307327477588356
+v min = -5.3291695890792745
+----------------------------------
+----------------------------------
+Iteration = 357
+Distance = 0.0010922018006477296
+v max = 0.7318249495594832
+v min = -5.328077387327906
+----------------------------------
+----------------------------------
+Iteration = 358
+Distance = 0.0010813879201511112
+v max = 0.7329063374796343
+v min = -5.326995999453988
+----------------------------------
+----------------------------------
+Iteration = 359
+Distance = 0.001070681107857685
+v max = 0.733977018587492
+v min = -5.325925318389501
+----------------------------------
+----------------------------------
+Iteration = 360
+Distance = 0.0010600803036833195
+v max = 0.7350370988911753
+v min = -5.3248652381265105
+----------------------------------
+----------------------------------
+Iteration = 361
+Distance = 0.0010495844580336033
+v max = 0.7360866833492089
+v min = -5.323815653706645
+----------------------------------
+----------------------------------
+Iteration = 362
+Distance = 0.0010391925317148054
+v max = 0.7371258758809237
+v min = -5.322776461210743
+----------------------------------
+----------------------------------
+Iteration = 363
+Distance = 0.0010289034958155252
+v max = 0.7381547793767391
+v min = -5.321747557748507
+----------------------------------
+----------------------------------
+Iteration = 364
+Distance = 0.0010187163316173198
+v max = 0.7391734957083564
+v min = -5.3207288414483935
+----------------------------------
+----------------------------------
+Iteration = 365
+Distance = 0.0010086300304843476
+v max = 0.7401821257388408
+v min = -5.319720211447466
+----------------------------------
+----------------------------------
+Iteration = 366
+Distance = 0.000998643593770332
+v max = 0.7411807693326111
+v min = -5.318721567881425
+----------------------------------
+----------------------------------
+Iteration = 367
+Distance = 0.0009887560327144218
+v max = 0.7421695253653255
+v min = -5.317732811874726
+----------------------------------
+----------------------------------
+Iteration = 368
+Distance = 0.0009789663683477112
+v max = 0.7431484917336733
+v min = -5.3167538455307835
+----------------------------------
+----------------------------------
+Iteration = 369
+Distance = 0.0009692736313934303
+v max = 0.7441177653650667
+v min = -5.315784571922276
+----------------------------------
+----------------------------------
+Iteration = 370
+Distance = 0.0009596768621704665
+v max = 0.7450774422272372
+v min = -5.314824895081577
+----------------------------------
+----------------------------------
+Iteration = 371
+Distance = 0.000950175110501772
+v max = 0.7460276173377388
+v min = -5.313874719991217
+----------------------------------
+----------------------------------
+Iteration = 372
+Distance = 0.0009407674356164408
+v max = 0.7469683847733551
+v min = -5.312933952574492
+----------------------------------
+----------------------------------
+Iteration = 373
+Distance = 0.0009314529060592269
+v max = 0.7478998376794143
+v min = -5.312002499686162
+----------------------------------
+----------------------------------
+Iteration = 374
+Distance = 0.0009222305995977287
+v max = 0.748822068279012
+v min = -5.311080269103189
+----------------------------------
+----------------------------------
+Iteration = 375
+Distance = 0.0009130996031307959
+v max = 0.7497351678821421
+v min = -5.31016716951565
+----------------------------------
+----------------------------------
+Iteration = 376
+Distance = 0.0009040590125934944
+v max = 0.7506392268947355
+v min = -5.309263110517677
+----------------------------------
+----------------------------------
+Iteration = 377
+Distance = 0.0008951079328818334
+v max = 0.7515343348276173
+v min = -5.308368002598521
+----------------------------------
+----------------------------------
+Iteration = 378
+Distance = 0.0008862454777431861
+v max = 0.75242058030536
+v min = -5.307481757133653
+----------------------------------
+----------------------------------
+Iteration = 379
+Distance = 0.0008774707697080109
+v max = 0.753298051075067
+v min = -5.306604286376027
+----------------------------------
+----------------------------------
+Iteration = 380
+Distance = 0.0008687829399907088
+v max = 0.7541668340150577
+v min = -5.305735503447365
+----------------------------------
+----------------------------------
+Iteration = 381
+Distance = 0.0008601811284093541
+v max = 0.7550270151434665
+v min = -5.304875322329588
+----------------------------------
+----------------------------------
+Iteration = 382
+Distance = 0.0008516644832964326
+v max = 0.7558786796267627
+v min = -5.304023657856264
+----------------------------------
+----------------------------------
+Iteration = 383
+Distance = 0.0008432321614206817
+v max = 0.7567219117881834
+v min = -5.303180425704202
+----------------------------------
+----------------------------------
+Iteration = 384
+Distance = 0.0008348833278970513
+v max = 0.7575567951160789
+v min = -5.302345542385087
+----------------------------------
+----------------------------------
+Iteration = 385
+Distance = 0.0008266171561044366
+v max = 0.758383412272183
+v min = -5.301518925237214
+----------------------------------
+----------------------------------
+Iteration = 386
+Distance = 0.0008184328276115149
+v max = 0.7592018450997944
+v min = -5.300700492417313
+----------------------------------
+----------------------------------
+Iteration = 387
+Distance = 0.000810329532089149
+v max = 0.7600121746318809
+v min = -5.299890162892474
+----------------------------------
+----------------------------------
+Iteration = 388
+Distance = 0.0008023064672246782
+v max = 0.7608144810991044
+v min = -5.29908785643204
+----------------------------------
+----------------------------------
+Iteration = 389
+Distance = 0.0007943628386589685
+v max = 0.7616088439377634
+v min = -5.298293493599753
+----------------------------------
+----------------------------------
+Iteration = 390
+Distance = 0.0007864978598932648
+v max = 0.7623953417976554
+v min = -5.29750699574585
+----------------------------------
+----------------------------------
+Iteration = 391
+Distance = 0.0007787107522131409
+v max = 0.7631740525498686
+v min = -5.29672828499925
+----------------------------------
+----------------------------------
+Iteration = 392
+Distance = 0.0007710007446188882
+v max = 0.7639450532944875
+v min = -5.295957284259886
+----------------------------------
+----------------------------------
+Iteration = 393
+Distance = 0.0007633670737459131
+v max = 0.7647084203682326
+v min = -5.295193917191082
+----------------------------------
+----------------------------------
+Iteration = 394
+Distance = 0.0007558089837775839
+v max = 0.765464229352009
+v min = -5.29443810821193
+----------------------------------
+----------------------------------
+Iteration = 395
+Distance = 0.0007483257263937171
+v max = 0.7662125550783998
+v min = -5.293689782489885
+----------------------------------
+----------------------------------
+Iteration = 396
+Distance = 0.0007409165606705459
+v max = 0.7669534716390696
+v min = -5.292948865933284
+----------------------------------
+----------------------------------
+Iteration = 397
+Distance = 0.0007335807530379768
+v max = 0.7676870523921037
+v min = -5.292215285184073
+----------------------------------
+----------------------------------
+Iteration = 398
+Distance = 0.0007263175771630159
+v max = 0.7684133699692648
+v min = -5.2914889676104995
+----------------------------------
+----------------------------------
+Iteration = 399
+Distance = 0.0007191263139286752
+v max = 0.7691324962831927
+v min = -5.290769841299929
+----------------------------------
+----------------------------------
+Iteration = 400
+Distance = 0.0007120062513280567
+v max = 0.7698445025345196
+v min = -5.290057835051753
+----------------------------------
+----------------------------------
+Iteration = 401
+Distance = 0.0007049566844024024
+v max = 0.77054945921892
+v min = -5.289352878370312
+----------------------------------
+----------------------------------
+Iteration = 402
+Distance = 0.0006979769151739257
+v max = 0.7712474361340901
+v min = -5.28865490145791
+----------------------------------
+----------------------------------
+Iteration = 403
+Distance = 0.000691066252575756
+v max = 0.7719385023866636
+v min = -5.287963835207941
+----------------------------------
+----------------------------------
+Iteration = 404
+Distance = 0.0006842240123817733
+v max = 0.7726227263990431
+v min = -5.287279611198
+----------------------------------
+----------------------------------
+Iteration = 405
+Distance = 0.000677449517149098
+v max = 0.7733001759161886
+v min = -5.286602161683152
+----------------------------------
+----------------------------------
+Iteration = 406
+Distance = 0.000670742096128385
+v max = 0.7739709180123128
+v min = -5.2859314195891764
+----------------------------------
+----------------------------------
+Iteration = 407
+Distance = 0.0006641010852183049
+v max = 0.7746350190975275
+v min = -5.2852673185059835
+----------------------------------
+----------------------------------
+Iteration = 408
+Distance = 0.0006575258268963768
+v max = 0.7752925449244207
+v min = -5.284609792680982
+----------------------------------
+----------------------------------
+Iteration = 409
+Distance = 0.0006510156701462488
+v max = 0.7759435605945634
+v min = -5.283958777012616
+----------------------------------
+----------------------------------
+Iteration = 410
+Distance = 0.0006445699703938601
+v max = 0.7765881305649555
+v min = -5.28331420704389
+----------------------------------
+----------------------------------
+Iteration = 411
+Distance = 0.0006381880894562597
+v max = 0.7772263186544083
+v min = -5.282676018956006
+----------------------------------
+----------------------------------
+Iteration = 412
+Distance = 0.0006318693954613375
+v max = 0.7778581880498654
+v min = -5.282044149562019
+----------------------------------
+----------------------------------
+Iteration = 413
+Distance = 0.0006256132627922018
+v max = 0.7784838013126566
+v min = -5.281418536300603
+----------------------------------
+----------------------------------
+Iteration = 414
+Distance = 0.0006194190720367754
+v max = 0.7791032203846917
+v min = -5.280799117229862
+----------------------------------
+----------------------------------
+Iteration = 415
+Distance = 0.0006132862099043068
+v max = 0.7797165065945935
+v min = -5.280185831021171
+----------------------------------
+----------------------------------
+Iteration = 416
+Distance = 0.0006072140691824046
+v max = 0.7803237206637721
+v min = -5.279578616953124
+----------------------------------
+----------------------------------
+Iteration = 417
+Distance = 0.0006012020486646508
+v max = 0.7809249227124342
+v min = -5.278977414905528
+----------------------------------
+----------------------------------
+Iteration = 418
+Distance = 0.0005952495531088564
+v max = 0.7815201722655368
+v min = -5.278382165353426
+----------------------------------
+----------------------------------
+Iteration = 419
+Distance = 0.0005893559931472447
+v max = 0.7821095282586813
+v min = -5.277792809361217
+----------------------------------
+----------------------------------
+Iteration = 420
+Distance = 0.0005835207852711299
+v max = 0.782693049043949
+v min = -5.277209288576822
+----------------------------------
+----------------------------------
+Iteration = 421
+Distance = 0.0005777433517273334
+v max = 0.783270792395676
+v min = -5.276631545225919
+----------------------------------
+----------------------------------
+Iteration = 422
+Distance = 0.000572023120505194
+v max = 0.7838428155161762
+v min = -5.276059522106189
+----------------------------------
+----------------------------------
+Iteration = 423
+Distance = 0.0005663595252329845
+v max = 0.7844091750414045
+v min = -5.275493162581687
+----------------------------------
+----------------------------------
+Iteration = 424
+Distance = 0.0005607520051594816
+v max = 0.7849699270465609
+v min = -5.274932410577208
+----------------------------------
+----------------------------------
+Iteration = 425
+Distance = 0.0005552000050911277
+v max = 0.7855251270516496
+v min = -5.2743772105727595
+----------------------------------
+----------------------------------
+Iteration = 426
+Distance = 0.0005497029753236404
+v max = 0.7860748300269674
+v min = -5.273827507598038
+----------------------------------
+----------------------------------
+Iteration = 427
+Distance = 0.0005442603715907213
+v max = 0.7866190903985534
+v min = -5.273283247227017
+----------------------------------
+----------------------------------
+Iteration = 428
+Distance = 0.0005388716550251971
+v max = 0.7871579620535758
+v min = -5.272744375572521
+----------------------------------
+----------------------------------
+Iteration = 429
+Distance = 0.0005335362920935172
+v max = 0.7876914983456625
+v min = -5.272210839280928
+----------------------------------
+----------------------------------
+Iteration = 430
+Distance = 0.0005282537545353572
+v max = 0.7882197521001921
+v min = -5.271682585526869
+----------------------------------
+----------------------------------
+Iteration = 431
+Distance = 0.0005230235193250943
+v max = 0.7887427756195157
+v min = -5.271159562007979
+----------------------------------
+----------------------------------
+Iteration = 432
+Distance = 0.0005178450686311731
+v max = 0.7892606206881418
+v min = -5.270641716939766
+----------------------------------
+----------------------------------
+Iteration = 433
+Distance = 0.0005127178897195162
+v max = 0.7897733385778605
+v min = -5.270128999050429
+----------------------------------
+----------------------------------
+Iteration = 434
+Distance = 0.0005076414749612956
+v max = 0.7902809800528181
+v min = -5.269621357575837
+----------------------------------
+----------------------------------
+Iteration = 435
+Distance = 0.0005026153217365659
+v max = 0.7907835953745493
+v min = -5.269118742254453
+----------------------------------
+----------------------------------
+Iteration = 436
+Distance = 0.0004976389324046204
+v max = 0.7912812343069474
+v min = -5.268621103322377
+----------------------------------
+----------------------------------
+Iteration = 437
+Distance = 0.0004927118142507014
+v max = 0.7917739461211953
+v min = -5.268128391508427
+----------------------------------
+----------------------------------
+Iteration = 438
+Distance = 0.0004878334794489181
+v max = 0.7922617796006401
+v min = -5.267640558029258
+----------------------------------
+----------------------------------
+Iteration = 439
+Distance = 0.0004830034449921916
+v max = 0.792744783045628
+v min = -5.267157554584529
+----------------------------------
+----------------------------------
+Iteration = 440
+Distance = 0.00047822123266239025
+v max = 0.793223004278284
+v min = -5.266679333352117
+----------------------------------
+----------------------------------
+Iteration = 441
+Distance = 0.00047348636896160645
+v max = 0.7936964906472429
+v min = -5.2662058469833894
+----------------------------------
+----------------------------------
+Iteration = 442
+Distance = 0.0004687983851087152
+v max = 0.7941652890323451
+v min = -5.2657370485984965
+----------------------------------
+----------------------------------
+Iteration = 443
+Distance = 0.0004641568169315713
+v max = 0.7946294458492723
+v min = -5.265272891781767
+----------------------------------
+----------------------------------
+Iteration = 444
+Distance = 0.0004595612048815534
+v max = 0.7950890070541453
+v min = -5.264813330577082
+----------------------------------
+----------------------------------
+Iteration = 445
+Distance = 0.00045501109393975003
+v max = 0.7955440181480747
+v min = -5.2643583194833266
+----------------------------------
+----------------------------------
+Iteration = 446
+Distance = 0.0004505060335993072
+v max = 0.7959945241816634
+v min = -5.2639078134499035
+----------------------------------
+----------------------------------
+Iteration = 447
+Distance = 0.000446045577809806
+v max = 0.7964405697594701
+v min = -5.263461767872251
+----------------------------------
+----------------------------------
+Iteration = 448
+Distance = 0.0004416292849556136
+v max = 0.7968821990444218
+v min = -5.263020138587449
+----------------------------------
+----------------------------------
+Iteration = 449
+Distance = 0.00043725671777339326
+v max = 0.7973194557621921
+v min = -5.262582881869808
+----------------------------------
+----------------------------------
+Iteration = 450
+Distance = 0.0004329274433400032
+v max = 0.7977523832055262
+v min = -5.262149954426605
+----------------------------------
+----------------------------------
+Iteration = 451
+Distance = 0.00042864103300610523
+v max = 0.7981810242385269
+v min = -5.261721313393718
+----------------------------------
+----------------------------------
+Iteration = 452
+Distance = 0.0004243970623808435
+v max = 0.7986054213008994
+v min = -5.261296916331459
+----------------------------------
+----------------------------------
+Iteration = 453
+Distance = 0.0004201951112645652
+v max = 0.7990256164121574
+v min = -5.260876721220306
+----------------------------------
+----------------------------------
+Iteration = 454
+Distance = 0.00041603476362706004
+v max = 0.7994416511757773
+v min = -5.260460686456791
+----------------------------------
+----------------------------------
+Iteration = 455
+Distance = 0.0004119156075583774
+v max = 0.7998535667833181
+v min = -5.260048770849341
+----------------------------------
+----------------------------------
+Iteration = 456
+Distance = 0.0004078372352158688
+v max = 0.8002614040185054
+v min = -5.259640933614239
+----------------------------------
+----------------------------------
+Iteration = 457
+Distance = 0.00040379924279765333
+v max = 0.8006652032612613
+v min = -5.259237134371572
+----------------------------------
+----------------------------------
+Iteration = 458
+Distance = 0.0003998012304795573
+v max = 0.8010650044917117
+v min = -5.258837333141196
+----------------------------------
+----------------------------------
+Iteration = 459
+Distance = 0.0003958428024448679
+v max = 0.801460847294135
+v min = -5.2584414903388526
+----------------------------------
+----------------------------------
+Iteration = 460
+Distance = 0.000391923566777308
+v max = 0.8018527708608907
+v min = -5.258049566772167
+----------------------------------
+----------------------------------
+Iteration = 461
+Distance = 0.0003880431354392755
+v max = 0.8022408139962884
+v min = -5.257661523636839
+----------------------------------
+----------------------------------
+Iteration = 462
+Distance = 0.00038420112419590424
+v max = 0.802625015120444
+v min = -5.257277322512743
+----------------------------------
+----------------------------------
+Iteration = 463
+Distance = 0.0003803971527149841
+v max = 0.8030054122730709
+v min = -5.256896925360166
+----------------------------------
+----------------------------------
+Iteration = 464
+Distance = 0.00037663084424899296
+v max = 0.8033820431172559
+v min = -5.256520294516036
+----------------------------------
+----------------------------------
+Iteration = 465
+Distance = 0.00037290182596549926
+v max = 0.8037549449431806
+v min = -5.256147392690167
+----------------------------------
+----------------------------------
+Iteration = 466
+Distance = 0.0003692097286585039
+v max = 0.8041241546718157
+v min = -5.2557781829615795
+----------------------------------
+----------------------------------
+Iteration = 467
+Distance = 0.0003655541868310408
+v max = 0.8044897088585831
+v min = -5.25541262877486
+----------------------------------
+----------------------------------
+Iteration = 468
+Distance = 0.00036193483843227625
+v max = 0.8048516436969662
+v min = -5.255050693936516
+----------------------------------
+----------------------------------
+Iteration = 469
+Distance = 0.0003583513252225501
+v max = 0.8052099950220949
+v min = -5.25469234261142
+----------------------------------
+----------------------------------
+Iteration = 470
+Distance = 0.00035480329227066676
+v max = 0.8055647983143022
+v min = -5.254337539319246
+----------------------------------
+----------------------------------
+Iteration = 471
+Distance = 0.000351290388370451
+v max = 0.8059160887026248
+v min = -5.2539862489309614
+----------------------------------
+----------------------------------
+Iteration = 472
+Distance = 0.0003478122657183391
+v max = 0.8062639009682887
+v min = -5.253638436665326
+----------------------------------
+----------------------------------
+Iteration = 473
+Distance = 0.0003443685799258134
+v max = 0.8066082695481536
+v min = -5.253294068085488
+----------------------------------
+----------------------------------
+Iteration = 474
+Distance = 0.00034095899003450114
+v max = 0.8069492285381189
+v min = -5.252953109095554
+----------------------------------
+----------------------------------
+Iteration = 475
+Distance = 0.00033758315847798315
+v max = 0.8072868116964991
+v min = -5.252615525937203
+----------------------------------
+----------------------------------
+Iteration = 476
+Distance = 0.0003342407509752121
+v max = 0.8076210524473721
+v min = -5.252281285186365
+----------------------------------
+----------------------------------
+Iteration = 477
+Distance = 0.0003309314365727012
+v max = 0.8079519838838773
+v min = -5.251950353749882
+----------------------------------
+----------------------------------
+Iteration = 478
+Distance = 0.00032765488769559425
+v max = 0.8082796387715054
+v min = -5.251622698862278
+----------------------------------
+----------------------------------
+Iteration = 479
+Distance = 0.0003244107799136309
+v max = 0.808604049551335
+v min = -5.251298288082466
+----------------------------------
+----------------------------------
+Iteration = 480
+Distance = 0.00032119879194780765
+v max = 0.808925248343245
+v min = -5.250977089290583
+----------------------------------
+----------------------------------
+Iteration = 481
+Distance = 0.0003180186059310586
+v max = 0.8092432669490953
+v min = -5.250659070684755
+----------------------------------
+----------------------------------
+Iteration = 482
+Distance = 0.0003148699068740157
+v max = 0.8095581368558779
+v min = -5.2503442007779855
+----------------------------------
+----------------------------------
+Iteration = 483
+Distance = 0.0003117523830082902
+v max = 0.8098698892388314
+v min = -5.250032448395047
+----------------------------------
+----------------------------------
+Iteration = 484
+Distance = 0.0003086657257460601
+v max = 0.8101785549645258
+v min = -5.2497237826693715
+----------------------------------
+----------------------------------
+Iteration = 485
+Distance = 0.00030560962948111836
+v max = 0.8104841645939277
+v min = -5.24941817303999
+----------------------------------
+----------------------------------
+Iteration = 486
+Distance = 0.0003025837915364704
+v max = 0.8107867483854134
+v min = -5.249115589248519
+----------------------------------
+----------------------------------
+Iteration = 487
+Distance = 0.00029958791243434035
+v max = 0.8110863362977739
+v min = -5.248816001336179
+----------------------------------
+----------------------------------
+Iteration = 488
+Distance = 0.00029662169550803696
+v max = 0.811382957993181
+v min = -5.248519379640784
+----------------------------------
+----------------------------------
+Iteration = 489
+Distance = 0.0002936848470298514
+v max = 0.8116766428401186
+v min = -5.248225694793848
+----------------------------------
+----------------------------------
+Iteration = 490
+Distance = 0.00029077707624569626
+v max = 0.8119674199162944
+v min = -5.2479349177176795
+----------------------------------
+----------------------------------
+Iteration = 491
+Distance = 0.00028789809535023636
+v max = 0.8122553180115175
+v min = -5.247647019622461
+----------------------------------
+----------------------------------
+Iteration = 492
+Distance = 0.00028504761912095944
+v max = 0.8125403656305491
+v min = -5.247361972003427
+----------------------------------
+----------------------------------
+Iteration = 493
+Distance = 0.000282225365440425
+v max = 0.8128225909959257
+v min = -5.247079746638056
+----------------------------------
+----------------------------------
+Iteration = 494
+Distance = 0.0002794310549010248
+v max = 0.8131020220507554
+v min = -5.246800315583232
+----------------------------------
+----------------------------------
+Iteration = 495
+Distance = 0.0002766644108280758
+v max = 0.813378686461478
+v min = -5.246523651172503
+----------------------------------
+----------------------------------
+Iteration = 496
+Distance = 0.0002739251592291936
+v max = 0.8136526116206083
+v min = -5.24624972601337
+----------------------------------
+----------------------------------
+Iteration = 497
+Distance = 0.00027121302892263444
+v max = 0.8139238246494495
+v min = -5.245978512984535
+----------------------------------
+----------------------------------
+Iteration = 498
+Distance = 0.00026852775141339436
+v max = 0.8141923524007794
+v min = -5.245709985233216
+----------------------------------
+----------------------------------
+Iteration = 499
+Distance = 0.0002658690608052794
+v max = 0.8144582214615006
+v min = -5.245444116172493
+----------------------------------
+----------------------------------
+Iteration = 500
+Distance = 0.000263236693867519
+v max = 0.8147214581552836
+v min = -5.245180879478712
+----------------------------------
+----------------------------------
+Iteration = 501
+Distance = 0.0002606303899432838
+v max = 0.8149820885451677
+v min = -5.24492024908883
+----------------------------------
+----------------------------------
+Iteration = 502
+Distance = 0.00025804989103228593
+v max = 0.8152401384361423
+v min = -5.244662199197857
+----------------------------------
+----------------------------------
+Iteration = 503
+Distance = 0.0002554949416539998
+v max = 0.815495633377701
+v min = -5.244406704256306
+----------------------------------
+----------------------------------
+Iteration = 504
+Distance = 0.00025296528875529134
+v max = 0.8157485986663731
+v min = -5.244153738967636
+----------------------------------
+----------------------------------
+Iteration = 505
+Distance = 0.0002504606819417887
+v max = 0.8159990593482269
+v min = -5.243903278285785
+----------------------------------
+----------------------------------
+Iteration = 506
+Distance = 0.00024798087317545736
+v max = 0.8162470402213486
+v min = -5.243655297412662
+----------------------------------
+----------------------------------
+Iteration = 507
+Distance = 0.0002455256170490472
+v max = 0.816492565838301
+v min = -5.243409771795708
+----------------------------------
+----------------------------------
+Iteration = 508
+Distance = 0.00024309467033178933
+v max = 0.8167356605085496
+v min = -5.2431666771254655
+----------------------------------
+----------------------------------
+Iteration = 509
+Distance = 0.0002406877924121531
+v max = 0.8169763483008765
+v min = -5.242925989333141
+----------------------------------
+----------------------------------
+Iteration = 510
+Distance = 0.00023830474498165444
+v max = 0.817214653045754
+v min = -5.242687684588263
+----------------------------------
+----------------------------------
+Iteration = 511
+Distance = 0.00023594529203929682
+v max = 0.8174505983377123
+v min = -5.242451739296309
+----------------------------------
+----------------------------------
+Iteration = 512
+Distance = 0.0002336092000505552
+v max = 0.8176842075376715
+v min = -5.242218130096349
+----------------------------------
+----------------------------------
+Iteration = 513
+Distance = 0.00023129623766715568
+v max = 0.8179155037752538
+v min = -5.241986833858768
+----------------------------------
+----------------------------------
+Iteration = 514
+Distance = 0.000229006175883395
+v max = 0.818144509951078
+v min = -5.2417578276829415
+----------------------------------
+----------------------------------
+Iteration = 515
+Distance = 0.0002267387880179328
+v max = 0.8183712487390219
+v min = -5.241531088895
+----------------------------------
+----------------------------------
+Iteration = 516
+Distance = 0.00022449384952771823
+v max = 0.8185957425884732
+v min = -5.241306595045546
+----------------------------------
+----------------------------------
+Iteration = 517
+Distance = 0.00022227113813855226
+v max = 0.8188180137265423
+v min = -5.241084323907486
+----------------------------------
+----------------------------------
+Iteration = 518
+Distance = 0.0002200704338379822
+v max = 0.8190380841602739
+v min = -5.2408642534737595
+----------------------------------
+----------------------------------
+Iteration = 519
+Distance = 0.00021789151862616762
+v max = 0.8192559756788216
+v min = -5.240646361955223
+----------------------------------
+----------------------------------
+Iteration = 520
+Distance = 0.00021573417685871732
+v max = 0.819471709855601
+v min = -5.240430627778443
+----------------------------------
+----------------------------------
+Iteration = 521
+Distance = 0.00021359819494515264
+v max = 0.8196853080504319
+v min = -5.240217029583618
+----------------------------------
+----------------------------------
+Iteration = 522
+Distance = 0.00021148336130671908
+v max = 0.8198967914116513
+v min = -5.240005546222407
+----------------------------------
+----------------------------------
+Iteration = 523
+Distance = 0.00020938946665127744
+v max = 0.8201061808782041
+v min = -5.239796156755857
+----------------------------------
+----------------------------------
+Iteration = 524
+Distance = 0.00020731630360959485
+v max = 0.8203134971817223
+v min = -5.239588840452341
+----------------------------------
+----------------------------------
+Iteration = 525
+Distance = 0.00020526366693118803
+v max = 0.8205187608485729
+v min = -5.239383576785488
+----------------------------------
+----------------------------------
+Iteration = 526
+Distance = 0.00020323135340483134
+v max = 0.8207219922018905
+v min = -5.239180345432177
+----------------------------------
+----------------------------------
+Iteration = 527
+Distance = 0.00020121916181903288
+v max = 0.82092321136359
+v min = -5.238979126270474
+----------------------------------
+----------------------------------
+Iteration = 528
+Distance = 0.00019922689285323258
+v max = 0.8211224382563637
+v min = -5.23877989937771
+----------------------------------
+----------------------------------
+Iteration = 529
+Distance = 0.0001972543493522494
+v max = 0.821319692605643
+v min = -5.238582645028441
+----------------------------------
+----------------------------------
+Iteration = 530
+Distance = 0.00019530133598610888
+v max = 0.821514993941563
+v min = -5.23838734369253
+----------------------------------
+----------------------------------
+Iteration = 531
+Distance = 0.00019336765940813905
+v max = 0.8217083616008894
+v min = -5.2381939760332035
+----------------------------------
+----------------------------------
+Iteration = 532
+Distance = 0.0001914531281350662
+v max = 0.821899814728935
+v min = -5.238002522905163
+----------------------------------
+----------------------------------
+Iteration = 533
+Distance = 0.00018955755261007567
+v max = 0.8220893722814551
+v min = -5.237812965352645
+----------------------------------
+----------------------------------
+Iteration = 534
+Distance = 0.00018768074513619837
+v max = 0.822277053026525
+v min = -5.237625284607574
+----------------------------------
+----------------------------------
+Iteration = 535
+Distance = 0.00018582251993537469
+v max = 0.8224628755463963
+v min = -5.237439462087703
+----------------------------------
+----------------------------------
+Iteration = 536
+Distance = 0.00018398269304054082
+v max = 0.8226468582393361
+v min = -5.2372554793947685
+----------------------------------
+----------------------------------
+Iteration = 537
+Distance = 0.00018216108219881733
+v max = 0.8228290193214562
+v min = -5.237073318312652
+----------------------------------
+----------------------------------
+Iteration = 538
+Distance = 0.00018035750714329168
+v max = 0.8230093768285043
+v min = -5.236892960805603
+----------------------------------
+----------------------------------
+Iteration = 539
+Distance = 0.0001785717892199834
+v max = 0.8231879486176615
+v min = -5.236714389016443
+----------------------------------
+----------------------------------
+Iteration = 540
+Distance = 0.00017680375172712814
+v max = 0.8233647523693014
+v min = -5.236537585264792
+----------------------------------
+----------------------------------
+Iteration = 541
+Distance = 0.00017505321953770192
+v max = 0.8235398055887474
+v min = -5.2363625320453515
+----------------------------------
+----------------------------------
+Iteration = 542
+Distance = 0.00017332001932590657
+v max = 0.8237131256080003
+v min = -5.236189212026095
+----------------------------------
+----------------------------------
+Iteration = 543
+Distance = 0.00017160397954452122
+v max = 0.82388472958746
+v min = -5.236017608046646
+----------------------------------
+----------------------------------
+Iteration = 544
+Distance = 0.00016990493023216757
+v max = 0.8240546345176168
+v min = -5.235847703116495
+----------------------------------
+----------------------------------
+Iteration = 545
+Distance = 0.00016822270321315003
+v max = 0.8242228572207423
+v min = -5.23567948041337
+----------------------------------
+----------------------------------
+Iteration = 546
+Distance = 0.00016655713188695742
+v max = 0.8243894143525509
+v min = -5.235512923281562
+----------------------------------
+----------------------------------
+Iteration = 547
+Distance = 0.00016490805138724696
+v max = 0.8245543224038454
+v min = -5.2353480152302705
+----------------------------------
+----------------------------------
+Iteration = 548
+Distance = 0.00016327529841042576
+v max = 0.8247175977021575
+v min = -5.235184739931966
+----------------------------------
+----------------------------------
+Iteration = 549
+Distance = 0.00016165871129114606
+v max = 0.8248792564133576
+v min = -5.235023081220769
+----------------------------------
+----------------------------------
+Iteration = 550
+Distance = 0.00016005812999519975
+v max = 0.8250393145432582
+v min = -5.234863023090868
+----------------------------------
+----------------------------------
+Iteration = 551
+Distance = 0.00015847339602714783
+v max = 0.8251977879391987
+v min = -5.234704549694923
+----------------------------------
+----------------------------------
+Iteration = 552
+Distance = 0.00015690435250714785
+v max = 0.8253546922916173
+v min = -5.234547645342511
+----------------------------------
+----------------------------------
+Iteration = 553
+Distance = 0.00015535084406703703
+v max = 0.8255100431355948
+v min = -5.23439229449853
+----------------------------------
+----------------------------------
+Iteration = 554
+Distance = 0.0001538127169276038
+v max = 0.8256638558524053
+v min = -5.234238481781722
+----------------------------------
+----------------------------------
+Iteration = 555
+Distance = 0.0001522898187271693
+v max = 0.8258161456710295
+v min = -5.234086191963095
+----------------------------------
+----------------------------------
+Iteration = 556
+Distance = 0.00015078199873164166
+v max = 0.8259669276696664
+v min = -5.233935409964441
+----------------------------------
+----------------------------------
+Iteration = 557
+Distance = 0.00014928910763734038
+v max = 0.8261162167772281
+v min = -5.233786120856883
+----------------------------------
+----------------------------------
+Iteration = 558
+Distance = 0.0001478109977011144
+v max = 0.8262640277748158
+v min = -5.233638309859298
+----------------------------------
+----------------------------------
+Iteration = 559
+Distance = 0.00014634752242326243
+v max = 0.8264103752971784
+v min = -5.233491962336922
+----------------------------------
+----------------------------------
+Iteration = 560
+Distance = 0.0001448985370724465
+v max = 0.826555273834171
+v min = -5.233347063799924
+----------------------------------
+----------------------------------
+Iteration = 561
+Distance = 0.00014346389809372084
+v max = 0.8266987377321845
+v min = -5.233203599901916
+----------------------------------
+----------------------------------
+Iteration = 562
+Distance = 0.0001420434634589185
+v max = 0.8268407811955626
+v min = -5.233061556438547
+----------------------------------
+----------------------------------
+Iteration = 563
+Distance = 0.0001406370925405298
+v max = 0.8269814182880177
+v min = -5.232920919346087
+----------------------------------
+----------------------------------
+Iteration = 564
+Distance = 0.00013924464608239262
+v max = 0.8271206629340135
+v min = -5.232781674700105
+----------------------------------
+----------------------------------
+Iteration = 565
+Distance = 0.00013786598622056445
+v max = 0.8272585289201463
+v min = -5.232643808713971
+----------------------------------
+----------------------------------
+Iteration = 566
+Distance = 0.00013650097646156212
+v max = 0.8273950298965149
+v min = -5.232507307737599
+----------------------------------
+----------------------------------
+Iteration = 567
+Distance = 0.00013514948165749274
+v max = 0.8275301793780684
+v min = -5.232372158256047
+----------------------------------
+----------------------------------
+Iteration = 568
+Distance = 0.00013381136798162885
+v max = 0.8276639907459444
+v min = -5.232238346888172
+----------------------------------
+----------------------------------
+Iteration = 569
+Distance = 0.00013248650293151698
+v max = 0.8277964772487905
+v min = -5.232105860385334
+----------------------------------
+----------------------------------
+Iteration = 570
+Distance = 0.0001311747553707221
+v max = 0.827927652004084
+v min = -5.231974685630047
+----------------------------------
+----------------------------------
+Iteration = 571
+Distance = 0.00012987599545244422
+v max = 0.8280575279994248
+v min = -5.2318448096346994
+----------------------------------
+----------------------------------
+Iteration = 572
+Distance = 0.00012859009446319902
+v max = 0.8281861180938205
+v min = -5.231716219540302
+----------------------------------
+----------------------------------
+Iteration = 573
+Distance = 0.00012731692523626492
+v max = 0.8283134350189651
+v min = -5.231588902615163
+----------------------------------
+----------------------------------
+Iteration = 574
+Distance = 0.00012605636162899003
+v max = 0.828439491380494
+v min = -5.231462846253634
+----------------------------------
+----------------------------------
+Iteration = 575
+Distance = 0.0001248082788434246
+v max = 0.8285642996592363
+v min = -5.231338037974894
+----------------------------------
+----------------------------------
+Iteration = 576
+Distance = 0.00012357255328154793
+v max = 0.828687872212445
+v min = -5.231214465421685
+----------------------------------
+----------------------------------
+Iteration = 577
+Distance = 0.0001223490626989232
+v max = 0.8288102212750298
+v min = -5.231092116359103
+----------------------------------
+----------------------------------
+Iteration = 578
+Distance = 0.00012113768582500128
+v max = 0.8289313589607568
+v min = -5.230970978673369
+----------------------------------
+----------------------------------
+Iteration = 579
+Distance = 0.00011993830277035045
+v max = 0.8290512972634567
+v min = -5.230851040370665
+----------------------------------
+----------------------------------
+Iteration = 580
+Distance = 0.00011875079483658624
+v max = 0.8291700480582092
+v min = -5.230732289575912
+----------------------------------
+----------------------------------
+Iteration = 581
+Distance = 0.0001175750443955792
+v max = 0.8292876231025187
+v min = -5.2306147145316055
+----------------------------------
+----------------------------------
+Iteration = 582
+Distance = 0.00011641093506042921
+v max = 0.829404034037478
+v min = -5.230498303596644
+----------------------------------
+----------------------------------
+Iteration = 583
+Distance = 0.00011525835152870201
+v max = 0.8295192923889231
+v min = -5.230383045245204
+----------------------------------
+----------------------------------
+Iteration = 584
+Distance = 0.0001141171797049978
+v max = 0.829633409568571
+v min = -5.230268928065561
+----------------------------------
+----------------------------------
+Iteration = 585
+Distance = 0.00011298730667075318
+v max = 0.8297463968751532
+v min = -5.230155940758975
+----------------------------------
+----------------------------------
+Iteration = 586
+Distance = 0.00011186862047196655
+v max = 0.8298582654955319
+v min = -5.230044072138597
+----------------------------------
+----------------------------------
+Iteration = 587
+Distance = 0.00011076101037499342
+v max = 0.8299690265058076
+v min = -5.229933311128322
+----------------------------------
+----------------------------------
+Iteration = 588
+Distance = 0.0001096643667084507
+v max = 0.8300786908724171
+v min = -5.229823646761698
+----------------------------------
+----------------------------------
+Iteration = 589
+Distance = 0.00010857858087920391
+v max = 0.8301872694532205
+v min = -5.229715068180891
+----------------------------------
+----------------------------------
+Iteration = 590
+Distance = 0.00010750354541988472
+v max = 0.8302947729985692
+v min = -5.229607564635546
+----------------------------------
+----------------------------------
+Iteration = 591
+Distance = 0.00010643915387653635
+v max = 0.8304012121523787
+v min = -5.229501125481736
+----------------------------------
+----------------------------------
+Iteration = 592
+Distance = 0.0001053853008885497
+v max = 0.8305065974531808
+v min = -5.229395740180934
+----------------------------------
+----------------------------------
+Iteration = 593
+Distance = 0.00010434188206120965
+v max = 0.8306109393351628
+v min = -5.22929139829895
+----------------------------------
+----------------------------------
+Iteration = 594
+Distance = 0.00010330879409892191
+v max = 0.8307142481292059
+v min = -5.229188089504913
+----------------------------------
+----------------------------------
+Iteration = 595
+Distance = 0.00010228593477901171
+v max = 0.8308165340639013
+v min = -5.229085803570214
+----------------------------------
+----------------------------------
+Iteration = 596
+Distance = 0.00010127320278296992
+v max = 0.8309178072665695
+v min = -5.228984530367544
+----------------------------------
+----------------------------------
+Iteration = 597
+Distance = 0.00010027049778127406
+v max = 0.8310180777642597
+v min = -5.228884259869853
+----------------------------------
+----------------------------------
+Iteration = 598
+Distance = 9.927772058215822e-5
+v max = 0.8311173554847465
+v min = -5.228784982149359
+----------------------------------
+----------------------------------
+Iteration = 599
+Distance = 9.829477282208288e-5
+v max = 0.8312156502575051
+v min = -5.228686687376596
+----------------------------------
+----------------------------------
+Iteration = 600
+Distance = 9.73215572477315e-5
+v max = 0.8313129718146931
+v min = -5.228589365819412
+----------------------------------
+----------------------------------
+Iteration = 601
+Distance = 9.63579774904133e-5
+v max = 0.831409329792105
+v min = -5.228493007842003
+----------------------------------
+----------------------------------
+Iteration = 602
+Distance = 9.540393813178838e-5
+v max = 0.8315047337301377
+v min = -5.228397603903973
+----------------------------------
+----------------------------------
+Iteration = 603
+Distance = 9.445934467944284e-5
+v max = 0.8315991930747243
+v min = -5.228303144559385
+----------------------------------
+----------------------------------
+Iteration = 604
+Distance = 9.352410365437436e-5
+v max = 0.8316927171782759
+v min = -5.228209620455822
+----------------------------------
+----------------------------------
+Iteration = 605
+Distance = 9.259812237871756e-5
+v max = 0.8317853153006052
+v min = -5.228117022333485
+----------------------------------
+----------------------------------
+Iteration = 606
+Distance = 9.168130930881091e-5
+v max = 0.8318769966098414
+v min = -5.228025341024252
+----------------------------------
+----------------------------------
+Iteration = 607
+Distance = 9.077357359155158e-5
+v max = 0.8319677701833428
+v min = -5.227934567450754
+----------------------------------
+----------------------------------
+Iteration = 608
+Distance = 8.987482531708224e-5
+v max = 0.8320576450085925
+v min = -5.2278446926254984
+----------------------------------
+----------------------------------
+Iteration = 609
+Distance = 8.898497558229579e-5
+v max = 0.8321466299840873
+v min = -5.227755707650011
+----------------------------------
+----------------------------------
+Iteration = 610
+Distance = 8.8103936205286e-5
+v max = 0.8322347339202186
+v min = -5.227667603713883
+----------------------------------
+----------------------------------
+Iteration = 611
+Distance = 8.723162001711415e-5
+v max = 0.8323219655401524
+v min = -5.227580372093951
+----------------------------------
+----------------------------------
+Iteration = 612
+Distance = 8.636794061889219e-5
+v max = 0.8324083334806796
+v min = -5.227494004153423
+----------------------------------
+----------------------------------
+Iteration = 613
+Distance = 8.55128125119009e-5
+v max = 0.8324938462930821
+v min = -5.227408491341022
+----------------------------------
+----------------------------------
+Iteration = 614
+Distance = 8.466615096658359e-5
+v max = 0.8325785124439768
+v min = -5.227323825190125
+----------------------------------
+----------------------------------
+Iteration = 615
+Distance = 8.382787225214017e-5
+v max = 0.8326623403161493
+v min = -5.227239997317951
+----------------------------------
+----------------------------------
+Iteration = 616
+Distance = 8.299789335186603e-5
+v max = 0.8327453382093899
+v min = -5.227156999424712
+----------------------------------
+----------------------------------
+Iteration = 617
+Distance = 8.217613206351615e-5
+v max = 0.8328275143413096
+v min = -5.227074823292796
+----------------------------------
+----------------------------------
+Iteration = 618
+Distance = 8.136250691315183e-5
+v max = 0.8329088768481611
+v min = -5.226993460785951
+----------------------------------
+----------------------------------
+Iteration = 619
+Distance = 8.055693754283055e-5
+v max = 0.8329894337856388
+v min = -5.226912903848469
+----------------------------------
+----------------------------------
+Iteration = 620
+Distance = 7.975934411952323e-5
+v max = 0.8330691931296761
+v min = -5.226833144504433
+----------------------------------
+----------------------------------
+Iteration = 621
+Distance = 7.896964766729297e-5
+v max = 0.8331481627772382
+v min = -5.226754174856876
+----------------------------------
+----------------------------------
+Iteration = 622
+Distance = 7.818776994827914e-5
+v max = 0.8332263505471011
+v min = -5.226675987087013
+----------------------------------
+----------------------------------
+Iteration = 623
+Distance = 7.741363359814457e-5
+v max = 0.833303764180629
+v min = -5.226598573453487
+----------------------------------
+----------------------------------
+Iteration = 624
+Distance = 7.664716201905009e-5
+v max = 0.8333804113425377
+v min = -5.226521926291583
+----------------------------------
+----------------------------------
+Iteration = 625
+Distance = 7.588827921711783e-5
+v max = 0.8334562996216551
+v min = -5.226446038012458
+----------------------------------
+----------------------------------
+Iteration = 626
+Distance = 7.513691008220746e-5
+v max = 0.8335314365316723
+v min = -5.226370901102445
+----------------------------------
+----------------------------------
+Iteration = 627
+Distance = 7.43929803093124e-5
+v max = 0.8336058295118872
+v min = -5.226296508122225
+----------------------------------
+----------------------------------
+Iteration = 628
+Distance = 7.365641614365259e-5
+v max = 0.8336794859279427
+v min = -5.226222851706174
+----------------------------------
+----------------------------------
+Iteration = 629
+Distance = 7.292714469198103e-5
+v max = 0.8337524130725513
+v min = -5.226149924561559
+----------------------------------
+----------------------------------
+Iteration = 630
+Distance = 7.22050937449481e-5
+v max = 0.8338246181662238
+v min = -5.226077719467881
+----------------------------------
+----------------------------------
+Iteration = 631
+Distance = 7.149019184105043e-5
+v max = 0.8338961083579784
+v min = -5.226006229276125
+----------------------------------
+----------------------------------
+Iteration = 632
+Distance = 7.078236819690886e-5
+v max = 0.8339668907260523
+v min = -5.225935446908046
+----------------------------------
+----------------------------------
+Iteration = 633
+Distance = 7.008155261800653e-5
+v max = 0.8340369722786
+v min = -5.225865365355495
+----------------------------------
+----------------------------------
+Iteration = 634
+Distance = 6.938767587172379e-5
+v max = 0.834106359954391
+v min = -5.225795977679706
+----------------------------------
+----------------------------------
+Iteration = 635
+Distance = 6.870066917130657e-5
+v max = 0.8341750606234891
+v min = -5.2257272770106145
+----------------------------------
+----------------------------------
+Iteration = 636
+Distance = 6.802046453913135e-5
+v max = 0.834243081087945
+v min = -5.225659256546164
+----------------------------------
+----------------------------------
+Iteration = 637
+Distance = 6.734699458688098e-5
+v max = 0.8343104280824538
+v min = -5.2255919095516585
+----------------------------------
+----------------------------------
+Iteration = 638
+Distance = 6.668019268118996e-5
+v max = 0.834377108275039
+v min = -5.225525229359069
+----------------------------------
+----------------------------------
+Iteration = 639
+Distance = 6.601999273270209e-5
+v max = 0.8344431282676958
+v min = -5.225459209366417
+----------------------------------
+----------------------------------
+Iteration = 640
+Distance = 6.536632947895527e-5
+v max = 0.8345084945970594
+v min = -5.225393843037059
+----------------------------------
+----------------------------------
+Iteration = 641
+Distance = 6.471913807093443e-5
+v max = 0.8345732137350438
+v min = -5.225329123899078
+----------------------------------
+----------------------------------
+Iteration = 642
+Distance = 6.407835453980937e-5
+v max = 0.834637292089484
+v min = -5.225265045544636
+----------------------------------
+----------------------------------
+Iteration = 643
+Distance = 6.344391536483585e-5
+v max = 0.8347007360047709
+v min = -5.225201601629352
+----------------------------------
+----------------------------------
+Iteration = 644
+Distance = 6.281575778199766e-5
+v max = 0.8347635517624807
+v min = -5.22513878587164
+----------------------------------
+----------------------------------
+Iteration = 645
+Distance = 6.219381961791726e-5
+v max = 0.8348257455819943
+v min = -5.2250765920521305
+----------------------------------
+----------------------------------
+Iteration = 646
+Distance = 6.157803920370242e-5
+v max = 0.8348873236211185
+v min = -5.2250150140130085
+----------------------------------
+----------------------------------
+Iteration = 647
+Distance = 6.0968355641843885e-5
+v max = 0.8349482919766859
+v min = -5.224954045657442
+----------------------------------
+----------------------------------
+Iteration = 648
+Distance = 6.036470854997589e-5
+v max = 0.8350086566851681
+v min = -5.224893680948962
+----------------------------------
+----------------------------------
+Iteration = 649
+Distance = 5.9767038182556576e-5
+v max = 0.8350684237232708
+v min = -5.224833913910857
+----------------------------------
+----------------------------------
+Iteration = 650
+Distance = 5.917528534649108e-5
+v max = 0.8351275990085198
+v min = -5.2247747386256
+----------------------------------
+----------------------------------
+Iteration = 651
+Distance = 5.858939149128162e-5
+v max = 0.835186188399853
+v min = -5.224716149234262
+----------------------------------
+----------------------------------
+Iteration = 652
+Distance = 5.800929842747493e-5
+v max = 0.8352441976982056
+v min = -5.2246581399359195
+----------------------------------
+----------------------------------
+Iteration = 653
+Distance = 5.743494893106771e-5
+v max = 0.8353016326470672
+v min = -5.22460070498706
+----------------------------------
+----------------------------------
+Iteration = 654
+Distance = 5.686628610668265e-5
+v max = 0.835358498933071
+v min = -5.22454383870106
+----------------------------------
+----------------------------------
+Iteration = 655
+Distance = 5.630325354921695e-5
+v max = 0.8354148021865391
+v min = -5.224487535447587
+----------------------------------
+----------------------------------
+Iteration = 656
+Distance = 5.57457956267271e-5
+v max = 0.8354705479820523
+v min = -5.224431789652073
+----------------------------------
+----------------------------------
+Iteration = 657
+Distance = 5.519385702212887e-5
+v max = 0.8355257418389954
+v min = -5.224376595795132
+----------------------------------
+----------------------------------
+Iteration = 658
+Distance = 5.4647383200823185e-5
+v max = 0.8355803892221082
+v min = -5.224321948412023
+----------------------------------
+----------------------------------
+Iteration = 659
+Distance = 5.4106319994584595e-5
+v max = 0.8356344955420214
+v min = -5.2242678420921065
+----------------------------------
+----------------------------------
+Iteration = 660
+Distance = 5.357061383826078e-5
+v max = 0.8356880661557978
+v min = -5.224214271478335
+----------------------------------
+----------------------------------
+Iteration = 661
+Distance = 5.304021174268314e-5
+v max = 0.8357411063674574
+v min = -5.224161231266675
+----------------------------------
+----------------------------------
+Iteration = 662
+Distance = 5.251506111125792e-5
+v max = 0.8357936214285067
+v min = -5.224108716205619
+----------------------------------
+----------------------------------
+Iteration = 663
+Distance = 5.199511006104274e-5
+v max = 0.8358456165384561
+v min = -5.22405672109567
+----------------------------------
+----------------------------------
+Iteration = 664
+Distance = 5.148030697466055e-5
+v max = 0.8358970968453366
+v min = -5.2240052407887845
+----------------------------------
+----------------------------------
+Iteration = 665
+Distance = 5.097060095859973e-5
+v max = 0.835948067446208
+v min = -5.223954270187902
+----------------------------------
+----------------------------------
+Iteration = 666
+Distance = 5.04659415456743e-5
+v max = 0.8359985333876648
+v min = -5.223903804246448
+----------------------------------
+----------------------------------
+Iteration = 667
+Distance = 4.9966278737656467e-5
+v max = 0.8360484996663351
+v min = -5.223853837967783
+----------------------------------
+----------------------------------
+Iteration = 668
+Distance = 4.947156309675904e-5
+v max = 0.8360979712293757
+v min = -5.2238043664047344
+----------------------------------
+----------------------------------
+Iteration = 669
+Distance = 4.898174568968017e-5
+v max = 0.8361469529749594
+v min = -5.223755384659148
+----------------------------------
+----------------------------------
+Iteration = 670
+Distance = 4.849677791973761e-5
+v max = 0.8361954497527639
+v min = -5.223706887881341
+----------------------------------
+----------------------------------
+Iteration = 671
+Distance = 4.801661174536065e-5
+v max = 0.8362434663644527
+v min = -5.223658871269654
+----------------------------------
+----------------------------------
+Iteration = 672
+Distance = 4.754119977956606e-5
+v max = 0.8362910075641435
+v min = -5.223611330069962
+----------------------------------
+----------------------------------
+Iteration = 673
+Distance = 4.707049481833536e-5
+v max = 0.8363380780588887
+v min = -5.223564259575216
+----------------------------------
+----------------------------------
+Iteration = 674
+Distance = 4.6604450314902124e-5
+v max = 0.8363846825091299
+v min = -5.223517655124972
+----------------------------------
+----------------------------------
+Iteration = 675
+Distance = 4.614302012750926e-5
+v max = 0.8364308255291701
+v min = -5.223471512104932
+----------------------------------
+----------------------------------
+Iteration = 676
+Distance = 4.568615852784674e-5
+v max = 0.8364765116876275
+v min = -5.223425825946468
+----------------------------------
+----------------------------------
+Iteration = 677
+Distance = 4.52338203409397e-5
+v max = 0.8365217455078818
+v min = -5.223380592126216
+----------------------------------
+----------------------------------
+Iteration = 678
+Distance = 4.478596073731467e-5
+v max = 0.8365665314685297
+v min = -5.2233358061655615
+----------------------------------
+----------------------------------
+Iteration = 679
+Distance = 4.4342535388430804e-5
+v max = 0.8366108740038243
+v min = -5.223291463630262
+----------------------------------
+----------------------------------
+Iteration = 680
+Distance = 4.390350036587165e-5
+v max = 0.8366547775041167
+v min = -5.2232475601299635
+----------------------------------
+----------------------------------
+Iteration = 681
+Distance = 4.346881226968691e-5
+v max = 0.8366982463162872
+v min = -5.223204091317791
+----------------------------------
+----------------------------------
+Iteration = 682
+Distance = 4.30384279868079e-5
+v max = 0.83674128474418
+v min = -5.223161052889908
+----------------------------------
+----------------------------------
+Iteration = 683
+Distance = 4.2612304916644916e-5
+v max = 0.8367838970490231
+v min = -5.223118440585064
+----------------------------------
+----------------------------------
+Iteration = 684
+Distance = 4.219040089825654e-5
+v max = 0.8368260874498592
+v min = -5.223076250184224
+----------------------------------
+----------------------------------
+Iteration = 685
+Distance = 4.177267417571073e-5
+v max = 0.8368678601239539
+v min = -5.223034477510129
+----------------------------------
+----------------------------------
+Iteration = 686
+Distance = 4.1359083347458636e-5
+v max = 0.836909219207216
+v min = -5.222993118426867
+----------------------------------
+----------------------------------
+Iteration = 687
+Distance = 4.094958745337607e-5
+v max = 0.8369501687946039
+v min = -5.222952168839484
+----------------------------------
+----------------------------------
+Iteration = 688
+Distance = 4.0544146019172445e-5
+v max = 0.8369907129405346
+v min = -5.222911624693564
+----------------------------------
+----------------------------------
+Iteration = 689
+Distance = 4.014271881747078e-5
+v max = 0.8370308556592764
+v min = -5.222871481974823
+----------------------------------
+----------------------------------
+Iteration = 690
+Distance = 3.9745266178670136e-5
+v max = 0.8370706009253579
+v min = -5.222831736708748
+----------------------------------
+----------------------------------
+Iteration = 691
+Distance = 3.93517486627637e-5
+v max = 0.8371099526739523
+v min = -5.22279238496015
+----------------------------------
+----------------------------------
+Iteration = 692
+Distance = 3.896212740883698e-5
+v max = 0.8371489148012737
+v min = -5.222753422832832
+----------------------------------
+----------------------------------
+Iteration = 693
+Distance = 3.857636378690188e-5
+v max = 0.8371874911649592
+v min = -5.22271484646914
+----------------------------------
+----------------------------------
+Iteration = 694
+Distance = 3.819441958174963e-5
+v max = 0.8372256855844481
+v min = -5.222676652049651
+----------------------------------
+----------------------------------
+Iteration = 695
+Distance = 3.781625702270475e-5
+v max = 0.8372635018413691
+v min = -5.222638835792729
+----------------------------------
+----------------------------------
+Iteration = 696
+Distance = 3.744183860465711e-5
+v max = 0.8373009436799046
+v min = -5.222601393954193
+----------------------------------
+----------------------------------
+Iteration = 697
+Distance = 3.707112734474549e-5
+v max = 0.8373380148071677
+v min = -5.222564322826932
+----------------------------------
+----------------------------------
+Iteration = 698
+Distance = 3.670408646883061e-5
+v max = 0.8373747188935671
+v min = -5.22252761874053
+----------------------------------
+----------------------------------
+Iteration = 699
+Distance = 3.6340679690383126e-5
+v max = 0.8374110595731697
+v min = -5.222491278060921
+----------------------------------
+----------------------------------
+Iteration = 700
+Distance = 3.598087096712277e-5
+v max = 0.837447040444062
+v min = -5.222455297190029
+----------------------------------
+----------------------------------
+Iteration = 701
+Distance = 3.562462471062844e-5
+v max = 0.8374826650687085
+v min = -5.222419672565386
+----------------------------------
+----------------------------------
+Iteration = 702
+Distance = 3.5271905653999625e-5
+v max = 0.837517936974299
+v min = -5.222384400659791
+----------------------------------
+----------------------------------
+Iteration = 703
+Distance = 3.492267892246659e-5
+v max = 0.8375528596531014
+v min = -5.222349477980986
+----------------------------------
+----------------------------------
+Iteration = 704
+Distance = 3.457690978647676e-5
+v max = 0.8375874365628071
+v min = -5.222314901071276
+----------------------------------
+----------------------------------
+Iteration = 705
+Distance = 3.423456416129511e-5
+v max = 0.8376216711268722
+v min = -5.222280666507207
+----------------------------------
+----------------------------------
+Iteration = 706
+Distance = 3.3895608084755224e-5
+v max = 0.8376555667348571
+v min = -5.222246770899212
+----------------------------------
+----------------------------------
+Iteration = 707
+Distance = 3.356000797616332e-5
+v max = 0.837689126742763
+v min = -5.222213210891303
+----------------------------------
+----------------------------------
+Iteration = 708
+Distance = 3.322773066427587e-5
+v max = 0.8377223544733614
+v min = -5.222179983160705
+----------------------------------
+----------------------------------
+Iteration = 709
+Distance = 3.2898743261178254e-5
+v max = 0.8377552532165297
+v min = -5.222147084417536
+----------------------------------
+----------------------------------
+Iteration = 710
+Distance = 3.257301313874805e-5
+v max = 0.8377878262295676
+v min = -5.222114511404493
+----------------------------------
+----------------------------------
+Iteration = 711
+Distance = 3.225050806765495e-5
+v max = 0.8378200767375256
+v min = -5.222082260896538
+----------------------------------
+----------------------------------
+Iteration = 712
+Distance = 3.193119607924899e-5
+v max = 0.8378520079335247
+v min = -5.22205032970054
+----------------------------------
+----------------------------------
+Iteration = 713
+Distance = 3.161504562676498e-5
+v max = 0.8378836229790687
+v min = -5.222018714655005
+----------------------------------
+----------------------------------
+Iteration = 714
+Distance = 3.1302025378820986e-5
+v max = 0.8379149250043602
+v min = -5.22198741262972
+----------------------------------
+----------------------------------
+Iteration = 715
+Distance = 3.0992104322447034e-5
+v max = 0.8379459171086093
+v min = -5.221956420525478
+----------------------------------
+----------------------------------
+Iteration = 716
+Distance = 3.068525182392534e-5
+v max = 0.8379766023603397
+v min = -5.221925735273743
+----------------------------------
+----------------------------------
+Iteration = 717
+Distance = 3.038143744227284e-5
+v max = 0.838006983797698
+v min = -5.22189535383639
+----------------------------------
+----------------------------------
+Iteration = 718
+Distance = 3.0080631117979095e-5
+v max = 0.8380370644287456
+v min = -5.221865273205349
+----------------------------------
+----------------------------------
+Iteration = 719
+Distance = 2.978280310017567e-5
+v max = 0.8380668472317621
+v min = -5.2218354904023405
+----------------------------------
+----------------------------------
+Iteration = 720
+Distance = 2.9487923872473232e-5
+v max = 0.8380963351555406
+v min = -5.221806002478559
+----------------------------------
+----------------------------------
+Iteration = 721
+Distance = 2.919596423289761e-5
+v max = 0.8381255311196802
+v min = -5.221776806514426
+----------------------------------
+----------------------------------
+Iteration = 722
+Distance = 2.8906895268576704e-5
+v max = 0.838154438014866
+v min = -5.2217478996192375
+----------------------------------
+----------------------------------
+Iteration = 723
+Distance = 2.8620688403258043e-5
+v max = 0.8381830587031672
+v min = -5.221719278930946
+----------------------------------
+----------------------------------
+Iteration = 724
+Distance = 2.8337315264082008e-5
+v max = 0.8382113960183172
+v min = -5.221690941615791
+----------------------------------
+----------------------------------
+Iteration = 725
+Distance = 2.8056747763738343e-5
+v max = 0.8382394527659908
+v min = -5.221662884868121
+----------------------------------
+----------------------------------
+Iteration = 726
+Distance = 2.7778958161750467e-5
+v max = 0.838267231724083
+v min = -5.221635105910031
+----------------------------------
+----------------------------------
+Iteration = 727
+Distance = 2.7503918988536213e-5
+v max = 0.8382947356429873
+v min = -5.2216076019911295
+----------------------------------
+----------------------------------
+Iteration = 728
+Distance = 2.7231602963695423e-5
+v max = 0.8383219672458615
+v min = -5.221580370388255
+----------------------------------
+----------------------------------
+Iteration = 729
+Distance = 2.696198310658815e-5
+v max = 0.8383489292289072
+v min = -5.221553408405211
+----------------------------------
+----------------------------------
+Iteration = 730
+Distance = 2.6695032801171692e-5
+v max = 0.8383756242616257
+v min = -5.2215267133724925
+----------------------------------
+----------------------------------
+Iteration = 731
+Distance = 2.6430725560189217e-5
+v max = 0.8384020549870879
+v min = -5.221500282647021
+----------------------------------
+----------------------------------
+Iteration = 732
+Distance = 2.6169035196588197e-5
+v max = 0.8384282240221997
+v min = -5.221474113611912
+----------------------------------
+----------------------------------
+Iteration = 733
+Distance = 2.5909935855494837e-5
+v max = 0.8384541339579545
+v min = -5.221448203676158
+----------------------------------
+----------------------------------
+Iteration = 734
+Distance = 2.5653401812597565e-5
+v max = 0.838479787359693
+v min = -5.2214225502744185
+----------------------------------
+----------------------------------
+Iteration = 735
+Distance = 2.5399407740600566e-5
+v max = 0.8385051867673537
+v min = -5.221397150866768
+----------------------------------
+----------------------------------
+Iteration = 736
+Distance = 2.514792844365843e-5
+v max = 0.8385303346957298
+v min = -5.221372002938393
+----------------------------------
+----------------------------------
+Iteration = 737
+Distance = 2.48989390776444e-5
+v max = 0.8385552336347165
+v min = -5.2213471039994
+----------------------------------
+----------------------------------
+Iteration = 738
+Distance = 2.4652414923664878e-5
+v max = 0.8385798860495548
+v min = -5.221322451584562
+----------------------------------
+----------------------------------
+Iteration = 739
+Distance = 2.4408331611880385e-5
+v max = 0.8386042943810783
+v min = -5.221298043253036
+----------------------------------
+----------------------------------
+Iteration = 740
+Distance = 2.4166664959857087e-5
+v max = 0.8386284610459536
+v min = -5.2212738765881515
+----------------------------------
+----------------------------------
+Iteration = 741
+Distance = 2.3927391041400625e-5
+v max = 0.8386523884369181
+v min = -5.221249949197183
+----------------------------------
+----------------------------------
+Iteration = 742
+Distance = 2.369048618433567e-5
+v max = 0.8386760789230212
+v min = -5.2212262587110825
+----------------------------------
+----------------------------------
+Iteration = 743
+Distance = 2.3455926941196026e-5
+v max = 0.8386995348498577
+v min = -5.221202802784246
+----------------------------------
+----------------------------------
+Iteration = 744
+Distance = 2.3223690005735875e-5
+v max = 0.8387227585397939
+v min = -5.22117957909431
+----------------------------------
+----------------------------------
+Iteration = 745
+Distance = 2.2993752475386486e-5
+v max = 0.8387457522922052
+v min = -5.221156585341897
+----------------------------------
+----------------------------------
+Iteration = 746
+Distance = 2.276609160389853e-5
+v max = 0.8387685183837026
+v min = -5.221133819250404
+----------------------------------
+----------------------------------
+Iteration = 747
+Distance = 2.254068475160409e-5
+v max = 0.8387910590683532
+v min = -5.2211112785657505
+----------------------------------
+----------------------------------
+Iteration = 748
+Distance = 2.2317509637215238e-5
+v max = 0.8388133765779074
+v min = -5.221088961056197
+----------------------------------
+----------------------------------
+Iteration = 749
+Distance = 2.2096544201488655e-5
+v max = 0.8388354731220218
+v min = -5.22106686451208
+----------------------------------
+----------------------------------
+Iteration = 750
+Distance = 2.1877766521960496e-5
+v max = 0.8388573508884716
+v min = -5.221044986745624
+----------------------------------
+----------------------------------
+Iteration = 751
+Distance = 2.1661154981700292e-5
+v max = 0.8388790120433727
+v min = -5.221023325590724
+----------------------------------
+----------------------------------
+Iteration = 752
+Distance = 2.1446688122317425e-5
+v max = 0.8389004587313921
+v min = -5.221001878902699
+----------------------------------
+----------------------------------
+Iteration = 753
+Distance = 2.1234344638187963e-5
+v max = 0.8389216930759665
+v min = -5.220980644558115
+----------------------------------
+----------------------------------
+Iteration = 754
+Distance = 2.1024103717515175e-5
+v max = 0.8389427171795059
+v min = -5.220959620454573
+----------------------------------
+----------------------------------
+Iteration = 755
+Distance = 2.081594418790189e-5
+v max = 0.8389635331236043
+v min = -5.220938804510471
+----------------------------------
+----------------------------------
+Iteration = 756
+Distance = 2.060984573448721e-5
+v max = 0.8389841429692457
+v min = -5.220918194664828
+----------------------------------
+----------------------------------
+Iteration = 757
+Distance = 2.0405787839017364e-5
+v max = 0.8390045487570101
+v min = -5.2208977888770685
+----------------------------------
+----------------------------------
+Iteration = 758
+Distance = 2.0203750354497174e-5
+v max = 0.839024752507273
+v min = -5.220877585126804
+----------------------------------
+----------------------------------
+Iteration = 759
+Distance = 2.000371320365346e-5
+v max = 0.8390447562204034
+v min = -5.220857581413673
+----------------------------------
+----------------------------------
+Iteration = 760
+Distance = 1.980565664494449e-5
+v max = 0.8390645618769683
+v min = -5.220837775757116
+----------------------------------
+----------------------------------
+Iteration = 761
+Distance = 1.9609561084266147e-5
+v max = 0.8390841714379232
+v min = -5.220818166196165
+----------------------------------
+----------------------------------
+Iteration = 762
+Distance = 1.94154069896868e-5
+v max = 0.8391035868448091
+v min = -5.220798750789283
+----------------------------------
+----------------------------------
+Iteration = 763
+Distance = 1.922317524716277e-5
+v max = 0.8391228100199436
+v min = -5.220779527614145
+----------------------------------
+----------------------------------
+Iteration = 764
+Distance = 1.9032846784838853e-5
+v max = 0.839141842866611
+v min = -5.220760494767475
+----------------------------------
+----------------------------------
+Iteration = 765
+Distance = 1.8844402728035448e-5
+v max = 0.8391606872692523
+v min = -5.220741650364834
+----------------------------------
+----------------------------------
+Iteration = 766
+Distance = 1.8657824486734143e-5
+v max = 0.83917934509365
+v min = -5.220722992540428
+----------------------------------
+----------------------------------
+Iteration = 767
+Distance = 1.847309358016247e-5
+v max = 0.8391978181871139
+v min = -5.220704519446965
+----------------------------------
+----------------------------------
+Iteration = 768
+Distance = 1.8290191605707662e-5
+v max = 0.839216108378661
+v min = -5.220686229255416
+----------------------------------
+----------------------------------
+Iteration = 769
+Distance = 1.8109100632379693e-5
+v max = 0.8392342174792017
+v min = -5.220668120154873
+----------------------------------
+----------------------------------
+Iteration = 770
+Distance = 1.7929802616833967e-5
+v max = 0.839252147281718
+v min = -5.220650190352358
+----------------------------------
+----------------------------------
+Iteration = 771
+Distance = 1.7752279788396663e-5
+v max = 0.8392698995614386
+v min = -5.220632438072633
+----------------------------------
+----------------------------------
+Iteration = 772
+Distance = 1.75765146792628e-5
+v max = 0.8392874760760134
+v min = -5.220614861558057
+----------------------------------
+----------------------------------
+Iteration = 773
+Distance = 1.740248976478398e-5
+v max = 0.8393048785656891
+v min = -5.220597459068377
+----------------------------------
+----------------------------------
+Iteration = 774
+Distance = 1.723018788624131e-5
+v max = 0.8393221087534869
+v min = -5.220580228880578
+----------------------------------
+----------------------------------
+Iteration = 775
+Distance = 1.7059591968404675e-5
+v max = 0.8393391683453688
+v min = -5.220563169288687
+----------------------------------
+----------------------------------
+Iteration = 776
+Distance = 1.6890685094139712e-5
+v max = 0.8393560590303996
+v min = -5.220546278603661
+----------------------------------
+----------------------------------
+Iteration = 777
+Distance = 1.6723450609212875e-5
+v max = 0.8393727824809251
+v min = -5.220529555153137
+----------------------------------
+----------------------------------
+Iteration = 778
+Distance = 1.6557871944655744e-5
+v max = 0.8393893403527319
+v min = -5.220512997281333
+----------------------------------
+----------------------------------
+Iteration = 779
+Distance = 1.6393932606106887e-5
+v max = 0.8394057342852139
+v min = -5.220496603348854
+----------------------------------
+----------------------------------
+Iteration = 780
+Distance = 1.6231616418505013e-5
+v max = 0.8394219659015334
+v min = -5.220480371732542
+----------------------------------
+----------------------------------
+Iteration = 781
+Distance = 1.6070907313370242e-5
+v max = 0.8394380368087796
+v min = -5.2204643008252996
+----------------------------------
+----------------------------------
+Iteration = 782
+Distance = 1.591178942605964e-5
+v max = 0.8394539485981338
+v min = -5.22044838903595
+----------------------------------
+----------------------------------
+Iteration = 783
+Distance = 1.5754246965649088e-5
+v max = 0.8394697028450182
+v min = -5.220432634789064
+----------------------------------
+----------------------------------
+Iteration = 784
+Distance = 1.5598264352156832e-5
+v max = 0.8394853011092607
+v min = -5.220417036524817
+----------------------------------
+----------------------------------
+Iteration = 785
+Distance = 1.544382608109629e-5
+v max = 0.8395007449352421
+v min = -5.220401592698835
+----------------------------------
+----------------------------------
+Iteration = 786
+Distance = 1.529091687846318e-5
+v max = 0.8395160358520571
+v min = -5.220386301782025
+----------------------------------
+----------------------------------
+Iteration = 787
+Distance = 1.513952166920518e-5
+v max = 0.8395311753736553
+v min = -5.220371162260427
+----------------------------------
+----------------------------------
+Iteration = 788
+Distance = 1.4989625412020757e-5
+v max = 0.8395461649989999
+v min = -5.2203561726350785
+----------------------------------
+----------------------------------
+Iteration = 789
+Distance = 1.4841213298311118e-5
+v max = 0.8395610062122121
+v min = -5.220341331421864
+----------------------------------
+----------------------------------
+Iteration = 790
+Distance = 1.4694270596748993e-5
+v max = 0.8395757004827201
+v min = -5.22032663715136
+----------------------------------
+----------------------------------
+Iteration = 791
+Distance = 1.454878276874183e-5
+v max = 0.8395902492654009
+v min = -5.220312088368672
+----------------------------------
+----------------------------------
+Iteration = 792
+Distance = 1.440473540359477e-5
+v max = 0.8396046540007288
+v min = -5.220297683633345
+----------------------------------
+----------------------------------
+Iteration = 793
+Distance = 1.4262114287788563e-5
+v max = 0.839618916114914
+v min = -5.220283421519162
+----------------------------------
+----------------------------------
+Iteration = 794
+Distance = 1.412090522912024e-5
+v max = 0.8396330370200474
+v min = -5.2202693006140235
+----------------------------------
+----------------------------------
+Iteration = 795
+Distance = 1.398109431161032e-5
+v max = 0.8396470181142395
+v min = -5.220255319519833
+----------------------------------
+----------------------------------
+Iteration = 796
+Distance = 1.3842667595298508e-5
+v max = 0.8396608607817564
+v min = -5.220241476852321
+----------------------------------
+----------------------------------
+Iteration = 797
+Distance = 1.3705611493275427e-5
+v max = 0.8396745663931585
+v min = -5.2202277712409195
+----------------------------------
+----------------------------------
+Iteration = 798
+Distance = 1.3569912373778692e-5
+v max = 0.8396881363054386
+v min = -5.220214201328649
+----------------------------------
+----------------------------------
+Iteration = 799
+Distance = 1.3435556787122493e-5
+v max = 0.8397015718621503
+v min = -5.220200765771934
+----------------------------------
+----------------------------------
+Iteration = 800
+Distance = 1.3302531473691204e-5
+v max = 0.8397148743935487
+v min = -5.220187463240527
+----------------------------------
+----------------------------------
+Iteration = 801
+Distance = 1.31708232271599e-5
+v max = 0.8397280452167153
+v min = -5.22017429241735
+----------------------------------
+----------------------------------
+Iteration = 802
+Distance = 1.3040419033938377e-5
+v max = 0.8397410856356933
+v min = -5.220161251998376
+----------------------------------
+----------------------------------
+Iteration = 803
+Distance = 1.2911305985241484e-5
+v max = 0.8397539969416115
+v min = -5.220148340692458
+----------------------------------
+----------------------------------
+Iteration = 804
+Distance = 1.2783471310395811e-5
+v max = 0.8397667804128178
+v min = -5.220135557221251
+----------------------------------
+----------------------------------
+Iteration = 805
+Distance = 1.2656902260488323e-5
+v max = 0.8397794373150032
+v min = -5.2201229003190655
+----------------------------------
+----------------------------------
+Iteration = 806
+Distance = 1.2531586429886943e-5
+v max = 0.8397919689013256
+v min = -5.220110368732742
+----------------------------------
+----------------------------------
+Iteration = 807
+Distance = 1.2407511301049112e-5
+v max = 0.8398043764125344
+v min = -5.220097961221536
+----------------------------------
+----------------------------------
+Iteration = 808
+Distance = 1.2284664632211673e-5
+v max = 0.8398166610770982
+v min = -5.220085676556978
+----------------------------------
+----------------------------------
+Iteration = 809
+Distance = 1.2163034281087448e-5
+v max = 0.8398288241113206
+v min = -5.22007351352275
+----------------------------------
+----------------------------------
+Iteration = 810
+Distance = 1.2042608212414763e-5
+v max = 0.8398408667194602
+v min = -5.220061470914619
+----------------------------------
+----------------------------------
+Iteration = 811
+Distance = 1.1923374465538927e-5
+v max = 0.8398527900938572
+v min = -5.22004954754023
+----------------------------------
+----------------------------------
+Iteration = 812
+Distance = 1.18053212672109e-5
+v max = 0.8398645954150418
+v min = -5.220037742219052
+----------------------------------
+----------------------------------
+Iteration = 813
+Distance = 1.1688436881041042e-5
+v max = 0.839876283851858
+v min = -5.220026053782243
+----------------------------------
+----------------------------------
+Iteration = 814
+Distance = 1.1572709856189078e-5
+v max = 0.8398878565615764
+v min = -5.220014481072527
+----------------------------------
+----------------------------------
+Iteration = 815
+Distance = 1.1458128510888343e-5
+v max = 0.8398993146900094
+v min = -5.220003022944103
+----------------------------------
+----------------------------------
+Iteration = 816
+Distance = 1.1344681697167402e-5
+v max = 0.8399106593716279
+v min = -5.219991678262485
+----------------------------------
+----------------------------------
+Iteration = 817
+Distance = 1.1232358126278541e-5
+v max = 0.8399218917296665
+v min = -5.219980445904442
+----------------------------------
+----------------------------------
+Iteration = 818
+Distance = 1.112114669155062e-5
+v max = 0.8399330128762382
+v min = -5.219969324757872
+----------------------------------
+----------------------------------
+Iteration = 819
+Distance = 1.101103629341793e-5
+v max = 0.8399440239124479
+v min = -5.2199583137216585
+----------------------------------
+----------------------------------
+Iteration = 820
+Distance = 1.090201611919639e-5
+v max = 0.8399549259284976
+v min = -5.2199474117056095
+----------------------------------
+----------------------------------
+Iteration = 821
+Distance = 1.0794075417930316e-5
+v max = 0.8399657200037959
+v min = -5.219936617630315
+----------------------------------
+----------------------------------
+Iteration = 822
+Distance = 1.0687203348958008e-5
+v max = 0.8399764072070612
+v min = -5.219925930427055
+----------------------------------
+----------------------------------
+Iteration = 823
+Distance = 1.0581389457087198e-5
+v max = 0.8399869885964332
+v min = -5.219915349037677
+----------------------------------
+----------------------------------
+Iteration = 824
+Distance = 1.0476623223620862e-5
+v max = 0.8399974652195727
+v min = -5.219904872414527
+----------------------------------
+----------------------------------
+Iteration = 825
+Distance = 1.0372894292842716e-5
+v max = 0.8400078381137709
+v min = -5.219894499520334
+----------------------------------
+----------------------------------
+Iteration = 826
+Distance = 1.0270192347228146e-5
+v max = 0.8400181083060453
+v min = -5.219884229328055
+----------------------------------
+----------------------------------
+Iteration = 827
+Distance = 1.0168507330821086e-5
+v max = 0.8400282768132484
+v min = -5.21987406082086
+----------------------------------
+----------------------------------
+Iteration = 828
+Distance = 1.006782903445469e-5
+v max = 0.8400383446421616
+v min = -5.219863992991953
+----------------------------------
+----------------------------------
+Iteration = 829
+Distance = 9.968147520744708e-6
+v max = 0.8400483127895997
+v min = -5.219854024844514
+----------------------------------
+    Value Function Converged, Iteration = 829 with gamma=1.0 with rho=1.0 and v=-2.2204582637455093
+Convergence time (minutes): 1.5750099951166667
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{String, Any} with 40 entries:
+  &quot;ymax&quot;    =&gt; 2.0e-5
+  &quot;V&quot;       =&gt; [-5.21985 -5.21984 … -5.213 -5.213; -5.1899 -5.1899 … -5.18883 -…
+  &quot;dy&quot;      =&gt; 9.75e-8
+  &quot;a22&quot;     =&gt; 0.194
+  &quot;zz&quot;      =&gt; [-5.0 -5.0 … -5.0 -5.0; -4.95 -4.95 … -4.95 -4.95; … ; 4.95 4.95…
+  &quot;times&quot;   =&gt; 94.5006
+  &quot;hz&quot;      =&gt; [7.30085 7.29732 … 6.15858 6.15821; 13.2831 13.2795 … 11.9034 11…
+  &quot;delta&quot;   =&gt; 0.01
+  &quot;mu_y&quot;    =&gt; [1.1252e-6 1.10629e-6 … -2.63889e-6 -2.6578e-6; 1.1252e-6 1.1062…
+  &quot;hy&quot;      =&gt; [0.097075 0.241849 … 0.0415655 0.014188; -0.00158519 -0.00420511…
+  &quot;sigma_y&quot; =&gt; [0.0, 0.0, 0.00107387]
+  &quot;phi&quot;     =&gt; 8.0
+  &quot;zmin&quot;    =&gt; -5.0
+  &quot;maxit&quot;   =&gt; 50000
+  &quot;Delta&quot;   =&gt; 1.0
+  &quot;crit&quot;    =&gt; 1.0e-5
+  &quot;d&quot;       =&gt; [0.0761111 0.0761111 … 0.0761111 0.0761111; 0.0761111 0.0761111 …
+  &quot;zmax&quot;    =&gt; 5.0
+  &quot;sigma_k&quot; =&gt; [3.18697, 1.38564, 0.0]
+  &quot;dz&quot;      =&gt; 0.05
+  &quot;g&quot;       =&gt; [3.00353e-8 2.13511e-8 … 5.2324e-17 5.08546e-17; 1.44656e-8 1.42…
+  &quot;hk&quot;      =&gt; [3.18697 3.18697 … 3.18697 3.18697; 3.18697 3.18697 … 3.18697 3.…
+  &quot;alpha&quot;   =&gt; 0.0922
+  &quot;mu_z&quot;    =&gt; [0.28 0.28 … 0.28 0.28; 0.2772 0.2772 … 0.2772 0.2772; … ; -0.27…
+  &quot;cons&quot;    =&gt; [0.0160889 0.0160889 … 0.0160889 0.0160889; 0.0160889 0.0160889 …
+  ⋮         =&gt; ⋮
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>By default, the solution is saved to the <code class="docutils literal notranslate"><span class="pre">output</span></code> folder. These results can be used to compute elasticities, which are described in a different section.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -652,6 +5655,15 @@ C_t + I_t = \alpha K_t
         <p class="prev-next-title">Introduction</p>
       </div>
     </a>
+    <a class="right-next"
+       href="model_ambiguity.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2 Model Ambiguity</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -670,11 +5682,9 @@ C_t + I_t = \alpha K_t
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Single Capital Model</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">Solution Overview</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">1.2 Solution Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">1.3 Quick Start</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
@@ -688,7 +5698,7 @@ C_t + I_t = \alpha K_t
   <div class="footer-item">
     
 <p class="component-author">
-By Lars Peter Hansen
+By Lars Peter Hansen, Paymon Khorrami and Fabrice Toure
 </p>
 
   </div>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction &#8212; Comparing DSGE Models</title>
+    <title>2 Model Ambiguity &#8212; Comparing DSGE Models</title>
   
   
   
@@ -62,10 +62,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'model_ambiguity';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1 Single Capital Model" href="single_capital.html" />
+    <link rel="next" title="3 Two Capital Model" href="twocapital.html" />
+    <link rel="prev" title="1 Single Capital Model" href="single_capital.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -131,7 +134,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -142,9 +145,9 @@ const thebe_selector_output = ".output, .cell_output"
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="single_capital.html">1 Single Capital Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="model_ambiguity.html">2 Model Ambiguity</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2 Model Ambiguity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="twocapital.html">3 Two Capital Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="heterogeneous_agents.html">4 Heterogeneous Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="elasticities.html">2 Elasticities</a></li>
@@ -204,7 +207,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/intro.ipynb" target="_blank"
+      <li><a href="_sources/model_ambiguity.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -284,7 +287,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduction</h1>
+    <h1>2 Model Ambiguity</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -298,10 +301,122 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h1>
-<p>This webpage provides user-friendly instructions on how to solve the models and compute the elasticities featured in Sections 4 and 5 of Hansen, Khorrami and Tourre (2024). It is divided into the following notebooks:</p>
-<div class="toctree-wrapper compound">
+  <section class="tex2jax_ignore mathjax_ignore" id="model-ambiguity">
+<h1>2 Model Ambiguity<a class="headerlink" href="#model-ambiguity" title="Permalink to this heading">#</a></h1>
+<p>Now we abstract away from stochastic volatility (set <span class="math notranslate nohighlight">\(\sigma_2\)</span> to 0) and introduce model ambiguity, following Hansen and Sargent (2021). Suppose that the agent’s baseline model follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+d Z_{t}^1 =  - \hat{\beta}_1 Z_t^1 dt +  \sqrt{Z_t^2} \sigma_1 \cdot d B_{t}^S, \\
+dK_t = K_t\left[ \Phi \left( \frac{I_t}{K_t} \right) + \hat{\beta}_k Z_t^1 - \hat{\eta}_k \right] dt  + K_t \sqrt{Z_t^2}  {\sigma}_k \cdot dB_t^S
+\end{split}\]</div>
+<p>Entertaining model ambiguity, the agents form a collection of structured models parameterized by <span class="math notranslate nohighlight">\((\phi_1,\beta_1,\eta_k,\beta_k)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+d Z_{t}^1 =  \phi_1 - \beta_1 Z_t^1 dt +  \sqrt{Z_t^2} \sigma_1 \cdot d B_{t}^S, \\
+dK_t = K_t\left[ \Phi \left( \frac{I_t}{K_t} \right) + \beta_k Z_t^1 - \eta_k \right] dt  + K_t \sqrt{Z_t^2}  {\sigma}_k \cdot dB_t^S
+\end{split}\]</div>
+<p>Where:</p>
+<div class="math notranslate nohighlight">
+\[
+dB_t^S = H_t dt + dB_t
+\]</div>
+<p>And <span class="math notranslate nohighlight">\(H_t\)</span> is the drift distortion implied by the parameters, with the form:</p>
+<div class="math notranslate nohighlight">
+\[
+H_t := \psi(Z_t) = \psi_0 + \psi_1 (Z_t - \bar{z})
+\]</div>
+<p>The agent solves:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+0 =   \max_{c+i = \alpha} \min_{h}  \left\{ \left( \frac{\delta}{1 - \rho} \right) \left( c^{1-\rho} \exp \left[ (\rho - 1) \upsilon \right] - 1 \right) + \Phi(i) + \hat{\beta}_k z_1 - \hat{\eta}_k + \sigma_k \cdot h - \frac{1}{2} |\sigma_k|^2 \right. \\
+ \left. + (-\hat{\beta}_1 + \sigma_1 \cdot h) \cdot \frac {\partial \upsilon}{\partial z_1}  +  \frac {1}2  {\rm trace} \left\{ {\sigma_1}' \frac {\partial^2 \upsilon}{\partial z_1^2} \sigma_1 \right\} +  \frac{(1 - \gamma) }{2} \left\vert\sigma_k + {\sigma_1}' \frac {\partial \upsilon}{\partial z_1}   \right\vert^2 \right\}
+\end{split}\]</div>
+<p>Such that:</p>
+<div class="math notranslate nohighlight">
+\[
+(z_1-\bar{z}_1) \zeta \left[\hat{\beta}_1(z_1-\bar{z}_1) + \sigma_1 \cdot h\right] + \frac{|\sigma_1|^2}{2} \zeta - \frac{q^2}{2} + \frac{h \cdot h}{2} \leq 0
+\]</div>
+<p>For some relative entropy <span class="math notranslate nohighlight">\(q\)</span> and constant <span class="math notranslate nohighlight">\(\zeta\)</span>. Thus, in addition to the inputs in the baseline model, the user must also supply:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">q</span></code></p></td>
+<td><p>Relative entropy constraint</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">twoparameter</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> if ambiguity is restricted to the slope parameters; <code class="docutils literal notranslate"><span class="pre">false</span></code> if ambiguity is extended to the slope and constant parameters</p></td>
+</tr>
+</tbody>
+</table>
+<p>We begin again by importing the necessary libraries and setting our inputs:</p>
+<!-- 
+
+We deduce the following restrictions for $\eta_0$ and $\eta_1$:
+\begin{equation}
+\begin{bmatrix}
+\sigma_k' \\
+\sigma_z'
+\end{bmatrix}  \begin{bmatrix}
+\gamma_0,  \gamma_1
+\end{bmatrix}= \begin{bmatrix}
+\hat{\eta}_k - \eta_k & \beta_k - \hat{\beta}_k\\
+\phi_1 - \hat{\phi}_1 & \hat{\beta}_z - \beta_z
+\end{bmatrix}
+\end{equation} -->
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;src/2/utils_onecapital.jl&quot;</span><span class="p">)</span>
+<span class="n">include</span><span class="p">(</span><span class="s">&quot;src/2/main_onecapital.jl&quot;</span><span class="p">)</span>
+
+<span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0922</span>
+<span class="n">delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.01</span>
+<span class="n">gamma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="n">Delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="n">rho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span>
+<span class="n">twoparameter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<span class="n">action_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;test&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Cyan">[ Info: </span>Precompiling JuMP [4076af6c-e467-56ae-b986-b466b2749572]
+<span class=" -Color -Color-Bold -Color-Bold-Cyan">[ Info: </span>Precompiling Ipopt [b6b21f68-93f8-5de0-b562-5493be1d77c9]
+<span class=" -Color -Color-Bold -Color-Bold-Green">  Activating</span> project at `/project/lhansen/macrofinance`
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: syntax: incomplete: &quot;function&quot; at /project/lhansen/macrofinance/src/2/main_onecapital.jl:46 requires end
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">lhansen</span><span class="o">/</span><span class="n">macrofinance</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">main_onecapital</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">46</span>
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">lhansen</span><span class="o">/</span><span class="n">macrofinance</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">main_onecapital</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">46</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">include</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span><span class="o">.</span><span class="n">MainInclude</span> <span class="o">./</span><span class="n">client</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">451</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can then run the main function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">results_ambiguity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model_ambiguity</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">Delta</span><span class="p">,</span><span class="w"> </span><span class="n">delta</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">twoparameter</span><span class="p">,</span><span class="w"> </span><span class="n">action_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 
@@ -314,16 +429,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "julia-1.7.3-1.7"
         },
         kernelOptions: {
-            name: "python3",
+            name: "julia-1.7.3-1.7",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'julia-1.7.3-1.7'</script>
 
                 </article>
               
@@ -336,12 +451,21 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="right-next"
+    <a class="left-prev"
        href="single_capital.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1 Single Capital Model</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="twocapital.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1 Single Capital Model</p>
+        <p class="prev-next-title">3 Two Capital Model</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
