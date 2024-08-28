@@ -150,6 +150,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="model_ambiguity.html">2 Model Ambiguity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="twocapital.html">3 Two Capital Model</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">4 Heterogeneous Agents</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="elasticities.html">2 Elasticities</a></li>
 
 
@@ -299,14 +300,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4 Heterogeneous Agents</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">Solution Overview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">Model Architecture</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters">Model Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-difference-method">Finite Difference Method</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -1265,11 +1270,30 @@ Elapsed time for training 94.0623 sec
   - $\sigma_c$
 </pre></div>
 </div>
+<p>Given that a solution has been saved under the same parameters, the following code outputs the variables listed above. In addition, the <code class="docutils literal notranslate"><span class="pre">marginal_quantile_func_factory</span></code> function is called to save the above outputs evaluated at desired quantiles (e.g. <span class="math notranslate nohighlight">\(Z^2\)</span> at median) for ease of plotting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;src/4&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">main_variable</span> <span class="kn">import</span> <span class="n">main_var</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+
+<span class="n">main_var</span><span class="p">(</span><span class="n">action_name</span><span class="p">,</span> <span class="n">nWealth</span><span class="p">,</span> <span class="n">nZ</span><span class="p">,</span> <span class="n">nV</span><span class="p">,</span> <span class="n">V_bar</span><span class="p">,</span> <span class="n">sigma_K_norm</span><span class="p">,</span> <span class="n">sigma_Z_norm</span><span class="p">,</span> <span class="n">sigma_V_norm</span><span class="p">,</span> <span class="n">wMin</span><span class="p">,</span> <span class="n">wMax</span><span class="p">,</span> <span class="n">chiUnderline</span><span class="p">,</span> <span class="n">a_e</span><span class="p">,</span> <span class="n">a_h</span><span class="p">,</span> <span class="n">gamma_e</span><span class="p">,</span> <span class="n">gamma_h</span><span class="p">,</span> <span class="n">rho_e</span><span class="p">,</span> <span class="n">rho_h</span><span class="p">,</span> <span class="n">delta_e</span><span class="p">,</span> <span class="n">delta_h</span><span class="p">,</span> <span class="n">lambda_d</span><span class="p">,</span> <span class="n">nu</span><span class="p">,</span> <span class="n">shock_expo</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">points_size</span><span class="p">,</span> <span class="n">iter_num</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">penalization</span><span class="p">,</span> <span class="n">BFGS_maxiter</span><span class="p">,</span> <span class="n">BFGS_maxfun</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-08-28 15:49:17.685366: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now plot the results.</p>
 </section>
-<section id="code">
-<h2>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h2>
-<p>To begin with</p>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="finite-difference-method">
+<h1>Finite Difference Method<a class="headerlink" href="#finite-difference-method" title="Permalink to this heading">#</a></h1>
+<p>We employ finite differences to solve Model IP from Section 5.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1339,14 +1363,18 @@ Elapsed time for training 94.0623 sec
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4 Heterogeneous Agents</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">Solution Overview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">Model Architecture</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters">Model Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-difference-method">Finite Difference Method</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>
