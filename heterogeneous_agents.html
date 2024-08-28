@@ -299,8 +299,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">Model Architecture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">Solution Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">Model Architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters">Model Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
 </ul>
             </nav>
         </div>
@@ -315,8 +320,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="heterogeneous-agents">
 <h1>4 Heterogeneous Agents<a class="headerlink" href="#heterogeneous-agents" title="Permalink to this heading">#</a></h1>
 <p>Consider the environment in section 5. We need to solve the following:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-10462b66-3995-499d-a97f-0bbc03952335">
-<span class="eqno">(1)<a class="headerlink" href="#equation-10462b66-3995-499d-a97f-0bbc03952335" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
     \begin{split}
     {L}^e_{HJB} \left(v^e, v^h, \kappa, \chi;x \right) &amp;= \frac{\rho_e}{1-\rho_e} \delta_e^{1 / \rho_e} \exp\left[({1- \frac{1}{\rho_e}})v^e)\right]-\frac{\delta_e}{1-\rho_e}+r\\&amp;+\frac{1}{2 \gamma_e} \frac{\left(\Delta^e+\pi^h \cdot \sigma_R\right)^2}{\left\|\sigma_R\right\|^2}
 +\left[\mu_X+\frac{1-\gamma_e}{\gamma_e}\left(\frac{\Delta^e+\pi^h \cdot \sigma_R}{\left\|\sigma_R\right\|^2}\right) \sigma_X \sigma_R\right] \cdot \partial_X v^e \\
@@ -332,17 +337,19 @@ document.write(`
     {L}_{\chi} \left(v^e, v^h, \kappa, \chi;x \right) &amp;= \min\Big\{ \chi - \underline{\chi}, \, \Big[ ((1-w)\gamma_e + w\gamma_h) | D_{z} |^2 + (\partial_w \log q) D_{\upsilon,z} - D_{\upsilon,w} \Big](\chi - w) \\
  \quad &amp;+ w(1-w) (\gamma_e - \gamma_h) | D_{z} |^2 - D_{\upsilon,z} \Big\} = 0
 \end{split}
-\end{align}\]</div>
+\end{align*}\]</div>
 <p>Where:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-71029a14-695a-4931-bc10-842b9b92c136">
-<span class="eqno">(2)<a class="headerlink" href="#equation-71029a14-695a-4931-bc10-842b9b92c136" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
  D_{z} &amp;\doteq \sqrt{z_2}\sigma_k + \sigma_{z}' \partial_{z} \log q \\
  D_{\upsilon,w} &amp;\doteq w(1-w) | D_{z} |^2 \partial_w  \big[ (\gamma_h - 1) \upsilon^h - (\gamma_e - 1)\upsilon^e \big] \\
  D_{\upsilon,z} &amp;\doteq w(1-w) \left(\sigma_{z}D_{z} \right) \cdot \partial_{z} \big[ (\gamma_h - 1) \upsilon^h - (\gamma_e - 1)\upsilon^e  \big]
-\end{align}\]</div>
+\end{align*}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\chi\)</span> can be solved algebraically, we solve (1) to (3).</p>
+<section id="solution-overview">
+<h2>Solution Overview<a class="headerlink" href="#solution-overview" title="Permalink to this heading">#</a></h2>
 <section id="model-architecture">
-<h2>Model Architecture<a class="headerlink" href="#model-architecture" title="Permalink to this heading">#</a></h2>
+<h3>Model Architecture<a class="headerlink" href="#model-architecture" title="Permalink to this heading">#</a></h3>
 <p>We modify the <code class="docutils literal notranslate"><span class="pre">DeepGalerkinMethod</span></code> code from https://github.com/alialaradi/DeepGalerkinMethod. We construct an object <code class="docutils literal notranslate"><span class="pre">sim_NN</span></code> of class <code class="docutils literal notranslate"><span class="pre">DGMNet</span></code> with the following hyperparameters:</p>
 <table class="table">
 <thead>
@@ -381,13 +388,13 @@ document.write(`
 <p>We use a Glorot normal initializer to initialize weights and a Glorot uniform initializer to initialize the biases.</p>
 </section>
 <section id="training">
-<h2>Training<a class="headerlink" href="#training" title="Permalink to this heading">#</a></h2>
+<h3>Training<a class="headerlink" href="#training" title="Permalink to this heading">#</a></h3>
 <p>The training set is constructed by drawing uniformly from the three-dimensional cube bounded by [<code class="docutils literal notranslate"><span class="pre">wMin</span></code>,<code class="docutils literal notranslate"><span class="pre">zMin</span></code>,<code class="docutils literal notranslate"><span class="pre">vMin</span></code>] and [<code class="docutils literal notranslate"><span class="pre">wMax</span></code>,<code class="docutils literal notranslate"><span class="pre">zMax</span></code>,<code class="docutils literal notranslate"><span class="pre">vMax</span></code>]. The loss function is given by:</p>
 <div class="math notranslate nohighlight">
 \[
-{L}^e_{HJB} + {L}^h_{HJB} + p{L}_{\kappa}
+L = {L}^e_{HJB} + {L}^h_{HJB} + p{L}_{\kappa}
 \]</div>
-<p>Where <span class="math notranslate nohighlight">\(p\)</span> is a penalization parameter. We compute the gradient using <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> and use an <code class="docutils literal notranslate"><span class="pre">L-BFGS-B</span></code> solver. The full list of parameters for the training stage are:</p>
+<p>Where <span class="math notranslate nohighlight">\(p\)</span> is a penalization parameter. We compute gradients using <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> and use an <code class="docutils literal notranslate"><span class="pre">L-BFGS-B</span></code> solver. The full list of parameters for the training stage are:</p>
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Input</p></th>
@@ -397,11 +404,11 @@ document.write(`
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">points_size</span></code></p></td>
-<td><p>Determines the <code class="docutils literal notranslate"><span class="pre">batchSize</span></code>, which is <span class="math notranslate nohighlight">\(2^x\)</span> where <span class="math notranslate nohighlight">\(x\)</span> is <code class="docutils literal notranslate"><span class="pre">points_size</span></code>. Batch size is the number of training samples in each epoch.</p></td>
+<td><p>Determines the <code class="docutils literal notranslate"><span class="pre">batchSize</span></code>, which is <span class="math notranslate nohighlight">\(2^x\)</span> where <span class="math notranslate nohighlight">\(x\)</span> is <code class="docutils literal notranslate"><span class="pre">points_size</span></code>. Batch size is the number of training samples in each epoch</p></td>
 <td><p>10</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">iter_num</span></code></p></td>
-<td><p>Number of epochs, i.e. the number of complete passes through the training set.</p></td>
+<td><p>Number of epochs, i.e. the number of complete passes through the training set</p></td>
 <td><p>5</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">penalization</span></code></p></td>
@@ -413,24 +420,936 @@ document.write(`
 <td><p>256 (same as seed for initialization)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max_iter</span></code></p></td>
-<td><p>Maximum number of L-BFGS-B iterations (number of times parameters are updated)</p></td>
+<td><p>Maximum number of L-BFGS-B iterations (number of times parameters are updated) per epoch</p></td>
 <td><p>100</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">maxfun</span></code></p></td>
-<td><p>Maximum number of function evaluations</p></td>
+<td><p>Maximum number of function evaluations per epoch</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">maxcor</span></code></p></td>
+<td><p>The maximum number of variable metric corrections used to define the limited memory matrix used to compute the Hessian per epoch</p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">maxls</span></code></p></td>
+<td><p>Maximum number of line search steps per iteration used to find the optimal step-size</p></td>
 <td><p>100</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gtol</span></code></p></td>
 <td><p>Iteration will stop when <span class="math notranslate nohighlight">\(\max|proj(g_i)| \leq\)</span> <code class="docutils literal notranslate"><span class="pre">gtol</span></code> for each entry <span class="math notranslate nohighlight">\(i\)</span> of the (projected) gradient vector</p></td>
-<td><p>Machine epsilon</p></td>
+<td><p>Machine epsilon for float64 (~<span class="math notranslate nohighlight">\(2^{-16}\)</span>)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">seed</span></code></p></td>
-<td><p>Seed for weight and bias initialization</p></td>
-<td><p>256</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ftol</span></code></p></td>
+<td><p>Iteration will stop when <span class="math notranslate nohighlight">\(\frac{L^k - L^{k+1}}{\max{|L^k|,|L^{k+1}|,1}} \leq\)</span> <code class="docutils literal notranslate"><span class="pre">ftol</span></code></p></td>
+<td><p>Machine epsilon for float64 (~<span class="math notranslate nohighlight">\(2^{-16}\)</span>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tolerance</span></code></p></td>
+<td><p>Iteration will stop when, after fully completing an epoch, <span class="math notranslate nohighlight">\(L\)</span> is less than <code class="docutils literal notranslate"><span class="pre">tolerance</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(10^{-5}\)</span></p></td>
 </tr>
 </tbody>
 </table>
-<p>(10000 for the results in the paper).</p>
+</section>
+</section>
+<section id="model-parameters">
+<h2>Model Parameters<a class="headerlink" href="#model-parameters" title="Permalink to this heading">#</a></h2>
+<p>We also need to set model parameters. These will vary depending on the environment chosen from Section 5.1. By default, the following parameters are allowed as inputs to <code class="docutils literal notranslate"><span class="pre">main_BFGS</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>:header-rows: 1
+
+* - Input
+  - Description
+  - Parameter used in paper
+* - `chiUnderline`
+  - Skin-in-the-game constraint
+  - $\underline{\chi}$
+* - `gamma_e`, `gamma_h`
+  - Expert and household uncertainty aversion
+  - $\gamma_e, \gamma_h$
+* - `a_e`, `a_h`
+  - Expert and household productivity
+  - $\alpha_e, \alpha_h$
+* - `delta_e`,`delta_h`
+  - Expert and household discount rate
+  - $\delta_e, \delta_h$
+* - `rho_e`,`rho_h`
+  - Expert and household inverse of IES
+  - $\rho_e, \rho_h$
+* - `lambda_d`
+  - Birth/death rate
+  - $\lambda_d$
+* - `nu`
+  - Fraction of newborns which are experts
+  - $\nu$
+* - `V_bar`
+  - Mean of $Z_2$
+  - $\mu_2$
+* - `sigma_K_norm`, `sigma_Z_norm`, `sigma_V_norm`
+  - Normalization for variances; these are multiplied by the covariance matrix specified in `utils_para` to yield $\sigma_k, \sigma_1, \sigma2$
+  - 
+* - `wMin`, `wMax`
+  - Bounds for training set for $W$; the corresponding bounds for $Z_1$ and $Z_2$ can be edited in `utils_para`
+  - 
+* - `nWealth`, `nZ`, `nV`
+  - Number of gridpoints for each state variable; this does not have any effect on the solution but will determine the evaluation of variables of interest using the solution at a later step
+  - 
+* - `shock_expo`
+  - Determines whether the shock exposure matrix is &quot;upper_triangular&quot; or &quot;lower_triangular&quot;
+  - 
+</pre></div>
+</div>
+<p>In addition, the following parameters can be edited in the <code class="docutils literal notranslate"><span class="pre">utils_para</span></code> file. They do not vary across the models explored in the paper, but the user may wish to explore their own variations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>:header-rows: 1
+
+* - Input
+  - Description
+  - Parameter used in paper
+  - Default used in paper
+* - `Z_bar`
+  - Mean of $Z^1$
+  - 
+  - 0.0
+* - `lambda_Z`
+  - Persistence of $Z^1
+  - $\beta_1$
+  - 0.056
+* - `lambda_V`
+  - Persistence of $Z^2$
+  - $\beta_2$
+  - 0.194
+* - `alpha_K`
+  - Depreciation
+  - $\eta_k$
+  - $\alpha$
+  - 0.04
+* - `phi`
+  - Adjustment cost
+  - $\phi$
+  - 8.0
+* - `covij`
+  - $i,j$ entry in shock exposure matrix 
+  - 
+  - See Table 1 in paper
+* - `numSds`
+  - Governs grid size for $Z^1$ and $Z^2$ (number of standard deviations from the mean)
+  - 5
+* - `zmin`,`zmax`
+  - Grid boundaries for $Z^1$
+  - $\mu_1 \pm SD Var{Z_1|Z_2=\mu_2}$ where $S=$`numSds`
+* - `vmin`,`vmax`
+  - Grid boundaries for $Z^2$
+  - `vmin` = $10^{-8}$,`vmax` = $\mu_2 + SD Var{Z_2|Z_2=\mu_2}$ where $S=$`numSds`
+</pre></div>
+</div>
+<p>We can build and train the neural network as follows. First, we import libraries:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span> 
+<span class="kn">import</span> <span class="nn">time</span> 
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;src/4&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">main_BFGS</span> <span class="kn">import</span> <span class="n">main</span>
+<span class="kn">from</span> <span class="nn">utils_para</span> <span class="kn">import</span> <span class="n">setModelParameters</span>
+<span class="kn">from</span> <span class="nn">utils_training</span> <span class="kn">import</span> <span class="n">training_step_BFGS</span>
+<span class="kn">from</span> <span class="nn">utils_DGM</span> <span class="kn">import</span> <span class="n">DGMNet</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;../..&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s1">&#39;ERROR&#39;</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set_visible_devices</span><span class="p">([],</span> <span class="s1">&#39;GPU&#39;</span><span class="p">)</span> <span class="c1"># To enable GPU acceleration, comment out this line and ensure CUDA and cuDNN libraries are properly installed</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-08-28 13:19:02.969807: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-08-28 13:19:05.178721: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-08-28 13:19:06.389192: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcudart.so.11.0&#39;; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /software/slurm-current-el8-x86_64/lib
+2024-08-28 13:19:06.389212: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2024-08-28 13:19:06.683674: E tensorflow/stream_executor/cuda/cuda_blas.cc:2981] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-08-28 13:19:17.699752: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libnvinfer.so.7&#39;; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /software/slurm-current-el8-x86_64/lib
+2024-08-28 13:19:17.699843: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libnvinfer_plugin.so.7&#39;; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /software/slurm-current-el8-x86_64/lib
+2024-08-28 13:19:17.699849: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2024-08-28 13:19:32.240512: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcuda.so.1&#39;; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /software/slurm-current-el8-x86_64/lib
+2024-08-28 13:19:32.240561: W tensorflow/stream_executor/cuda/cuda_driver.cc:263] failed call to cuInit: UNKNOWN ERROR (303)
+2024-08-28 13:19:32.240578: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (midway3-login3.rcc.local): /proc/driver/nvidia/version does not exist
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Next, we set the model parameters and hyperparameters. In the following example, we have used a variant of Model RF.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chiUnderline</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">gamma_e</span> <span class="o">=</span> <span class="mf">4.0</span>
+<span class="n">a_e</span><span class="o">=</span><span class="mf">0.0922</span>
+<span class="n">a_h</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">gamma_h</span><span class="o">=</span><span class="mf">4.0</span>
+<span class="n">delta_e</span><span class="o">=</span><span class="mf">0.0115</span>
+<span class="n">delta_h</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="n">lambda_d</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">rho_e</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">rho_h</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">nu</span><span class="o">=</span><span class="mf">0.1</span>
+
+<span class="n">V_bar</span><span class="o">=</span><span class="mf">0.0000063030303030303026</span>
+<span class="n">sigma_K_norm</span><span class="o">=</span><span class="mf">3.1707442821755683</span>
+<span class="n">sigma_Z_norm</span><span class="o">=</span><span class="mf">19.835431735873996</span>
+<span class="n">sigma_V_norm</span><span class="o">=</span><span class="mf">0.0010882177801089308</span>
+<span class="n">wMin</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="n">wMax</span><span class="o">=</span><span class="mf">0.99</span>
+
+<span class="n">nWealth</span><span class="o">=</span><span class="mi">180</span>
+<span class="n">nZ</span><span class="o">=</span><span class="mi">30</span>
+<span class="n">nV</span><span class="o">=</span><span class="mi">30</span>
+
+<span class="n">seed_</span><span class="o">=</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">n_layers_</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">units_</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">points_size_</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">iter_num_</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">penalization</span><span class="o">=</span><span class="mi">10000</span>
+
+<span class="n">BFGSmaxiter</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">BFGSmaxfun</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">action_name</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
+
+<span class="n">seed</span><span class="o">=</span><span class="mi">256</span>
+<span class="n">n_layers</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">units</span><span class="o">=</span><span class="mi">16</span>
+<span class="n">points_size</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">iter_num</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">penalization</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">BFGS_maxiter</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">BFGS_maxfun</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">shock_expo</span> <span class="o">=</span> <span class="s1">&#39;upper_triangular&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">main</span><span class="p">(</span><span class="n">action_name</span><span class="p">,</span> <span class="n">nWealth</span><span class="p">,</span> <span class="n">nZ</span><span class="p">,</span> <span class="n">nV</span><span class="p">,</span> <span class="n">V_bar</span><span class="p">,</span> <span class="n">sigma_K_norm</span><span class="p">,</span> <span class="n">sigma_Z_norm</span><span class="p">,</span> <span class="n">sigma_V_norm</span><span class="p">,</span> <span class="n">wMin</span><span class="p">,</span> <span class="n">wMax</span><span class="p">,</span> <span class="n">chiUnderline</span><span class="p">,</span> <span class="n">a_e</span><span class="p">,</span> <span class="n">a_h</span><span class="p">,</span> <span class="n">gamma_e</span><span class="p">,</span> <span class="n">gamma_h</span><span class="p">,</span> <span class="n">rho_e</span><span class="p">,</span> <span class="n">rho_h</span><span class="p">,</span> <span class="n">delta_e</span><span class="p">,</span> <span class="n">delta_h</span><span class="p">,</span> <span class="n">lambda_d</span><span class="p">,</span> <span class="n">nu</span><span class="p">,</span> <span class="n">shock_expo</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">points_size</span><span class="p">,</span> <span class="n">iter_num</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">penalization</span><span class="p">,</span> <span class="n">BFGS_maxiter</span><span class="p">,</span> <span class="n">BFGS_maxfun</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-08-28 11:53:42.950166: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Batch 1
+WARNING: AutoGraph could not transform &lt;bound method Socket.send of &lt;zmq.Socket(zmq.PUSH) at 0x7fe5e04964c0&gt;&gt; and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: module, class, method, function, traceback, frame, or code object was expected, got cython_function_or_method
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+BFGS Iter: 1 loss: 2.4774472703476573
+BFGS Iter: 2 loss: 1.1956006049934733
+BFGS Iter: 3 loss: 1.1512525155491342
+BFGS Iter: 4 loss: 1.1129767803662238
+BFGS Iter: 5 loss: 0.66527442628344491
+BFGS Iter: 6 loss: 0.19045107418377538
+BFGS Iter: 7 loss: 0.14912483949077682
+BFGS Iter: 8 loss: 13735.611871315654
+BFGS Iter: 9 loss: 6.1972373051936556
+BFGS Iter: 10 loss: 0.1596903342691938
+BFGS Iter: 11 loss: 0.13320460614263718
+BFGS Iter: 12 loss: 0.10059469459515527
+BFGS Iter: 13 loss: 0.07474686259589601
+BFGS Iter: 14 loss: 0.062933798120950624
+BFGS Iter: 15 loss: 0.055086244251407859
+BFGS Iter: 16 loss: 0.050427814352636088
+BFGS Iter: 17 loss: 0.046813373478503034
+BFGS Iter: 18 loss: 0.045500246076412468
+BFGS Iter: 19 loss: 0.04387517781687314
+BFGS Iter: 20 loss: 0.091107656580451252
+BFGS Iter: 21 loss: 0.0342036619069961
+BFGS Iter: 22 loss: 0.031755537839112072
+BFGS Iter: 23 loss: 0.024450823213388515
+BFGS Iter: 24 loss: 0.072173266097987437
+BFGS Iter: 25 loss: 0.02098351616409698
+BFGS Iter: 26 loss: 0.28981045467710354
+BFGS Iter: 27 loss: 0.011887332558140942
+BFGS Iter: 28 loss: 0.037647404339732675
+BFGS Iter: 29 loss: 0.00902718593900408
+BFGS Iter: 30 loss: 0.0083789179332656033
+BFGS Iter: 31 loss: 0.0043935143303938324
+BFGS Iter: 32 loss: 0.0019368788908450379
+BFGS Iter: 33 loss: 0.0019099897959955852
+BFGS Iter: 34 loss: 0.0014738935433658501
+BFGS Iter: 35 loss: 0.0011593717042880736
+BFGS Iter: 36 loss: 0.000908164038048691
+BFGS Iter: 37 loss: 0.00075176866092291112
+BFGS Iter: 38 loss: 0.00054805996634202836
+BFGS Iter: 39 loss: 0.00051959944474631512
+BFGS Iter: 40 loss: 0.00045225661397642575
+BFGS Iter: 41 loss: 0.0004325621978176222
+BFGS Iter: 42 loss: 0.00035683277983640077
+BFGS Iter: 43 loss: 0.0003424233979344597
+BFGS Iter: 44 loss: 0.000329914761644039
+BFGS Iter: 45 loss: 0.00032742520569724423
+BFGS Iter: 46 loss: 0.00032544636316967935
+BFGS Iter: 47 loss: 0.00031352262369962976
+BFGS Iter: 48 loss: 0.00030225915501465875
+BFGS Iter: 49 loss: 0.00027523893339239481
+BFGS Iter: 50 loss: 0.00025455428426839213
+BFGS Iter: 51 loss: 0.00024578583089963576
+BFGS Iter: 52 loss: 0.00024285342973901885
+BFGS Iter: 53 loss: 0.00023994461890596813
+BFGS Iter: 54 loss: 0.00023861381196568589
+BFGS Iter: 55 loss: 0.00023673930657093907
+BFGS Iter: 56 loss: 0.00023398271997321796
+BFGS Iter: 57 loss: 0.00022724885180655128
+BFGS Iter: 58 loss: 0.00021661176044998102
+BFGS Iter: 59 loss: 0.00020958772227023991
+BFGS Iter: 60 loss: 0.0002064656223563504
+BFGS Iter: 61 loss: 0.00019922072684694085
+BFGS Iter: 62 loss: 0.00017271409691762808
+BFGS Iter: 63 loss: 0.00014857614158382586
+BFGS Iter: 64 loss: 0.00024695471443224689
+BFGS Iter: 65 loss: 0.00013835145106131489
+BFGS Iter: 66 loss: 0.00013451456369301468
+BFGS Iter: 67 loss: 0.00013161012137018582
+BFGS Iter: 68 loss: 0.00012613454285588814
+BFGS Iter: 69 loss: 0.00012144641553965568
+BFGS Iter: 70 loss: 0.00011831696831485425
+BFGS Iter: 71 loss: 0.00011658986349170722
+BFGS Iter: 72 loss: 0.00011495065149315101
+BFGS Iter: 73 loss: 0.00011182459290387857
+BFGS Iter: 74 loss: 0.00010701676672256478
+BFGS Iter: 75 loss: 0.00010168748247379941
+BFGS Iter: 76 loss: 9.8110563654184735e-05
+BFGS Iter: 77 loss: 9.7013183430058578e-05
+BFGS Iter: 78 loss: 9.6442862813273759e-05
+BFGS Iter: 79 loss: 9.5818499871771386e-05
+BFGS Iter: 80 loss: 9.3725689390033315e-05
+BFGS Iter: 81 loss: 9.0592041217983809e-05
+BFGS Iter: 82 loss: 8.4723022281452625e-05
+BFGS Iter: 83 loss: 7.8949903997356063e-05
+BFGS Iter: 84 loss: 7.70492580908571e-05
+BFGS Iter: 85 loss: 7.6541986492635109e-05
+BFGS Iter: 86 loss: 7.6155678845069355e-05
+BFGS Iter: 87 loss: 7.5955811036532e-05
+BFGS Iter: 88 loss: 7.5641444375039929e-05
+BFGS Iter: 89 loss: 7.4598212022948033e-05
+BFGS Iter: 90 loss: 6.929043309298374e-05
+BFGS Iter: 91 loss: 5.9968128687644348e-05
+BFGS Iter: 92 loss: 5.5785700736942215e-05
+BFGS Iter: 93 loss: 5.2484043662533347e-05
+BFGS Iter: 94 loss: 5.0133791024322124e-05
+BFGS Iter: 95 loss: 4.8850315791665443e-05
+BFGS Iter: 96 loss: 4.7110570759746623e-05
+BFGS Iter: 97 loss: 4.491745003882522e-05
+BFGS Iter: 98 loss: 4.0061435089068928e-05
+BFGS Iter: 99 loss: 3.613962132748868e-05
+BFGS Iter: 100 loss: 3.51466198559229e-05
+BFGS Iter: 101 loss: 3.4883861920420573e-05
+Elapsed time 38.9414 sec
+Training Batch 2
+BFGS Iter: 1 loss: 3.2853896971848968e-05
+BFGS Iter: 2 loss: 0.019707537745072244
+BFGS Iter: 3 loss: 0.00014041080336993437
+BFGS Iter: 4 loss: 3.1974377718675872e-05
+BFGS Iter: 5 loss: 3.1825184390630736e-05
+BFGS Iter: 6 loss: 3.1344167734114741e-05
+BFGS Iter: 7 loss: 3.1252179104972564e-05
+BFGS Iter: 8 loss: 3.0416883028541236e-05
+BFGS Iter: 9 loss: 2.97514132047265e-05
+BFGS Iter: 10 loss: 2.906501017422695e-05
+BFGS Iter: 11 loss: 2.8818583544234104e-05
+BFGS Iter: 12 loss: 2.873178819948239e-05
+BFGS Iter: 13 loss: 2.8648501538548452e-05
+BFGS Iter: 14 loss: 2.8449005933157758e-05
+BFGS Iter: 15 loss: 2.8064555371744166e-05
+BFGS Iter: 16 loss: 2.7536057681507427e-05
+BFGS Iter: 17 loss: 2.703641185822243e-05
+BFGS Iter: 18 loss: 2.6687933523042895e-05
+BFGS Iter: 19 loss: 2.6522887393995814e-05
+BFGS Iter: 20 loss: 2.6264218254959419e-05
+BFGS Iter: 21 loss: 2.591644718390245e-05
+BFGS Iter: 22 loss: 2.4977123780294386e-05
+BFGS Iter: 23 loss: 2.3383280580777118e-05
+BFGS Iter: 24 loss: 2.2759879544202166e-05
+BFGS Iter: 25 loss: 2.2252896993315572e-05
+BFGS Iter: 26 loss: 2.1371535914795528e-05
+BFGS Iter: 27 loss: 2.0839626254889541e-05
+BFGS Iter: 28 loss: 2.0777584427760023e-05
+BFGS Iter: 29 loss: 2.0736604962744527e-05
+BFGS Iter: 30 loss: 2.0705036193386124e-05
+BFGS Iter: 31 loss: 2.0655092647324191e-05
+BFGS Iter: 32 loss: 2.0598914750422025e-05
+BFGS Iter: 33 loss: 2.0468158345696189e-05
+BFGS Iter: 34 loss: 2.0224766860300472e-05
+BFGS Iter: 35 loss: 1.9839248942125531e-05
+BFGS Iter: 36 loss: 1.9341026918287342e-05
+BFGS Iter: 37 loss: 1.8884423073158643e-05
+BFGS Iter: 38 loss: 1.8702716459971356e-05
+BFGS Iter: 39 loss: 1.8560172826039611e-05
+BFGS Iter: 40 loss: 1.8276066722155523e-05
+BFGS Iter: 41 loss: 1.7623510034851014e-05
+BFGS Iter: 42 loss: 1.6761181733420085e-05
+BFGS Iter: 43 loss: 1.6166916889031392e-05
+BFGS Iter: 44 loss: 1.5472076204676365e-05
+BFGS Iter: 45 loss: 1.5024891047283445e-05
+BFGS Iter: 46 loss: 1.4355291727712163e-05
+BFGS Iter: 47 loss: 1.3642639885382408e-05
+BFGS Iter: 48 loss: 1.3508537886352953e-05
+BFGS Iter: 49 loss: 1.3444851352247259e-05
+BFGS Iter: 50 loss: 1.3359903255302055e-05
+BFGS Iter: 51 loss: 1.3272913830301804e-05
+BFGS Iter: 52 loss: 1.3207987129916955e-05
+BFGS Iter: 53 loss: 1.3101230685461094e-05
+BFGS Iter: 54 loss: 1.2988284528412209e-05
+BFGS Iter: 55 loss: 1.282990171102536e-05
+BFGS Iter: 56 loss: 1.2712032288942737e-05
+BFGS Iter: 57 loss: 1.2674735833415232e-05
+BFGS Iter: 58 loss: 1.2663329186623378e-05
+BFGS Iter: 59 loss: 1.2650315702993225e-05
+BFGS Iter: 60 loss: 1.2623578282506827e-05
+BFGS Iter: 61 loss: 1.2577814294733134e-05
+BFGS Iter: 62 loss: 1.2547208683358239e-05
+BFGS Iter: 63 loss: 1.2523502020011372e-05
+BFGS Iter: 64 loss: 1.2501757713314936e-05
+BFGS Iter: 65 loss: 1.2418363606262223e-05
+BFGS Iter: 66 loss: 1.2253280554965201e-05
+BFGS Iter: 67 loss: 1.2195432558519506e-05
+BFGS Iter: 68 loss: 1.2185728612095706e-05
+BFGS Iter: 69 loss: 1.2172212591885034e-05
+BFGS Iter: 70 loss: 1.2168082534604752e-05
+BFGS Iter: 71 loss: 1.216592102061464e-05
+BFGS Iter: 72 loss: 1.2160875524338406e-05
+BFGS Iter: 73 loss: 1.2133819802866951e-05
+BFGS Iter: 74 loss: 1.2109716961644602e-05
+BFGS Iter: 75 loss: 1.2087067091338671e-05
+BFGS Iter: 76 loss: 1.2076558024284849e-05
+BFGS Iter: 77 loss: 1.2066996255622948e-05
+BFGS Iter: 78 loss: 1.2053154613077278e-05
+BFGS Iter: 79 loss: 1.203797942341931e-05
+BFGS Iter: 80 loss: 1.2016844012736538e-05
+BFGS Iter: 81 loss: 1.200139477497608e-05
+BFGS Iter: 82 loss: 1.1988520697403073e-05
+BFGS Iter: 83 loss: 1.198157664545267e-05
+BFGS Iter: 84 loss: 1.1978585181529594e-05
+BFGS Iter: 85 loss: 1.1966552352106392e-05
+BFGS Iter: 86 loss: 1.1956102387720503e-05
+BFGS Iter: 87 loss: 1.1935969329296331e-05
+BFGS Iter: 88 loss: 1.1921091735959954e-05
+BFGS Iter: 89 loss: 1.1912455188382755e-05
+BFGS Iter: 90 loss: 1.191066868206912e-05
+BFGS Iter: 91 loss: 1.1910354321870175e-05
+BFGS Iter: 92 loss: 1.1909990710776239e-05
+BFGS Iter: 93 loss: 1.1909094263289071e-05
+BFGS Iter: 94 loss: 1.1906607107549928e-05
+BFGS Iter: 95 loss: 1.1900758789743032e-05
+BFGS Iter: 96 loss: 1.1886762849391672e-05
+BFGS Iter: 97 loss: 1.1866360902097644e-05
+BFGS Iter: 98 loss: 1.1851912471258075e-05
+BFGS Iter: 99 loss: 1.1829654621967488e-05
+BFGS Iter: 100 loss: 1.181186005704434e-05
+BFGS Iter: 101 loss: 1.1808721580096721e-05
+Elapsed time 13.4273 sec
+Training Batch 3
+BFGS Iter: 1 loss: 1.331064116882083e-05
+BFGS Iter: 2 loss: 0.06117408740760033
+BFGS Iter: 3 loss: 1.6545090774307306e-05
+BFGS Iter: 4 loss: 1.3233483451527528e-05
+BFGS Iter: 5 loss: 1.3229861876555701e-05
+BFGS Iter: 6 loss: 1.3220643103168207e-05
+BFGS Iter: 7 loss: 1.3218023683495404e-05
+BFGS Iter: 8 loss: 1.3192825006285791e-05
+BFGS Iter: 9 loss: 1.3162709506410751e-05
+BFGS Iter: 10 loss: 1.3122478405834297e-05
+BFGS Iter: 11 loss: 1.3086652696287559e-05
+BFGS Iter: 12 loss: 1.3066946734789399e-05
+BFGS Iter: 13 loss: 1.30625645234478e-05
+BFGS Iter: 14 loss: 1.3056600028652622e-05
+BFGS Iter: 15 loss: 1.3041742751643852e-05
+BFGS Iter: 16 loss: 1.302278511422033e-05
+BFGS Iter: 17 loss: 1.3015263917683468e-05
+BFGS Iter: 18 loss: 1.3010882437890982e-05
+BFGS Iter: 19 loss: 1.3007174746827917e-05
+BFGS Iter: 20 loss: 1.3003567895294272e-05
+BFGS Iter: 21 loss: 1.2994063999200187e-05
+BFGS Iter: 22 loss: 1.2976924536905825e-05
+BFGS Iter: 23 loss: 1.2957821812855494e-05
+BFGS Iter: 24 loss: 1.2945510229395388e-05
+BFGS Iter: 25 loss: 1.2933797095940215e-05
+BFGS Iter: 26 loss: 1.2924884708960356e-05
+BFGS Iter: 27 loss: 1.2914824453347176e-05
+BFGS Iter: 28 loss: 1.2907758553489387e-05
+BFGS Iter: 29 loss: 1.2902529350726502e-05
+BFGS Iter: 30 loss: 1.2892655423718043e-05
+BFGS Iter: 31 loss: 1.2878869677871708e-05
+BFGS Iter: 32 loss: 1.2855464224573348e-05
+BFGS Iter: 33 loss: 1.2836326345029857e-05
+BFGS Iter: 34 loss: 1.282503585884498e-05
+BFGS Iter: 35 loss: 1.2819832876536658e-05
+BFGS Iter: 36 loss: 1.2817327177132516e-05
+BFGS Iter: 37 loss: 1.2814583416266755e-05
+BFGS Iter: 38 loss: 1.2812970776046914e-05
+BFGS Iter: 39 loss: 1.2811340914372243e-05
+BFGS Iter: 40 loss: 1.2808473901933942e-05
+BFGS Iter: 41 loss: 1.2804617061602693e-05
+BFGS Iter: 42 loss: 1.2799461734615346e-05
+BFGS Iter: 43 loss: 1.2791872909612326e-05
+BFGS Iter: 44 loss: 1.2775845340300466e-05
+BFGS Iter: 45 loss: 1.2767558545070499e-05
+BFGS Iter: 46 loss: 1.2765786028034198e-05
+BFGS Iter: 47 loss: 1.2765456915944788e-05
+BFGS Iter: 48 loss: 1.2764954898250717e-05
+BFGS Iter: 49 loss: 1.2763820297186977e-05
+BFGS Iter: 50 loss: 1.2761370314026455e-05
+BFGS Iter: 51 loss: 1.275633242947466e-05
+BFGS Iter: 52 loss: 1.2748364647824511e-05
+BFGS Iter: 53 loss: 1.2737479564954124e-05
+BFGS Iter: 54 loss: 1.2731536537342279e-05
+BFGS Iter: 55 loss: 1.2726402028368688e-05
+BFGS Iter: 56 loss: 1.2724893055359673e-05
+BFGS Iter: 57 loss: 1.2722910755738014e-05
+BFGS Iter: 58 loss: 1.2719392273903786e-05
+BFGS Iter: 59 loss: 1.2711735264065272e-05
+BFGS Iter: 60 loss: 1.2704860674004855e-05
+BFGS Iter: 61 loss: 1.27021993723173e-05
+BFGS Iter: 62 loss: 1.2701273997595555e-05
+BFGS Iter: 63 loss: 1.2701021816793273e-05
+BFGS Iter: 64 loss: 1.2700517502319772e-05
+BFGS Iter: 65 loss: 1.269903508238038e-05
+BFGS Iter: 66 loss: 1.2697087291156104e-05
+BFGS Iter: 67 loss: 1.2693290446662503e-05
+BFGS Iter: 68 loss: 1.2687183746506989e-05
+BFGS Iter: 69 loss: 1.2682668907493189e-05
+BFGS Iter: 70 loss: 1.2679415896418426e-05
+BFGS Iter: 71 loss: 1.2676845117611318e-05
+BFGS Iter: 72 loss: 1.2673213507258254e-05
+BFGS Iter: 73 loss: 1.2666559781308332e-05
+BFGS Iter: 74 loss: 1.2656686082966439e-05
+BFGS Iter: 75 loss: 1.2644999148520057e-05
+BFGS Iter: 76 loss: 1.2635209939852263e-05
+BFGS Iter: 77 loss: 1.2630498568379768e-05
+BFGS Iter: 78 loss: 1.262936268884058e-05
+BFGS Iter: 79 loss: 1.2628221954083415e-05
+BFGS Iter: 80 loss: 1.2628029582622525e-05
+BFGS Iter: 81 loss: 1.262792602962517e-05
+BFGS Iter: 82 loss: 1.262772463638237e-05
+BFGS Iter: 83 loss: 1.262706943312788e-05
+BFGS Iter: 84 loss: 1.2624294992242655e-05
+BFGS Iter: 85 loss: 1.2618450273525895e-05
+BFGS Iter: 86 loss: 1.2609322074630907e-05
+BFGS Iter: 87 loss: 1.2598401519292362e-05
+BFGS Iter: 88 loss: 1.2590384564064844e-05
+BFGS Iter: 89 loss: 1.2587779992697465e-05
+BFGS Iter: 90 loss: 1.258765922461213e-05
+BFGS Iter: 91 loss: 1.2587290535380229e-05
+BFGS Iter: 92 loss: 1.2587197180692745e-05
+BFGS Iter: 93 loss: 1.2586706782716528e-05
+BFGS Iter: 94 loss: 1.2585824920184296e-05
+BFGS Iter: 95 loss: 1.2583355677049011e-05
+BFGS Iter: 96 loss: 1.257742418799933e-05
+BFGS Iter: 97 loss: 1.2565273036975706e-05
+BFGS Iter: 98 loss: 1.2548872096132877e-05
+BFGS Iter: 99 loss: 1.2535809180398835e-05
+BFGS Iter: 100 loss: 1.2530088247677251e-05
+BFGS Iter: 101 loss: 1.2528984134717129e-05
+Elapsed time 13.7815 sec
+Training Batch 4
+BFGS Iter: 1 loss: 1.2934253125994222e-05
+BFGS Iter: 2 loss: 0.022237867180928024
+BFGS Iter: 3 loss: 3.5087285345516575e-05
+BFGS Iter: 4 loss: 1.2748799764896702e-05
+BFGS Iter: 5 loss: 1.2684513583115664e-05
+BFGS Iter: 6 loss: 1.249150200462084e-05
+BFGS Iter: 7 loss: 1.2368280693659667e-05
+BFGS Iter: 8 loss: 1.2363141064484407e-05
+BFGS Iter: 9 loss: 1.2344596450679788e-05
+BFGS Iter: 10 loss: 1.2244304824844164e-05
+BFGS Iter: 11 loss: 1.2215863286743963e-05
+BFGS Iter: 12 loss: 1.2205716259213079e-05
+BFGS Iter: 13 loss: 1.2202306969429472e-05
+BFGS Iter: 14 loss: 1.219602381087838e-05
+BFGS Iter: 15 loss: 1.2183416717284681e-05
+BFGS Iter: 16 loss: 1.216555188607241e-05
+BFGS Iter: 17 loss: 1.213824387136914e-05
+BFGS Iter: 18 loss: 1.2121873224964583e-05
+BFGS Iter: 19 loss: 1.2114396371794193e-05
+BFGS Iter: 20 loss: 1.2091100146216405e-05
+BFGS Iter: 21 loss: 1.20618082017786e-05
+BFGS Iter: 22 loss: 1.2024929276501241e-05
+BFGS Iter: 23 loss: 1.2004709867961343e-05
+BFGS Iter: 24 loss: 1.2000014343663818e-05
+BFGS Iter: 25 loss: 1.1996822486851663e-05
+BFGS Iter: 26 loss: 1.1989850270745779e-05
+BFGS Iter: 27 loss: 1.1974217370844448e-05
+BFGS Iter: 28 loss: 1.1946488450148227e-05
+BFGS Iter: 29 loss: 1.1913115843031066e-05
+BFGS Iter: 30 loss: 1.1894778447483723e-05
+BFGS Iter: 31 loss: 1.18910343952307e-05
+BFGS Iter: 32 loss: 1.1890089907808542e-05
+BFGS Iter: 33 loss: 1.1888383677046635e-05
+BFGS Iter: 34 loss: 1.1883279903485097e-05
+BFGS Iter: 35 loss: 1.18726499949084e-05
+BFGS Iter: 36 loss: 1.1855289160002535e-05
+BFGS Iter: 37 loss: 1.182632836397997e-05
+BFGS Iter: 38 loss: 1.1813207373814069e-05
+BFGS Iter: 39 loss: 1.1810327741296157e-05
+BFGS Iter: 40 loss: 1.1804946454478749e-05
+BFGS Iter: 41 loss: 1.1799320112426194e-05
+BFGS Iter: 42 loss: 1.1784198426799898e-05
+BFGS Iter: 43 loss: 1.1769579908185478e-05
+BFGS Iter: 44 loss: 1.1767728109488193e-05
+BFGS Iter: 45 loss: 1.1766500347053901e-05
+BFGS Iter: 46 loss: 1.1761919906735553e-05
+BFGS Iter: 47 loss: 1.1739475105618486e-05
+BFGS Iter: 48 loss: 1.1708020101422758e-05
+BFGS Iter: 49 loss: 1.1670674598939108e-05
+BFGS Iter: 50 loss: 1.1623827232351979e-05
+BFGS Iter: 51 loss: 1.1605535208677066e-05
+BFGS Iter: 52 loss: 1.1601464777961568e-05
+BFGS Iter: 53 loss: 1.1597955390530642e-05
+BFGS Iter: 54 loss: 1.1586662443935898e-05
+BFGS Iter: 55 loss: 1.1580133780187473e-05
+BFGS Iter: 56 loss: 1.156435494533015e-05
+BFGS Iter: 57 loss: 1.1539723572476787e-05
+BFGS Iter: 58 loss: 1.1532189883250412e-05
+BFGS Iter: 59 loss: 1.1529285133376485e-05
+BFGS Iter: 60 loss: 1.1528397670048011e-05
+BFGS Iter: 61 loss: 1.1521689318842587e-05
+BFGS Iter: 62 loss: 1.1508087374335811e-05
+BFGS Iter: 63 loss: 1.1476676378203691e-05
+BFGS Iter: 64 loss: 1.1445097641256559e-05
+BFGS Iter: 65 loss: 1.1416397252667121e-05
+BFGS Iter: 66 loss: 1.1400985805566946e-05
+BFGS Iter: 67 loss: 1.139254947373997e-05
+BFGS Iter: 68 loss: 1.1380127286031163e-05
+BFGS Iter: 69 loss: 1.1367041867669604e-05
+BFGS Iter: 70 loss: 1.1354795170612564e-05
+BFGS Iter: 71 loss: 1.1350218161038208e-05
+BFGS Iter: 72 loss: 1.1347431232098256e-05
+BFGS Iter: 73 loss: 1.1342765436043796e-05
+BFGS Iter: 74 loss: 1.1337951586426075e-05
+BFGS Iter: 75 loss: 1.1326444235439111e-05
+BFGS Iter: 76 loss: 1.1315133169016556e-05
+BFGS Iter: 77 loss: 1.1305252551126212e-05
+BFGS Iter: 78 loss: 1.1301318383477032e-05
+BFGS Iter: 79 loss: 1.1299828189733894e-05
+BFGS Iter: 80 loss: 1.1297910483081172e-05
+BFGS Iter: 81 loss: 1.1294123159386268e-05
+BFGS Iter: 82 loss: 1.1284997025994963e-05
+BFGS Iter: 83 loss: 1.1272374146795017e-05
+BFGS Iter: 84 loss: 1.1262237728419937e-05
+BFGS Iter: 85 loss: 1.1254497290392012e-05
+BFGS Iter: 86 loss: 1.1247674993836394e-05
+BFGS Iter: 87 loss: 1.1241008582186026e-05
+BFGS Iter: 88 loss: 1.1229533749776404e-05
+BFGS Iter: 89 loss: 1.1223094868210285e-05
+BFGS Iter: 90 loss: 1.1221029790459714e-05
+BFGS Iter: 91 loss: 1.1220563854183987e-05
+BFGS Iter: 92 loss: 1.1220395662515568e-05
+BFGS Iter: 93 loss: 1.121967406397467e-05
+BFGS Iter: 94 loss: 1.1215132161734005e-05
+BFGS Iter: 95 loss: 1.1209151111831868e-05
+BFGS Iter: 96 loss: 1.1197307803262909e-05
+BFGS Iter: 97 loss: 1.1186821861820828e-05
+BFGS Iter: 98 loss: 1.1181929521796944e-05
+BFGS Iter: 99 loss: 1.1181207434858048e-05
+BFGS Iter: 100 loss: 1.118102366166359e-05
+BFGS Iter: 101 loss: 1.1180886294138432e-05
+Elapsed time 13.1249 sec
+Training Batch 5
+BFGS Iter: 1 loss: 3.5371236143115144e-05
+BFGS Iter: 2 loss: 0.14220276672329604
+BFGS Iter: 3 loss: 0.0053646011810574365
+BFGS Iter: 4 loss: 0.00031364060581301234
+BFGS Iter: 5 loss: 1.8928635540105462e-05
+BFGS Iter: 6 loss: 1.7790417724596251e-05
+BFGS Iter: 7 loss: 1.5658651419098762e-05
+BFGS Iter: 8 loss: 1.5400933235362e-05
+BFGS Iter: 9 loss: 1.5387480853495626e-05
+BFGS Iter: 10 loss: 1.5331273113404196e-05
+BFGS Iter: 11 loss: 1.5229814501211383e-05
+BFGS Iter: 12 loss: 1.4960227036595818e-05
+BFGS Iter: 13 loss: 1.4468751921052961e-05
+BFGS Iter: 14 loss: 1.3845158095502893e-05
+BFGS Iter: 15 loss: 1.3403873135908949e-05
+BFGS Iter: 16 loss: 1.3246065627405587e-05
+BFGS Iter: 17 loss: 1.3221379859331613e-05
+BFGS Iter: 18 loss: 1.3199607297060127e-05
+BFGS Iter: 19 loss: 1.3144872604214214e-05
+BFGS Iter: 20 loss: 1.3053734001415056e-05
+BFGS Iter: 21 loss: 1.2796692896697949e-05
+BFGS Iter: 22 loss: 1.2329643930171517e-05
+BFGS Iter: 23 loss: 1.2196946630989999e-05
+BFGS Iter: 24 loss: 1.2112374293463313e-05
+BFGS Iter: 25 loss: 1.1995618308926672e-05
+BFGS Iter: 26 loss: 1.192519068129695e-05
+BFGS Iter: 27 loss: 1.1907527560263758e-05
+BFGS Iter: 28 loss: 1.1872807374446712e-05
+BFGS Iter: 29 loss: 1.186656525950388e-05
+BFGS Iter: 30 loss: 1.1865108259411649e-05
+BFGS Iter: 31 loss: 1.1863998629821241e-05
+BFGS Iter: 32 loss: 1.1860723285461483e-05
+BFGS Iter: 33 loss: 1.1853197029721009e-05
+BFGS Iter: 34 loss: 1.1835622095321231e-05
+BFGS Iter: 35 loss: 1.1803717724713043e-05
+BFGS Iter: 36 loss: 1.1764876259997913e-05
+BFGS Iter: 37 loss: 1.1739488157964466e-05
+BFGS Iter: 38 loss: 1.173195844411259e-05
+BFGS Iter: 39 loss: 1.1730718823954479e-05
+BFGS Iter: 40 loss: 1.1729250216689364e-05
+BFGS Iter: 41 loss: 1.172461525986897e-05
+BFGS Iter: 42 loss: 1.1713365115901901e-05
+BFGS Iter: 43 loss: 1.168818750167371e-05
+BFGS Iter: 44 loss: 1.1644935853311753e-05
+BFGS Iter: 45 loss: 1.159274261341498e-05
+BFGS Iter: 46 loss: 1.1563088949500705e-05
+BFGS Iter: 47 loss: 1.1556632573438674e-05
+BFGS Iter: 48 loss: 1.1554112040634257e-05
+BFGS Iter: 49 loss: 1.1549878581285814e-05
+BFGS Iter: 50 loss: 1.1539610643148062e-05
+BFGS Iter: 51 loss: 1.1522281942447986e-05
+BFGS Iter: 52 loss: 1.149251415014182e-05
+BFGS Iter: 53 loss: 1.1479392333423878e-05
+BFGS Iter: 54 loss: 1.1475994363881961e-05
+BFGS Iter: 55 loss: 1.1468372225899354e-05
+BFGS Iter: 56 loss: 1.1456541320631684e-05
+BFGS Iter: 57 loss: 1.1439399776759038e-05
+BFGS Iter: 58 loss: 1.1410725492089062e-05
+BFGS Iter: 59 loss: 1.1356054766756423e-05
+BFGS Iter: 60 loss: 1.1330061545090437e-05
+BFGS Iter: 61 loss: 1.1306432112056774e-05
+BFGS Iter: 62 loss: 1.1288200587281669e-05
+BFGS Iter: 63 loss: 1.1272524142312414e-05
+BFGS Iter: 64 loss: 1.1266858116681203e-05
+BFGS Iter: 65 loss: 1.1253927459287215e-05
+BFGS Iter: 66 loss: 1.1236607367987663e-05
+BFGS Iter: 67 loss: 1.121619986484418e-05
+BFGS Iter: 68 loss: 1.120775718419495e-05
+BFGS Iter: 69 loss: 1.1206452393275113e-05
+BFGS Iter: 70 loss: 1.1206267834597727e-05
+BFGS Iter: 71 loss: 1.1205816838928572e-05
+BFGS Iter: 72 loss: 1.1202193385177711e-05
+BFGS Iter: 73 loss: 1.1194368907026998e-05
+BFGS Iter: 74 loss: 1.1183837415402236e-05
+BFGS Iter: 75 loss: 1.1174997964410506e-05
+BFGS Iter: 76 loss: 1.1171030563697652e-05
+BFGS Iter: 77 loss: 1.1170242325112961e-05
+BFGS Iter: 78 loss: 1.116710340229912e-05
+BFGS Iter: 79 loss: 1.1142125068001499e-05
+BFGS Iter: 80 loss: 1.1135492609919581e-05
+BFGS Iter: 81 loss: 1.1133476119579804e-05
+BFGS Iter: 82 loss: 1.1133258709515484e-05
+BFGS Iter: 83 loss: 1.1133026775013508e-05
+BFGS Iter: 84 loss: 1.1132451389931068e-05
+BFGS Iter: 85 loss: 1.1130934728269286e-05
+BFGS Iter: 86 loss: 1.112715593477359e-05
+BFGS Iter: 87 loss: 1.1118315783131395e-05
+BFGS Iter: 88 loss: 1.1101161602659784e-05
+BFGS Iter: 89 loss: 1.107922939843552e-05
+BFGS Iter: 90 loss: 1.1063589810676235e-05
+BFGS Iter: 91 loss: 1.105754572859437e-05
+BFGS Iter: 92 loss: 1.1056549014404436e-05
+BFGS Iter: 93 loss: 1.1055826285149645e-05
+BFGS Iter: 94 loss: 1.1053544796972902e-05
+BFGS Iter: 95 loss: 1.1048119382793432e-05
+BFGS Iter: 96 loss: 1.1036070754941427e-05
+BFGS Iter: 97 loss: 1.1016533819418808e-05
+BFGS Iter: 98 loss: 1.0985942212474907e-05
+BFGS Iter: 99 loss: 1.0969796385295971e-05
+BFGS Iter: 100 loss: 1.0964485214369811e-05
+BFGS Iter: 101 loss: 1.0959386904055931e-05
+Elapsed time 14.2118 sec
+Tolerance reached. Current loss: 1.095938690405593e-05 Batches: 5
+Elapsed time for training 94.0623 sec
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Now that we have a solution, we can compute variables of interest, which can subsequently be used to compute shock elasticities. By default, <code class="docutils literal notranslate"><span class="pre">main_variable</span></code> computes the following variables. Unless specified otherwise, the variables are evaluated on an array with dimension [<code class="docutils literal notranslate"><span class="pre">nWealth</span></code>,<code class="docutils literal notranslate"><span class="pre">nZ</span></code>,<code class="docutils literal notranslate"><span class="pre">nV</span></code>].</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>:header-rows: 1
+
+* - Input
+  - Description
+  - Parameter used in paper
+* - `W_NN`, `Z_NN`, `V_NN`
+  - The values of $W$, $Z_1$ and $Z_2$ on the state-space grid
+  - 
+* - `XiE_NN`, `XiH_NN`
+  - Expert and household value functions
+  - $V_e$, $V_h$
+* - `logXiE_NN`, `logXiH_NN`
+  - Log expert and household value functions
+  - $\hat{V}_e$, $\hat{V}_h$
+* - `chi_NN`
+  - Expert equity retention
+  - $\chi$
+* - `kappa_NN`
+  - Expert capital share
+  - $\kappa$
+* - `r_NN`
+  - Risk-free rate
+  - $r$
+* - `q_NN`
+  - Price of capital
+  - $Q$
+* - `sigmaW_NN`,`sigmaZ_NN`,`sigmaV_NN`
+  - State volatilities 
+  - $Z^2 \sigma_w$,$Z^2 \sigma_1$, $Z^2 \sigma_2$
+* - `muW_NN`,`muZ_NN`,`muV_NN`
+  - State drifts
+  - $\mu_w$,$\mu_1$,$\mu_2$
+* - `muK_NN`
+  - Log capital drift
+  - $\mu_{k}$
+* - `sigmaK_NN`
+  - Log capital diffusin
+  - $\sigma_{k}$
+* - `muQ_NN`
+  - Capital price drift
+  - $\mu_q$
+* - `sigmaQ_NN`
+  - Capital price diffusion
+  - $\sigma_q$
+* - `sigmaR_NN`
+  - Capital return volatility
+  - $\sigma_r$
+* - `deltaE_NN`, `deltaH_NN`
+  - Expert and household risk premium wedge
+  - $\Delta^e$,$\Delta^h$
+* - `PiE_NN`, `PiH_NN`
+  - Expert and household equity risk price
+  - $\pi_e$,$\pi_h$
+* - `betaE_NN`,`betaH_NN`
+  - 
+  - $\frac{\chi \kappa}{W}$, $\frac{1- \kappa}{W}$
+* - `HJB_E_NN`, `HJB_H_NN`
+  - RHS term of HJB equations (HJB loss)
+  - $L^e$, $L^h$
+* - `kappa_min_NN`
+  - RHS of capital $\kappa$ constraint
+  - $L^{\kappa}$
+* - `HJBE_validation_MSE`, `HJBH_validation_MSE`
+  - 
+  - 
+* - `kappa_validation_MSE`
+  - 
+  - 
+* - `dent_NN`
+  - 
+  - 
+* - `dX_logXiE_NN`
+  - 
+  - 
+* - `dX_logXiH_NN`
+  - 
+  - 
+* - `dX2_logXiE_NN`
+  - 
+  - 
+* - `dX2_logXiH_NN`
+  - 
+  - 
+* - `dWdZ_logXiE_NN`
+  - 
+  - 
+* - `dWdZ_logXiH_NN`
+  - 
+  - 
+* - `dWdV_logXiE_NN`
+  - 
+  - 
+* - `dWdV_logXiH_NN`
+  - 
+  - 
+* - `dZdV_logXiE_NN`
+  - 
+  - 
+* - `dZdV_logXiH_NN`
+  - 
+  - 
+* - `dW_logXiE_NN`
+  - 
+  - 
+* - `dZ_logXiE_NN`
+  - 
+  - 
+* - `dV_logXiE_NN`
+  - 
+  - 
+* - `dW_logXiH_NN`
+  - 
+  - 
+* - `dZ_logXiH_NN`
+  - 
+  - 
+* - `dV_logXiH_NN`
+  - 
+  - 
+* - `dW2_logXiE_NN`
+  - 
+  - 
+* - `dZ2_logXiE_NN`
+  - 
+  - 
+* - `dV2_logXiE_NN`
+  - 
+  - 
+* - `dW2_logXiH_NN`
+  - 
+  - 
+* - `dZ2_logXiH_NN`
+  - 
+  - 
+* - `dV2_logXiH_NN`
+  - 
+  - 
+* - `mulogSe_NN`
+  - 
+  - 
+* - `mulogSh_NN`
+  - 
+  - 
+* - `sigmalogSe_NN`
+  - 
+  - 
+* - `sigmalogSh_NN`
+  - 
+  - 
+* - `mulogCe_NN`
+  - 
+  - 
+* - `mulogCh_NN`
+  - 
+  - 
+* - `sigmalogCe_NN`
+  - 
+  - 
+* - `sigmalogCh_NN`
+  - 
+  - 
+* - `mulogC_NN`
+  - 
+  - 
+* - `sigmalogC_NN`
+  - 
+  - 
+</pre></div>
+</div>
+</section>
+<section id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h2>
+<p>To begin with</p>
 </section>
 </section>
 
@@ -443,16 +1362,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "envname"
         },
         kernelOptions: {
-            name: "python3",
+            name: "envname",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'envname'</script>
 
                 </article>
               
@@ -501,8 +1420,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">Model Architecture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">Solution Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">Model Architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters">Model Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
 </ul>
   </nav></div>
 
