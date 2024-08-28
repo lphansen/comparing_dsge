@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{bc} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{n}{bc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}a0\PYGZsq{}}\PYG{p}{]}	 \PYG{o}{=} \PYG{l+m+mi}{0}
+\PYG{n}{bc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}first\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{matrix}\PYG{p}{([}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{],} \PYG{l+s+s1}{\PYGZsq{}d\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{bc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}second\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{matrix}\PYG{p}{([}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{l+s+s1}{\PYGZsq{}d\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{bc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}third\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{matrix}\PYG{p}{([}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{l+s+s1}{\PYGZsq{}d\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{bc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}level\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{matrix}\PYG{p}{([}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{l+s+s1}{\PYGZsq{}d\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{bc}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}natural\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{k+kc}{False}
+\end{Verbatim}

@@ -1,0 +1,730 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Single Capital Model &#8212; Quant Macro Finance</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'single_capital';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Introduction" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Quant Macro Finance</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Single Capital Model</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/single_capital.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Single Capital Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Single Capital Model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">Solution Overview</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="single-capital-model">
+<h1>Single Capital Model<a class="headerlink" href="#single-capital-model" title="Permalink to this heading">#</a></h1>
+<p>This notebook describes the code used to solve the model in Section 4.5. That is, suppose that the logarithm of continuation utility <span class="math notranslate nohighlight">\(V\)</span> evolves as:</p>
+<div class="math notranslate nohighlight">
+\[
+d {\widehat V}_t = {\hat \mu}_{v,t} dt + \sigma_{v,t} \cdot dB_t
+\]</div>
+<p>where <span class="math notranslate nohighlight">\( {\hat \mu}_{v,t}\)</span> is the local mean, <span class="math notranslate nohighlight">\( |\sigma_{v,t}|^2\)</span> is local variance and <span class="math notranslate nohighlight">\(dB_t\)</span> is a Brownian increment, such that:</p>
+<div class="math notranslate nohighlight">
+\[
+0  =   \left({\frac \delta {1 - \rho}} \right) \left[ (C_t/V_t)^{1 - \rho}
+  - 1  \right]  + {\hat \mu}_{v,t}  +  \left(\frac{1 - \gamma}{ 2 } \right)  \vert \sigma_{v,t} \vert^2 
+\]</div>
+<p>We presume that the stochastic component of technology growth <span class="math notranslate nohighlight">\(Z_1\)</span> and aggregate stochastic volatility <span class="math notranslate nohighlight">\(Z_2\)</span> are governed by the following processes:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+d Z_{t}^1 =  - \beta_{1} Z_t^1 dt +  \sqrt{Z_t^2} \sigma_1 \cdot d B_{t} \\
+d Z_t^2 = - \beta_2 ( Z_t^2 - \mu_2) dt +  \sqrt{Z_t^2} \sigma_2 \cdot d B_t
+\end{split}\]</div>
+<p>Capital growth is governed by:</p>
+<div class="math notranslate nohighlight">
+\[
+dK_t = K_t\left[ \Phi \left( \frac{I_t}{K_t} \right) + \beta_k Z_t^1 - \eta_k \right] dt  + K_t \sqrt{Z_t^2}  {\sigma}_k \cdot dB_t
+\]</div>
+<p>Where:</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi(i) = {\frac 1 \phi}  \log \left( 1 + \phi i \right)
+\]</div>
+<p>Output is constrained by:</p>
+<div class="math notranslate nohighlight">
+\[
+C_t + I_t = \alpha K_t
+\]</div>
+<p>From this we can deduce the Hamilton-Jacobi-Bellman (HJB) equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+0 =   \max_{c+i = \alpha}  \left\{ \left( \frac{\delta}{1 - \rho} \right) \left( c^{1-\rho} \exp \left[ (\rho - 1) \upsilon \right] - 1 \right) + \Phi(i) + \beta_k z_1 - \eta_k - \frac{1}{2} z_2 |\sigma_k|^2 \right. \\
+ \left. + \mu_z \cdot \frac {\partial \upsilon}{\partial z}  +  \frac {z_2}2  {\rm trace} \left\{ {\sigma_z}' \frac {\partial^2 \upsilon}{\partial z \partial z'} \sigma_z \right\} +  \frac{(1 - \gamma) z_2 }{2} \left\vert\sigma_k + {\sigma_z}' \frac {\partial \upsilon}{\partial z}   \right\vert^2 \right\}
+\end{split}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(c\)</span> is the consumption-to-capital ratio and <span class="math notranslate nohighlight">\(i\)</span> is the investment-to-capital ratio. We solve this HJB using the algorithm described in Supplemental Appendix C.1.</p>
+<!-- | **Parameter**  | **Value**                                                         |
+|----------------|-------------------------------------------------------------------|
+| $\eta_k$       | 0.04                                                              |
+| $\phi$         | 8                                                                 |
+| $\beta_k$      | 0.04                                                              |
+| $\beta_1$      | 0.056                                                             |
+| $\beta_2$      | 0.194                                                             |
+| $\mu_2$        | $6.3 \times 10^{-6}$                                              |
+| **Upper triangular**  
+| $\sigma_2$ |$\sqrt{12} \times [0.92, 0.40, 0]$                              |
+| **Lower triangular** | $\sqrt{12} \times [1, 0, 0]$                                    |
+| $\sigma_k$     | $\sqrt{12} \times [0.92, 0.40, 0]$                                |
+| $\sigma_1$     | $\sqrt{12} \times [0, 5.7, 0]$                                    |
+| **Lower triangular** | $\sqrt{12} \times [2.3, 5.2, 0]$                                |
+| $\sigma_2$     | $\sqrt{12} \times [0, 0, 0.00031]$                                | --></section>
+<section class="tex2jax_ignore mathjax_ignore" id="solution-overview">
+<h1>Solution Overview<a class="headerlink" href="#solution-overview" title="Permalink to this heading">#</a></h1>
+<p>The function <code class="docutils literal notranslate"><span class="pre">main_one_capital</span></code> takes in the following inputs:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input</p></th>
+<th class="head"><p>Notation in paper</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Delta</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\Delta_t\)</span></p></td>
+<td><p>False-transient step-size: lower values (0.01 or 0.001) reduce likelihood of convergence issues</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gamma</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\gamma\)</span></p></td>
+<td><p>Uncertainty aversion</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">delta</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta\)</span></p></td>
+<td><p>Discount rate</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rho</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\rho\)</span></p></td>
+<td><p>Inverse of IES</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\alpha\)</span></p></td>
+<td><p>Productivity</p></td>
+</tr>
+</tbody>
+</table>
+<p>The user can also edit the <code class="docutils literal notranslate"><span class="pre">main_onecapital</span></code> Julia file to change model parameters which are held fixed in the paper, including:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Output</p></th>
+<th class="head"><p>Notation in paper</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cons</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(c\)</span></p></td>
+<td><p>Consumption-output ratio</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a11</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\beta_1\)</span></p></td>
+<td><p>Persistence of <span class="math notranslate nohighlight">\(Z_1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">a22</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\beta_2\)</span></p></td>
+<td><p>Persistence of <span class="math notranslate nohighlight">\(Z_2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ymean</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu_2\)</span></p></td>
+<td><p>Mean of <span class="math notranslate nohighlight">\(Z_2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">phi</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi\)</span></p></td>
+<td><p>Adjustment cost</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sigma_k</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma_k\)</span></p></td>
+<td><p>Shock exposure for <span class="math notranslate nohighlight">\(dK\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sigma_z</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma_1\)</span></p></td>
+<td><p>Shock exposure for <span class="math notranslate nohighlight">\(dZ_1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sigma_y</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma_2\)</span></p></td>
+<td><p>Shock exposure for <span class="math notranslate nohighlight">\(dZ_2\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Finally, the following parameters govern the construction of the state space grid and convergence criteria:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zmin</span></code>,<code class="docutils literal notranslate"><span class="pre">zmax</span></code></p></td>
+<td><p>Minimum and maximum values of <span class="math notranslate nohighlight">\(Z_1\)</span> grid; an insufficiently large grid may cause inaccuracies</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">II</span></code></p></td>
+<td><p>Number of <span class="math notranslate nohighlight">\(Z_1\)</span> gridpoints</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ymin</span></code>,<code class="docutils literal notranslate"><span class="pre">ymax</span></code></p></td>
+<td><p>Minimum and maximum values of <span class="math notranslate nohighlight">\(Z_2\)</span> grid; an insufficiently large grid may cause inaccuracies</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">JJ</span></code></p></td>
+<td><p>Number of <span class="math notranslate nohighlight">\(Z_2\)</span> gridpoints</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">maxit</span></code></p></td>
+<td><p>Maximum number of value function iterations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">crit</span></code></p></td>
+<td><p>The algorithm stops when the difference between <span class="math notranslate nohighlight">\(V_t\)</span> and <span class="math notranslate nohighlight">\(V_{t+1}\)</span> is less than <code class="docutils literal notranslate"><span class="pre">crit</span></code> for all points on the state-space grid</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">main_onecapital</span></code> outputs a dictionary that contains the above parameters, as well as the following outputs:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input</p></th>
+<th class="head"><p>Notation in paper</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>V</p></td>
+<td><p><span class="math notranslate nohighlight">\(V\)</span></p></td>
+<td><p>Value function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{C}{K}\)</span></p></td>
+<td><p>Consumption-capital ratio</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">d</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{I}{K}\)</span></p></td>
+<td><p>Investment-capital ratio</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vz</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial{v}}{\partial{z_1}}\)</span></p></td>
+<td><p>Derivative of <span class="math notranslate nohighlight">\(V\)</span> with respect to <span class="math notranslate nohighlight">\(Z^1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Vy</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial{v}}{\partial{z_2}}\)</span></p></td>
+<td><p>Derivative of <span class="math notranslate nohighlight">\(V\)</span> with respect to <span class="math notranslate nohighlight">\(Z^2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>mu_k</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu_{\hat{K}}\)</span></p></td>
+<td><p>Drift of <span class="math notranslate nohighlight">\(\log{K}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>g</p></td>
+<td></td>
+<td><p>Stationary density</p></td>
+</tr>
+<tr class="row-odd"><td><p>[<code class="docutils literal notranslate"><span class="pre">hk</span></code>,<code class="docutils literal notranslate"><span class="pre">hz</span></code>,<code class="docutils literal notranslate"><span class="pre">hy</span></code>]</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma_k + \sigma_z' \frac{\partial{v}}{\partial{z}}\)</span></p></td>
+<td><p>Robust control term</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ymean</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu_2\)</span></p></td>
+<td><p>Mean of <span class="math notranslate nohighlight">\(Z_2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">phi</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi\)</span></p></td>
+<td><p>Adjustment cost</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sigma_k</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma_k\)</span></p></td>
+<td><p>Shock exposure for <span class="math notranslate nohighlight">\(dK\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sigma_z</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma_1\)</span></p></td>
+<td><p>Shock exposure for <span class="math notranslate nohighlight">\(dZ_1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sigma_y</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma_2\)</span></p></td>
+<td><p>Shock exposure for <span class="math notranslate nohighlight">\(dZ_2\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading">#</a></h1>
+<p>We begin by importing required libraries:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
+<span class="k">using</span><span class="w"> </span><span class="n">SparseArrays</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Interpolations</span>
+<span class="k">using</span><span class="w"> </span><span class="n">SuiteSparse</span>
+<span class="n">include</span><span class="p">(</span><span class="s">&quot;../1_single_capital_with_stochastic_volatility/src/utils_onecapital.jl&quot;</span><span class="p">)</span>
+<span class="n">include</span><span class="p">(</span><span class="s">&quot;../1_single_capital_with_stochastic_volatility/src/main_onecapital.jl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold -Color-Bold-Green">  Activating</span> new project at `/project/lhansen/macrofinance/notebook`
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">LoadError</span>: ArgParseError(&quot;too many arguments&quot;)
+<span class="ow">in</span> <span class="n">expression</span> <span class="n">starting</span> <span class="n">at</span> <span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">lhansen</span><span class="o">/</span><span class="n">macrofinance</span><span class="o">/</span><span class="mi">1</span><span class="n">_single_capital_with_stochastic_volatility</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">main_onecapital</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">42</span>
+
+<span class="ne">Stacktrace</span>:
+  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">argparse_error</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Any</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">9</span>
+  <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">parse_arg</span><span class="o">!(</span>state::ArgParse.ParserState,<span class="w"> </span>settings::ArgParseSettings<span class="o">)</span>
+    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">918</span>
+  <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">parse_args_unhandled</span><span class="p">(</span><span class="n">args_list</span><span class="p">::</span><span class="n">Vector</span><span class="p">,</span> <span class="n">settings</span><span class="p">::</span><span class="n">ArgParseSettings</span><span class="p">,</span> <span class="n">truncated_shopts</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">632</span>
+  <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">parse_args_unhandled</span><span class="p">(</span><span class="n">args_list</span><span class="p">::</span><span class="n">Vector</span><span class="p">,</span> <span class="n">settings</span><span class="p">::</span><span class="n">ArgParseSettings</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">595</span>
+  <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">parse_args</span><span class="p">(</span><span class="n">args_list</span><span class="p">::</span><span class="n">Vector</span><span class="p">,</span> <span class="n">settings</span><span class="p">::</span><span class="n">ArgParseSettings</span><span class="p">;</span> <span class="n">as_symbols</span><span class="p">::</span><span class="n">Bool</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">469</span>
+  <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">parse_args</span><span class="p">(</span><span class="n">args_list</span><span class="p">::</span><span class="n">Vector</span><span class="p">,</span> <span class="n">settings</span><span class="p">::</span><span class="n">ArgParseSettings</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">466</span>
+  <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">parse_args</span><span class="p">(</span><span class="n">settings</span><span class="p">::</span><span class="n">ArgParseSettings</span><span class="p">;</span> <span class="n">kw</span><span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">Pairs</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">{</span><span class="n">Vararg</span><span class="p">{</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">N</span><span class="p">}},</span> <span class="n">NamedTuple</span><span class="p">{</span><span class="n">names</span><span class="p">,</span> <span class="n">T</span><span class="p">}}</span> <span class="n">where</span> <span class="p">{</span><span class="n">V</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">T</span><span class="o">&lt;</span><span class="p">:</span><span class="n">Tuple</span><span class="p">{</span><span class="n">Vararg</span><span class="p">{</span><span class="n">Any</span><span class="p">,</span> <span class="n">N</span><span class="p">}}})</span>
+    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">421</span>
+  <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="n">parse_args</span><span class="p">(</span><span class="n">settings</span><span class="p">::</span><span class="n">ArgParseSettings</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">ArgParse</span> <span class="o">~/.</span><span class="n">julia</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="n">ArgParse</span><span class="o">/</span><span class="n">bylyV</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">parsing</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">421</span>
+  <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="n">parse_commandline</span><span class="p">()</span>
+    <span class="o">@</span> <span class="n">Main</span> <span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">lhansen</span><span class="o">/</span><span class="n">macrofinance</span><span class="o">/</span><span class="mi">1</span><span class="n">_single_capital_with_stochastic_volatility</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">main_onecapital</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">39</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+    <span class="o">@</span> <span class="n">show</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1047</span>
+ <span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="n">include</span><span class="p">(</span><span class="n">fname</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+    <span class="o">@</span> <span class="n">Base</span><span class="o">.</span><span class="n">MainInclude</span> <span class="o">./</span><span class="n">client</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">451</span>
+ <span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+    <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="mi">6</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Next we set parameters, including an <code class="docutils literal notranslate"><span class="pre">action_name</span></code> which determines where the file is saved:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0922</span>
+<span class="n">delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.01</span>
+<span class="n">gamma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="n">Delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="n">rho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="n">action_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;test&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can run our main function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">mainonecapital</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">,</span><span class="w"> </span><span class="n">gamma</span><span class="o">=</span><span class="n">gamma</span><span class="p">,</span><span class="w"> </span><span class="n">Delta</span><span class="o">=</span><span class="n">Delta</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="o">=</span><span class="n">rho</span><span class="p">,</span><span class="n">action_name</span><span class="o">=</span><span class="n">action_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7.3-1.7"
+        },
+        kernelOptions: {
+            name: "julia-1.7.3-1.7",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7.3-1.7'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Single Capital Model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">Solution Overview</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Lars Peter Hansen
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
