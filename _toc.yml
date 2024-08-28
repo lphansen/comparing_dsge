@@ -4,7 +4,10 @@
 format: jb-book
 root: intro
 chapters:
-      - file: baseline
+      - file: single_capital
+      - file: model_ambiguity
+      - file: twocapital
+      - file: heterogeneous_agents
       - file: elasticities
 
 #   - caption: Risk, Uncertainty, and Value 

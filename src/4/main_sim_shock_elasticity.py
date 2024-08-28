@@ -13,7 +13,7 @@ def main(action_name="",
          chiUnderline=1.0, a_e=0.14, a_h=0.135, gamma_e=1.0, gamma_h=1.0, rho_e=1.0, rho_h=1.0,
          delta_e=1.0, delta_h=1.0, lambda_d=1.0, nu=1.0, shock_expo="",
          n_layers=5, units=16, points_size=2, iter_num=10, seed=1, penalization=10000,
-         W_percentile=0.5, BFGS_maxiter=100, BFGS_maxfun=1000):
+         W_percentile=0.5, V_percentile=0.5, Z_percentile=0.5, BFGS_maxiter=100, BFGS_maxfun=1000):
 
     ## Domain parameters
     domain_list = [nWealth, nZ, nV, V_bar, sigma_K_norm, sigma_Z_norm, sigma_V_norm, wMin, wMax]
@@ -78,7 +78,7 @@ def main(action_name="",
     sigmalogS = logsdfe_diffusion       ## log diffusion terms for the SDF
 
     print('Simulating elasticities for W')
-    initial_point = [marginal_quantile['W'](W_percentile).item(), 0.0, marginal_quantile['V'](0.5).item()]
+    initial_point = [marginal_quantile['W'](W_percentile).item(), marginal_quantile['Z'](Z_percentile).item(), marginal_quantile['V'](V_percentile).item()]
     elastictities_W = simulate_elasticities(statespace, shock_index, dx, dt, muX, sigmaX, mulogM, sigmalogM, mulogS, sigmalogS, initial_point, sim_length, sim_num)
     # np.savez(outputdir + '/elasticities_W_percentile_'+str(W_percentile)+'.npz',**elastictities_W)
 
