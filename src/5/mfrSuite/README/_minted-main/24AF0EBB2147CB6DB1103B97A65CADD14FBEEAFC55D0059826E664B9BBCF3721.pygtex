@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{mfr.modelSoln} \PYG{k}{as} \PYG{n+nn}{m}
+\PYG{n}{params} \PYG{o}{=} \PYG{n}{m}\PYG{o}{.}\PYG{n}{paramsDefault}\PYG{o}{.}\PYG{n}{copy}\PYG{p}{()}
+\PYG{n}{testModel} \PYG{o}{=} \PYG{n}{m}\PYG{o}{.}\PYG{n}{Model}\PYG{p}{(}\PYG{n}{params}\PYG{p}{)}
+\end{Verbatim}

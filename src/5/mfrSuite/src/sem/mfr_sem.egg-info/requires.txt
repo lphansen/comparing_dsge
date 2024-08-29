@@ -1,0 +1,2 @@
+numba>=0.42.0
+pyMKL

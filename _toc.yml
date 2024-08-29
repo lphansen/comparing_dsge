@@ -1,0 +1,108 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+      - file: single_capital
+      - file: model_ambiguity
+      - file: twocapital
+      - file: heterogeneous_agents
+      - file: elasticities
+
+#   - caption: Risk, Uncertainty, and Value 
+#     numbered: true
+#     chapters: 
+#     - file: book/example_out_c1_v2.md
+#     - file: book/example_out_c1_v2_enzo.md
+#     - file: book/example_out_c1_v2_ken.md
+#     - file: book/example_out_c2_v2.md
+#     - file: book/example_out_c2_v2_enzo.md
+#     - file: book/example_out_c2_v2_ken.md
+#     - file: book/example_out_c3_v2.md
+#     - file: book/example_out_c4_v2.md 
+#     - file: book/decision_book_draft.md 
+#     - file: book/example_out_c5_v2.md
+#     - file: book/example_out_c6_v2.md 
+#     - file: book/gmmcurrent_lars_v9.md  
+#     - file: book/cite.md
+#     # - file: book/example_out_c1_v2_enzo.md
+    
+
+#   - caption: Uncertainty Expansion
+#     numbered: false
+#     chapters:
+#     # - file: theory/theory
+#     - file: theory/manuscript 
+#       title: 'Manuscript'
+#     - file: theory/quickguide_update 
+#   # - caption: Discrete Local Approximation
+#   #   maxdepth: 0
+#   #   chapters:
+
+#   - caption: Stochastic Responses and Marginal Valuation
+#     numbered: false
+#     chapters: 
+#     - file: book/stochastic_impulse_response 
+#       title: 'Manuscript'
+    
+#   - caption: Shock Elasticities
+#     chapters: 
+#     - file: continuous_global_solution/manuscript 
+#       title: 'Manuscript'
+#     - file: continuous_global_solution/background 
+#     - file: continuous_global_solution/shockelasticity 
+#     - file: continuous_global_solution/shockelasticitycontinuous 
+
+#   - caption: Comparative Valuation Dynamics in Production Economies 
+#     chapters:
+#     - file: comparing_dsge/manuscript
+#       title: 'Manuscript'
+#     - file: comparing_dsge/appendix 
+#     - file: comparing_dsge/code
+  
+#   - caption: Uncertainty Spillovers for Markets and Policy
+#     chapters:
+#     - file: uncertainty_spillovers/manuscript
+#       title: 'Manuscript'
+
+
+#   # - caption: Stochastic Processes and Laws of Large Numbers
+#   #   chapters:
+#   #   - file: Knight_Chapter_1/introduction
+#   #   - file: Knight_Chapter_1/stochastic_processes
+#   #   - file: Knight_Chapter_1/constructing_a_stochastic_process
+#   #   - file: Knight_Chapter_1/stationary_stochastic_processes
+#   #   - file: Knight_Chapter_1/invariant_events_and_conditional_expectations
+#   #   - file: Knight_Chapter_1/laws_of_large_numbers
+#   #   - file: Knight_Chapter_1/limiting_empirical_measures
+#   #   - file: Knight_Chapter_1/ergodic_decomposition
+#   #   - file: Knight_Chapter_1/risk_and_uncertainty
+#   #   - file: Knight_Chapter_1/inventing_an_infinite_past
+#   #   - file: Knight_Chapter_1/summary
+
+#   # - caption: Stationary Increments
+#   #   chapters:
+#   #   - file: Knight_Chapter_2/basic_setup
+#   #   - file: Knight_Chapter_2/a_martingale_decomposition
+#   #   - file: Knight_Chapter_2/central_limit_approximation
+#   #   - file: Knight_Chapter_2/cointegration
+
+#   # - caption: Markov Processes
+#   #   chapters:
+#   #   - file: Knight_Chapter_3/constituents
+#   #   - file: Knight_Chapter_3/stationarity
+#   #   - file: Knight_Chapter_3/l2_and_eigenfunctions
+#   #   - file: Knight_Chapter_3/ergodic_markov_processes
+#   #   - file: Knight_Chapter_3/periodicity
+#   #   - file: Knight_Chapter_3/finite_state_markov_chains
+#   #   - file: Knight_Chapter_3/limited_dependence
+#   #   - file: Knight_Chapter_3/limits_of_multi_period_forecasts
+#   #   - file: Knight_Chapter_3/vector_autoregressions
+#   #   - file: Knight_Chapter_3/inventing_a_past_again
+
+#   # - caption: Processes with Markovian Increments
+#   #   chapters:
+#   #   - file: Knight_Chapter_4/definition_of_additive_functional
+#   #   - file: Knight_Chapter_4/extracting_martingales
+#   #   - file: Knight_Chapter_4/applications
