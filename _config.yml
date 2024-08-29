@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Comparing DSGE Models
-author: Lars Peter Hansen, Paymon Khorrami and Fabrice Toure
+author: Lars Peter Hansen, Paymon Khorrami and Fabrice Tourre
 logo: mfr.png
 
 # Force re-execution of notebooks on each build.
