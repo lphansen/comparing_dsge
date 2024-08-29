@@ -1,0 +1,52 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{License}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Installation}{}% 3
+\BOOKMARK [2][-]{subsection.2.1}{Installing MFR Suite}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Windows}{subsection.2.1}% 5
+\BOOKMARK [3][-]{subsubsection.2.1.2}{macOS/Linux}{subsection.2.1}% 6
+\BOOKMARK [3][-]{subsubsection.2.1.3}{Optional Step \(for Exporting Plots as Files with Plotly\)}{subsection.2.1}% 7
+\BOOKMARK [3][-]{subsubsection.2.1.4}{Potential Errors}{subsection.2.1}% 8
+\BOOKMARK [2][-]{subsection.2.2}{Quick Start Guide}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{Graphic User Interface}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{Start the Interface}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.2}{Solving a Model}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.3}{Analyzing a Model}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.4}{Comparing Models and Advanced Usage}{section.3}% 14
+\BOOKMARK [1][-]{section.4}{Generalized Modeling Framework in Hansen, Khorrami, and Tourre}{}% 15
+\BOOKMARK [2][-]{subsection.4.1}{Model Overview}{section.4}% 16
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Preferences}{subsection.4.1}% 17
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Technology}{subsection.4.1}% 18
+\BOOKMARK [3][-]{subsubsection.4.1.3}{Markets}{subsection.4.1}% 19
+\BOOKMARK [3][-]{subsubsection.4.1.4}{Single-Agent Optimization Problem}{subsection.4.1}% 20
+\BOOKMARK [3][-]{subsubsection.4.1.5}{Market Equilibrium}{subsection.4.1}% 21
+\BOOKMARK [2][-]{subsection.4.2}{Solving the Hansen, Khorrami, Tourre Model: mfr.modelSoln}{section.4}% 22
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Solving a Model}{subsection.4.2}% 23
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Setting Parameters}{subsection.4.2}% 24
+\BOOKMARK [3][-]{subsubsection.4.2.3}{Model Diagnostics I}{subsection.4.2}% 25
+\BOOKMARK [3][-]{subsubsection.4.2.4}{Model Diagnostics II}{subsection.4.2}% 26
+\BOOKMARK [3][-]{subsubsection.4.2.5}{Other Methods}{subsection.4.2}% 27
+\BOOKMARK [1][-]{section.5}{Stationary Density and Shock Elasticities}{}% 28
+\BOOKMARK [2][-]{subsection.5.1}{Stationary Density}{section.5}% 29
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Overview}{subsection.5.1}% 30
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Computing Stationary Distribution: mfr.sdm.computeDent}{subsection.5.1}% 31
+\BOOKMARK [2][-]{subsection.5.2}{Shock Elasticities}{section.5}% 32
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Overview}{subsection.5.2}% 33
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Computing Shock Elasticities: mfr.sem.computeElas}{subsection.5.2}% 34
+\BOOKMARK [1][-]{section.6}{Troubleshooting}{}% 35
+\BOOKMARK [2][-]{subsection.6.1}{Interpreting Errors and Warnings}{section.6}% 36
+\BOOKMARK [3][-]{subsubsection.6.1.1}{Module mfr.modelSoln}{subsection.6.1}% 37
+\BOOKMARK [3][-]{subsubsection.6.1.2}{Modules mfr.sdm and mfr.sem}{subsection.6.1}% 38
+\BOOKMARK [2][-]{subsection.6.2}{Interpreting the log.txt File and Potential Bottlenecks}{section.6}% 39
+\BOOKMARK [2][-]{subsection.6.3}{Numerical Algorithm Parameters to Tweak}{section.6}% 40
+\BOOKMARK [2][-]{subsection.6.4}{Models with Capital Misallocation}{section.6}% 41
+\BOOKMARK [1][-]{section.7}{Examples}{}% 42
+\BOOKMARK [2][-]{subsection.7.1}{He and Krushnamurthy \(2013\)}{section.7}% 43
+\BOOKMARK [2][-]{subsection.7.2}{Bansal and Yaron \(2004\)}{section.7}% 44
+\BOOKMARK [2][-]{subsection.7.3}{One-Dimensional Hansen, Khorrami, and Tourre \(2018\)}{section.7}% 45
+\BOOKMARK [2][-]{subsection.7.4}{Two-Dimensional Hansen, Khorrami, and Tourre \(2018\)}{section.7}% 46
+\BOOKMARK [1][-]{section.8}{Appendix}{}% 47
+\BOOKMARK [2][-]{subsection.8.1}{Parameters for mfr.modelSoln}{section.8}% 48
+\BOOKMARK [2][-]{subsection.8.2}{Equilibrium Quantities and Variables in HKT}{section.8}% 49
+\BOOKMARK [1][-]{section.9}{Change Log}{}% 50
+\BOOKMARK [2][-]{subsection.9.1}{Version 0.1.1}{section.9}% 51
+\BOOKMARK [2][-]{subsection.9.2}{Version 0.1.2}{section.9}% 52
