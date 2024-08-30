@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'heterogeneous_agents';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4 Elasticities" href="elasticities.html" />
+    <link rel="next" title="5 Elasticities" href="elasticities.html" />
     <link rel="prev" title="3 Two Capital Model" href="twocapital.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -147,10 +147,11 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="single_capital.html">1 Single Capital Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="model_ambiguity.html">2 Model Ambiguity</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="model_ambiguity.html">2 Ambiguity Sets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="twocapital.html">3 Two Capital Model</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">4 Heterogeneous Agents</a></li>
-<li class="toctree-l1"><a class="reference internal" href="elasticities.html">4 Elasticities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elasticities.html">5 Elasticities</a></li>
 
 
 </ul>
@@ -514,6 +515,62 @@ L = {L}^e_{HJB} + {L}^h_{HJB} + p{L}_{\kappa}
 </tbody>
 </table>
 <p>In addition, the following parameters can be edited in the <code class="docutils literal notranslate"><span class="pre">utils_para</span></code> file. They do not vary across the models explored in the paper, but the user may wish to explore their own variations.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notation used in paper</p></th>
+<th class="head"><p>Default used in paper</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Z_bar</span></code></p></td>
+<td><p>Mean of <span class="math notranslate nohighlight">\(Z^1\)</span></p></td>
+<td></td>
+<td><p>0.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lambda_Z</span></code></p></td>
+<td><p>Persistence of $Z^1</p></td>
+<td><p><span class="math notranslate nohighlight">\(\beta_1\)</span></p></td>
+<td><p>0.056</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lambda_V</span></code></p></td>
+<td><p>Persistence of <span class="math notranslate nohighlight">\(Z^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\beta_2\)</span></p></td>
+<td><p>0.194</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">alpha_K</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\eta_k\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\alpha\)</span></p></td>
+<td><p>0.04</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">phi</span></code></p></td>
+<td><p>Adjustment cost</p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi\)</span></p></td>
+<td><p>8.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">covij</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(i,j\)</span> entry in shock exposure matrix</p></td>
+<td></td>
+<td><p>See Table 1 in paper</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">numSds</span></code></p></td>
+<td><p>Governs grid size for <span class="math notranslate nohighlight">\(Z^1\)</span> and <span class="math notranslate nohighlight">\(Z^2\)</span> (number of standard deviations from the mean)</p></td>
+<td></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">zmin</span></code>,<code class="docutils literal notranslate"><span class="pre">zmax</span></code></p></td>
+<td><p>Grid boundaries for <span class="math notranslate nohighlight">\(Z^1\)</span></p></td>
+<td></td>
+<td><p><span class="math notranslate nohighlight">\(\mu_1 \pm SD Var{Z_1|Z_2=\mu_2}\)</span> where <span class="math notranslate nohighlight">\(S=\)</span><code class="docutils literal notranslate"><span class="pre">numSds</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">vmin</span></code>,<code class="docutils literal notranslate"><span class="pre">vmax</span></code></p></td>
+<td><p>Grid boundaries for <span class="math notranslate nohighlight">\(Z^2\)</span></p></td>
+<td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vmin</span></code> = <span class="math notranslate nohighlight">\(10^{-8}\)</span>,<code class="docutils literal notranslate"><span class="pre">vmax</span></code> = <span class="math notranslate nohighlight">\(\mu_2 + SD Var{Z_2|Z_2=\mu_2}\)</span> where <span class="math notranslate nohighlight">\(S=\)</span><code class="docutils literal notranslate"><span class="pre">numSds</span></code></p></td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 <section id="quick-start">
@@ -1348,7 +1405,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </section>
 <section id="finite-difference-method">
 <h2>4.4 Finite Difference Method<a class="headerlink" href="#finite-difference-method" title="Permalink to this heading">#</a></h2>
-<p>We employ a finite differences method from <code class="docutils literal notranslate"><span class="pre">mfrSuite</span></code> to solve Model IP from Section 5, which we cover briefly here.</p>
+<p>We employ a finite differences method from <code class="docutils literal notranslate"><span class="pre">mfrSuite</span></code> to solve the two-dimensional Model IP from Section 5, which we cover briefly here.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mfr.modelSoln</span> <span class="k">as</span> <span class="nn">m</span>
@@ -1358,11 +1415,13 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;src/5&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">main_evaluate</span> <span class="kn">import</span> <span class="n">main_fdm</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>The model inputs are identical to the neural network solution above, except that: we abstract away from <span class="math notranslate nohighlight">\(Z^2\)</span>; we have to set <span class="math notranslate nohighlight">\(dt\)</span> as our false-transient time-step; and some inputs have been moved inside the <code class="docutils literal notranslate"><span class="pre">main_solve.py</span></code> script.</p>
+<p>The model inputs are identical to the neural network solution above, except that: we abstract away from <span class="math notranslate nohighlight">\(Z^2\)</span>; we have to set <span class="math notranslate nohighlight">\(dt\)</span>, the false-transient time-step; and some inputs have been moved inside the <code class="docutils literal notranslate"><span class="pre">main_solve.py</span></code> script.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chiUnderline</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -1380,6 +1439,27 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <span class="n">nWealth</span><span class="o">=</span><span class="mi">180</span>
 <span class="n">nZ</span><span class="o">=</span><span class="mi">30</span>
 <span class="n">shock_expo</span> <span class="o">=</span> <span class="s1">&#39;upper_triangular&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">main_fdm</span><span class="p">(</span><span class="n">nW</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">nZ</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">a_e</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">a_h</span><span class="o">=</span><span class="mf">0.13</span><span class="p">,</span> <span class="n">rho_e</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">rho_h</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">gamma_e</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">gamma_h</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> 
+          <span class="n">chiUnderline</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">action_name</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">shock_expo</span><span class="o">=</span><span class="s1">&#39;upper_triangular&#39;</span><span class="p">,</span> <span class="n">delta_e</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">delta_h</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">lambda_d</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We plot an example from the paper:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>```{figure}  images/image_het_fdm.pdf
+---
+name: two-capital
+---
+Example taken from Figure 11 of the paper.
+```
 </pre></div>
 </div>
 </div>
@@ -1432,7 +1512,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">4 Elasticities</p>
+        <p class="prev-next-title">5 Elasticities</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
