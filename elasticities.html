@@ -1,0 +1,770 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>4 Elasticities &#8212; Comparing DSGE Models</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'elasticities';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="4 Heterogeneous Agents" href="heterogeneous_agents.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Comparing DSGE Models</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="single_capital.html">1 Single Capital Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_ambiguity.html">2 Model Ambiguity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="twocapital.html">3 Two Capital Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneous_agents.html">4 Heterogeneous Agents</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4 Elasticities</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/elasticities.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4 Elasticities</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4 Elasticities</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-differences">4.1 Finite Differences</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation">4.2 Simulation</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="elasticities">
+<h1>4 Elasticities<a class="headerlink" href="#elasticities" title="Permalink to this heading">#</a></h1>
+<p>Shock elasticites are computed by solving:</p>
+<div class="math notranslate nohighlight">
+\[
+\varepsilon_M(t,x) = \nu(x) \cdot \left\{ \sigma_M(x) + \sigma_X(x) \cdot \frac{\partial}{\partial x} \log \mathbb{E}\left[ \left( \frac{M_t}{M_0} \right) \mid X_0 = x \right] \right\}
+\]</div>
+<p>Shock price-elasticities can be computed using:
+$<span class="math notranslate nohighlight">\(
+\varepsilon_M(t,x) - \varepsilon_{SM}(t,x)
+\)</span>$</p>
+<p>Where <span class="math notranslate nohighlight">\(S\)</span> is the stochastic discount factor.</p>
+<p>This can either be solved using finite differences or simulated. We describe both methods here.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="finite-differences">
+<h1>4.1 Finite Differences<a class="headerlink" href="#finite-differences" title="Permalink to this heading">#</a></h1>
+<p>We compute elasticities using the finite differences method described in Supplemental Appendix C.3. Where <span class="math notranslate nohighlight">\({\hat{M}}=\log{M}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+0 = - \frac{\partial f_{\hat{M}}}{\partial t} + \Big( \mu_{\hat{M}} + \frac{1}{2} \| \sigma_{\hat{M}} \|^2 \Big) f_{\hat{M}} + \big( \mu_X + \sigma_{\hat{M}} \cdot \sigma_X \big) \cdot \frac{\partial f_{\hat{M}}}{\partial x} + \frac{1}{2} \text{tr}\Big( \sigma_X \sigma_X' \frac{\partial^2 f_{\hat{M}}}{\partial x \partial x'} \Big)
+\]</div>
+<p>The finite differences elasticities code is implemented for all model environments in the paper, but we will focus on the baseline model in this section.  The main function for calculating elasticities is <code class="docutils literal notranslate"><span class="pre">main_pde_shock_elasticity</span></code>, which takes in the same inputs as the solution script, which in this case is <code class="docutils literal notranslate"><span class="pre">main_onecapital</span></code>. These inputs are used to identify a saved solution; therefore, this function must be run after the solution script has finished running.</p>
+<p>There are several parameters which can be changed inside the body of <code class="docutils literal notranslate"><span class="pre">main_pde_shock_elasticity</span></code>. Notably, <code class="docutils literal notranslate"><span class="pre">dt</span></code> controls the time step, where <code class="docutils literal notranslate"><span class="pre">dt</span></code>=1 is one year, while <code class="docutils literal notranslate"><span class="pre">T</span></code> controls the total number of <code class="docutils literal notranslate"><span class="pre">dt</span></code> periods for which the elasticity is computed.</p>
+<p>Within <code class="docutils literal notranslate"><span class="pre">main_pde_shock_elasticity</span></code>, the function <code class="docutils literal notranslate"><span class="pre">compute_pde_shock_elasticity</span></code> computes shock-exposure and shock-price elasticities for a given cash flow variable <span class="math notranslate nohighlight">\(M\)</span> and stochastic discount factor <span class="math notranslate nohighlight">\(S\)</span>. These variables are specified by inputting their drift - <code class="docutils literal notranslate"><span class="pre">mulogM</span></code> and <code class="docutils literal notranslate"><span class="pre">mulogS</span></code> - and diffusion terms - <code class="docutils literal notranslate"><span class="pre">sigmalogM</span></code> and <code class="docutils literal notranslate"><span class="pre">sigmalogS</span></code>. For the baseline model, by default, the code computes drifts and diffusions for the following <span class="math notranslate nohighlight">\(M\)</span> variables:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(\hat{M}\)</span></p></th>
+<th class="head"><p>Notation in paper</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">logcmk</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\log{\frac{C}{K}}\)</span></p></td>
+<td><p>Log consumption-capital ratio</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">logimo</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\log{\frac{I}{Y}}\)</span></p></td>
+<td><p>Log investment-output ratio</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">logc</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\log{C}\)</span></p></td>
+<td><p>Log consumption</p></td>
+</tr>
+</tbody>
+</table>
+<p>And the following <span class="math notranslate nohighlight">\(S\)</span> variables:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(\hat{S}\)</span></p></th>
+<th class="head"><p>Notation in paper</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">logsdf</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{S}\)</span></p></td>
+<td><p>Log stochastic discount factor</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">logn</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{N}\)</span></p></td>
+<td><p>Log uncertainty component of SDF</p></td>
+</tr>
+</tbody>
+</table>
+<p>The user can also set the initial state. <code class="docutils literal notranslate"><span class="pre">marginal_quantile</span></code> is a dictionary which computes the quantiles of the marginal stationary distribution of each state. For example, <code class="docutils literal notranslate"><span class="pre">marginal_quantile['Z'](0.5)</span></code> computes the median of the marginal distribution of <code class="docutils literal notranslate"><span class="pre">Z</span></code>. Since the states consist of <span class="math notranslate nohighlight">\(Z^1\)</span> (<code class="docutils literal notranslate"><span class="pre">Z</span></code> in the code) and <span class="math notranslate nohighlight">\(Z^2\)</span> (<code class="docutils literal notranslate"><span class="pre">Y</span></code> in the code), we can define the initial state as follows:</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">initial_points</span> <span class="o">=</span> <span class="p">[[</span><span class="n">marginal_quantile</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">](</span><span class="mf">0.5</span><span class="p">),</span><span class="n">marginal_quantile</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">](</span><span class="mf">0.1</span><span class="p">)],</span>
+                    <span class="p">[</span><span class="n">marginal_quantile</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">](</span><span class="mf">0.5</span><span class="p">),</span><span class="n">marginal_quantile</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">](</span><span class="mf">0.5</span><span class="p">),</span>
+                    <span class="n">marginal_quantile</span><span class="p">[</span><span class="s1">&#39;Z&#39;</span><span class="p">](</span><span class="mf">0.5</span><span class="p">),</span><span class="n">marginal_quantile</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">](</span><span class="mf">0.9</span><span class="p">)]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above example, we initialize <span class="math notranslate nohighlight">\(Z^2\)</span> at its 10th, 50th and 90th percentiles while holding <span class="math notranslate nohighlight">\(Z^1\)</span> at its median.</p>
+<p>First we import the necessary libraries:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">RegularGridInterpolator</span> <span class="k">as</span> <span class="n">RGI</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;src/1/&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">main_pde_shock_elasticity</span> <span class="kn">import</span> <span class="n">main</span>
+<span class="kn">from</span> <span class="nn">utils_FDM</span> <span class="kn">import</span> <span class="n">finiteDiff_2D_first</span><span class="p">,</span> <span class="n">finiteDiff_2D_second</span><span class="p">,</span> <span class="n">finiteDiff_2D_cross</span>
+<span class="kn">from</span> <span class="nn">utils_pde_shock_elasticity</span> <span class="kn">import</span> <span class="n">computeElas</span>
+<span class="kn">from</span> <span class="nn">plot_function</span> <span class="kn">import</span> <span class="n">return_solution</span><span class="p">,</span> <span class="n">plot_solution</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;../../&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we set the elasticity inputs. Remember that a solution must be saved under the same parameters before the elasticities can be computed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.0922</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">Delta</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">action_name</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After changing these settings to your liking, we can run <code class="docutils literal notranslate"><span class="pre">main_pde_shock_elasticity</span></code>. Using default settings, this takes 20 seconds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">main</span><span class="p">(</span><span class="n">Delta</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">action_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- 12.889362812042236 seconds for the elasticity computation ---
+--- 4.820237636566162 seconds for the elasticity computation ---
+--- 3.97141170501709 seconds for the elasticity computation ---
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once the above function has finished running, we can load in the results. The elasticity for each <span class="math notranslate nohighlight">\(M\)</span> is saved as a separate <code class="docutils literal notranslate"><span class="pre">npz</span></code> file, but we can load all of them at once using the <code class="docutils literal notranslate"><span class="pre">return_solution</span></code> function.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">return_solution</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">Delta</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">action_name</span><span class="p">)</span>
+<span class="n">res</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;res&#39;: NpzFile &#39;./output/test/Delta_1.0/delta_0.01/gamma_1.0_rho_1.0_alpha_0.0922/res.npz&#39; with keys: ymax, V, dy, a22, zz...,
+ &#39;elasticity_logc&#39;: NpzFile &#39;./output/test/Delta_1.0/delta_0.01/gamma_1.0_rho_1.0_alpha_0.0922/elasticity_logc.npz&#39; with keys: exposure_elasticity, price_elasticity,
+ &#39;elasticity_logimo&#39;: NpzFile &#39;./output/test/Delta_1.0/delta_0.01/gamma_1.0_rho_1.0_alpha_0.0922/elasticity_logimo.npz&#39; with keys: exposure_elasticity, price_elasticity,
+ &#39;uncertainty_priceelas&#39;: NpzFile &#39;./output/test/Delta_1.0/delta_0.01/gamma_1.0_rho_1.0_alpha_0.0922/uncertainty_priceelas.npz&#39; with keys: exposure_elasticity, price_elasticity}
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>For example, we can load the first-type exposure elasticities for <span class="math notranslate nohighlight">\(\hat{C}\)</span> by accessing <code class="docutils literal notranslate"><span class="pre">['elasticity_logc']['exposure_elasticity'].item().firstType</span></code>. The first index of this object is the initial state; 0 represents the first initialization, which in this case is <span class="math notranslate nohighlight">\(Z^1\)</span> at median and <span class="math notranslate nohighlight">\(Z^2\)</span> at 10th percentile. The second index is the shock index; in this case, 1 represents a growth-rate shock. The third index is time. To illustrate this, we have written a simple <code class="docutils literal notranslate"><span class="pre">plot_solution</span></code> function, but the user can edit this to display their desired results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_solution</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">Delta</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">action_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e38a2238badcbd99f29182f9d5233fbeb75d47dc52d0384968af32b161a7046f.png" src="_images/e38a2238badcbd99f29182f9d5233fbeb75d47dc52d0384968af32b161a7046f.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="simulation">
+<h1>4.2 Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading">#</a></h1>
+<p>Alternatively, we can compute elasticities by simulation. Specifically, we use simulations to estimate:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{\partial}{\partial x} \log \mathbb{E}\Big[ \Big( \frac{M_t}{M_0} \Big) \mid X_0 = x \Big],\\
+\frac{\partial}{\partial x} \log \mathbb{E}\Big[ \Big( \frac{S_tM_t}{S_0M_0} \Big) \mid X_0 = x \Big]
+\end{split}\]</div>
+<p>Currently, this method is only implemented for the heterogeneous agents environment in Section 5, but the user can easily modify the code to adapt to the other environments.</p>
+<p>The solution scripts give us the objects we need: <code class="docutils literal notranslate"><span class="pre">[\mu_X,</span> <span class="pre">\sigma_X,</span> <span class="pre">\mulogM,</span> <span class="pre">\sigmalogM,</span> <span class="pre">\mulogS,</span> <span class="pre">\sigmalogS]</span></code> to perform simulations. These objects are interpolated on the state space grid using the <code class="docutils literal notranslate"><span class="pre">scipy.interpolate.RegularGridInterpolator</span></code> function. We initialize the states at <span class="math notranslate nohighlight">\(X_0\)</span> and simulate <code class="docutils literal notranslate"><span class="pre">sim_num</span></code>*100 independent Brownian motion processes <span class="math notranslate nohighlight">\({B_t}\)</span> with length <span class="math notranslate nohighlight">\(T\)</span>, use these to evaluate <span class="math notranslate nohighlight">\({X_t}\)</span>. Using the interpolations, we can compute <span class="math notranslate nohighlight">\({M_t/M_0}\)</span> and <span class="math notranslate nohighlight">\({S_t/S_0}\)</span> and thus estimate the expectation term.  We repeat this with initial state <span class="math notranslate nohighlight">\(X_0+dx\)</span> and use this to estimate the derivative of the expectation.</p>
+<p>Similar to the finite differences code, <code class="docutils literal notranslate"><span class="pre">main_sim_shock_elasticity</span></code> takes the same inputs as the main solution script, with the addition of <code class="docutils literal notranslate"><span class="pre">[W_percentile,Z_percentile,V_percentile]</span></code>, which characterise the initial state <span class="math notranslate nohighlight">\(X_0\)</span>. In addition, the <code class="docutils literal notranslate"><span class="pre">main_sim_shock_elasticity</span></code> script can be edited to change the following parameters:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sim_num</span></code></p></td>
+<td><p>Number of simulations is <code class="docutils literal notranslate"><span class="pre">sim_num</span></code><span class="math notranslate nohighlight">\(*100\)</span></p></td>
+<td><p>100</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sim_length</span></code></p></td>
+<td><p>Simulation length in years</p></td>
+<td><p>50</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shock_index</span></code></p></td>
+<td><p>Shock index: 0 for the capital shock, 1 for growth shock and 2 for volatility shock</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dx</span></code></p></td>
+<td><p>Step-size for state derivative</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[0.01,</span> <span class="pre">0.01,</span> <span class="pre">1e-7]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dt</span></code></p></td>
+<td><p>Time step</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statespace</span></code></p></td>
+<td><p>State space</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[W,</span> <span class="pre">Z,</span> <span class="pre">V]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">muX</span></code></p></td>
+<td><p>State variable drift terms</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[muW,</span> <span class="pre">muZ,</span> <span class="pre">muV]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sigmaX</span></code></p></td>
+<td><p>State variable diffusion terms</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[sigmaW,</span> <span class="pre">sigmaZ,</span> <span class="pre">sigmaV]</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mulogM</span></code></p></td>
+<td><p>Log drift term for the response variable M</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mulogW</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sigmalogM</span></code></p></td>
+<td><p>Log diffusion terms for the response variable M</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sigmalogW</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mulogS</span></code></p></td>
+<td><p>Log drift term for the SDF</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">logsdfe_drift</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sigmalogS</span></code></p></td>
+<td><p>Log diffusion terms for the SDF</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">logsdfe_diffusion</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The script saves the <code class="docutils literal notranslate"><span class="pre">exposure_elasticity</span></code> and <code class="docutils literal notranslate"><span class="pre">price_elasticity</span></code>. There is a chance that the simulation fails as <span class="math notranslate nohighlight">\(X_t\)</span> may move outside the state space grid. The total number of successful simulations for <span class="math notranslate nohighlight">\(X_0\)</span> and <span class="math notranslate nohighlight">\(X_0+dx\)</span> are recorded as <code class="docutils literal notranslate"><span class="pre">initial_success_count</span></code> and <code class="docutils literal notranslate"><span class="pre">derivative_success_count</span></code>, respectively. By default, intermediate variables, such as <span class="math notranslate nohighlight">\(X_t/X_0\)</span>, are not saved; this can be altered by setting <code class="docutils literal notranslate"><span class="pre">return_type</span></code>=0. We now demonstrate the code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">interpolate</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;src/4&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">main_sim_shock_elasticity</span> <span class="kn">import</span> <span class="n">main</span>
+<span class="kn">from</span> <span class="nn">plot</span> <span class="kn">import</span> <span class="n">return_sim_elasticity</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;../..&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">1.13</span><span class="p">,</span> <span class="n">rc</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lines.linewidth&quot;</span><span class="p">:</span> <span class="mf">3.5</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.formatter.useoffset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We provide example parameters which follow the default example in Chapter 4 of this notebook. For illustration, we initialize <span class="math notranslate nohighlight">\(W\)</span> and <span class="math notranslate nohighlight">\(Z^1\)</span> at their medians, and <span class="math notranslate nohighlight">\(Z^2\)</span> at its 90th percentile.</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chiUnderline</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">gamma_e</span> <span class="o">=</span> <span class="mf">4.0</span>
+<span class="n">a_e</span> <span class="o">=</span> <span class="mf">0.0922</span>
+<span class="n">a_h</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">gamma_h</span> <span class="o">=</span> <span class="mf">4.0</span>
+<span class="n">delta_e</span> <span class="o">=</span> <span class="mf">0.0115</span>
+<span class="n">delta_h</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">lambda_d</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">rho_e</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">rho_h</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">nu</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">V_bar</span> <span class="o">=</span> <span class="mf">0.0000063030303030303026</span>
+<span class="n">sigma_K_norm</span> <span class="o">=</span> <span class="mf">3.1707442821755683</span>
+<span class="n">sigma_Z_norm</span> <span class="o">=</span> <span class="mf">19.835431735873996</span>
+<span class="n">sigma_V_norm</span> <span class="o">=</span> <span class="mf">0.0010882177801089308</span>
+<span class="n">wMin</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">wMax</span> <span class="o">=</span> <span class="mf">0.99</span>
+<span class="n">nWealth</span> <span class="o">=</span> <span class="mi">180</span>
+<span class="n">nZ</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">nV</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">n_layers</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">units</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">points_size</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">iter_num</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">penalization</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">BFGS_maxiter</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">BFGS_maxfun</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">action_name</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
+<span class="n">shock_expo</span> <span class="o">=</span> <span class="s1">&#39;upper_triangular&#39;</span>
+<span class="n">W_percentile</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">Z_percentile</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">V_percentile</span> <span class="o">=</span> <span class="mf">0.9</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Next, we run the simulation. This can take more than an hour using default settings.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">main</span><span class="p">(</span><span class="n">chiUnderline</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">gamma_e</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">a_e</span> <span class="o">=</span> <span class="mf">0.0922</span><span class="p">,</span> <span class="n">a_h</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">gamma_h</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">delta_e</span> <span class="o">=</span> <span class="mf">0.0115</span><span class="p">,</span> <span class="n">delta_h</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">lambda_d</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">rho_e</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">rho_h</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">nu</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">V_bar</span> <span class="o">=</span> <span class="mf">0.0000063030303030303026</span><span class="p">,</span> <span class="n">sigma_K_norm</span> <span class="o">=</span> <span class="mf">3.1707442821755683</span><span class="p">,</span> <span class="n">sigma_Z_norm</span> <span class="o">=</span> <span class="mf">19.835431735873996</span><span class="p">,</span> <span class="n">sigma_V_norm</span> <span class="o">=</span> <span class="mf">0.0010882177801089308</span><span class="p">,</span> <span class="n">wMin</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">wMax</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">,</span> <span class="n">nWealth</span> <span class="o">=</span> <span class="mi">180</span><span class="p">,</span> <span class="n">nZ</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">nV</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span> <span class="n">n_layers</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="n">points_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">iter_num</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">penalization</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">BFGS_maxiter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">BFGS_maxfun</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">action_name</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">shock_expo</span> <span class="o">=</span> <span class="s1">&#39;upper_triangular&#39;</span><span class="p">,</span> <span class="n">W_percentile</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">Z_percentile</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">V_percentile</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now load the results and plot an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">return_sim_elasticity</span><span class="p">(</span><span class="n">shock_expo</span> <span class="o">=</span> <span class="n">shock_expo</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">,</span> <span class="n">chiUnderline</span> <span class="o">=</span> <span class="n">chiUnderline</span><span class="p">,</span> <span class="n">a_e</span> <span class="o">=</span> <span class="n">a_e</span><span class="p">,</span> <span class="n">a_h</span> <span class="o">=</span> <span class="n">a_h</span><span class="p">,</span> <span class="n">gamma_e</span> <span class="o">=</span> <span class="n">gamma_e</span><span class="p">,</span> <span class="n">gamma_h</span> <span class="o">=</span> <span class="n">gamma_h</span><span class="p">,</span> <span class="n">psi_e</span> <span class="o">=</span> <span class="n">rho_e</span><span class="p">,</span> <span class="n">psi_h</span> <span class="o">=</span> <span class="n">rho_h</span><span class="p">,</span> <span class="n">delta_e</span> <span class="o">=</span> <span class="n">delta_e</span><span class="p">,</span> <span class="n">delta_h</span> <span class="o">=</span> <span class="n">delta_h</span><span class="p">,</span> <span class="n">lambda_d</span> <span class="o">=</span> <span class="n">lambda_d</span><span class="p">,</span> <span class="n">nu</span> <span class="o">=</span> <span class="n">nu</span><span class="p">,</span> <span class="n">n_layers</span> <span class="o">=</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="n">units</span><span class="p">,</span> <span class="n">iter_num</span> <span class="o">=</span> <span class="n">iter_num</span><span class="p">,</span> <span class="n">points_size</span> <span class="o">=</span> <span class="n">points_size</span><span class="p">,</span> <span class="n">penalization</span> <span class="o">=</span> <span class="n">penalization</span><span class="p">,</span> <span class="n">action_name</span> <span class="o">=</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">W_percentile</span> <span class="o">=</span> <span class="n">W_percentile</span><span class="p">,</span> <span class="n">Z_percentile</span> <span class="o">=</span> <span class="n">Z_percentile</span><span class="p">,</span> <span class="n">V_percentile</span> <span class="o">=</span> <span class="n">V_percentile</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Figure 14</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Figure 14&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">sim</span><span class="p">[</span><span class="s1">&#39;elasticity&#39;</span><span class="p">][</span><span class="s1">&#39;exposure_elasticity&#39;</span><span class="p">],</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">)</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Model RF&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.018</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Figure 14
+</pre></div>
+</div>
+<img alt="_images/da50c43b5b9bc2ab4654e549c71eef10a6d13d11127307543b5553956d481260.png" src="_images/da50c43b5b9bc2ab4654e549c71eef10a6d13d11127307543b5553956d481260.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "envname"
+        },
+        kernelOptions: {
+            name: "envname",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'envname'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="heterogeneous_agents.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4 Heterogeneous Agents</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4 Elasticities</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-differences">4.1 Finite Differences</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation">4.2 Simulation</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Lars Peter Hansen, Paymon Khorrami and Fabrice Tourre
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
