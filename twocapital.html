@@ -150,7 +150,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="model_ambiguity.html">2 Model Ambiguity</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3 Two Capital Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="heterogeneous_agents.html">4 Heterogeneous Agents</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="elasticities.html">4 Elasticities</a></li>
 
 
@@ -304,10 +303,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="two-capital-model">
 <h1>3 Two Capital Model<a class="headerlink" href="#two-capital-model" title="Permalink to this heading">#</a></h1>
-<p>We now consider the environment in Section 4.6 with two capital stocks, which evolve as:
-$<span class="math notranslate nohighlight">\(
+<p>We now consider the environment in Section 4.6 with two capital stocks, which evolve as:</p>
+<div class="math notranslate nohighlight">
+\[
 dK_t^j = K_t^j \left[ \Phi^j \left( \frac{I_t^j}{K_t^j} \right) + \beta^j_k Z_t^1 - \eta^j \right] dt  + K_t^j \sqrt{Z_t^2}  {\sigma}^j_k \cdot dB_t
-\)</span>$</p>
+\]</div>
 <p>For <span class="math notranslate nohighlight">\(j=1,2\)</span>. The output equation is now:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -408,10 +408,19 @@ K_t^a = \left[(1-\zeta) \left(K_t^1\right)^{(1 - \tau)}  + \zeta \left( K_t^2\ri
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;src/3/main_twocapitals_three_dimensions.jl&quot;</span><span class="p">)</span>
 <span class="n">include</span><span class="p">(</span><span class="s">&quot;src/3/utils_twocapitals_three_dimensions.jl&quot;</span><span class="p">)</span>
+<span class="n">rho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="n">main_3d</span><span class="p">(</span><span class="n">Delta</span><span class="p">,</span><span class="w"> </span><span class="n">gamma</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">kappa</span><span class="p">,</span><span class="w"> </span><span class="n">zeta</span><span class="p">,</span><span class="w"> </span><span class="n">beta1</span><span class="p">,</span><span class="w"> </span><span class="n">beta2</span><span class="p">,</span><span class="w"> </span><span class="n">action_name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>The outputs of the solution are the same as for the baseline model except for the additional state variables for <span class="math notranslate nohighlight">\(\hat{Y}_t\)</span>, such as <code class="docutils literal notranslate"><span class="pre">smean</span></code> for <span class="math notranslate nohighlight">\(\mu_{\hat{y}}\)</span> and <code class="docutils literal notranslate"><span class="pre">sigma_s</span></code>.</p>
+<figure class="align-default" id="two-capital">
+<img alt="_images/image_twocapital.pdf" src="_images/image_twocapital.pdf" />
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Example taken from Figure 7 of the paper.</span><a class="headerlink" href="#two-capital" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 
     <script type="text/x-thebe-config">

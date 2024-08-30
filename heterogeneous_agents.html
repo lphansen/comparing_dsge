@@ -150,7 +150,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="model_ambiguity.html">2 Model Ambiguity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="twocapital.html">3 Two Capital Model</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">4 Heterogeneous Agents</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="elasticities.html">4 Elasticities</a></li>
 
 
@@ -300,18 +299,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4 Heterogeneous Agents</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">Solution Overview</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">Model Architecture</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">4.1 Solution Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">4.1.1 Model Architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">4.1.2 Training</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters">4.1.3 Model Parameters</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters">Model Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">4.2 Quick Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">4.3 Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-difference-method">4.4 Finite Difference Method</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-difference-method">Finite Difference Method</a></li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -352,9 +349,9 @@ document.write(`
 \end{align*}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\chi\)</span> can be solved algebraically, we solve (1) to (3).</p>
 <section id="solution-overview">
-<h2>Solution Overview<a class="headerlink" href="#solution-overview" title="Permalink to this heading">#</a></h2>
+<h2>4.1 Solution Overview<a class="headerlink" href="#solution-overview" title="Permalink to this heading">#</a></h2>
 <section id="model-architecture">
-<h3>Model Architecture<a class="headerlink" href="#model-architecture" title="Permalink to this heading">#</a></h3>
+<h3>4.1.1 Model Architecture<a class="headerlink" href="#model-architecture" title="Permalink to this heading">#</a></h3>
 <p>We modify the <code class="docutils literal notranslate"><span class="pre">DeepGalerkinMethod</span></code> code from https://github.com/alialaradi/DeepGalerkinMethod. We construct an object <code class="docutils literal notranslate"><span class="pre">sim_NN</span></code> of class <code class="docutils literal notranslate"><span class="pre">DGMNet</span></code> with the following hyperparameters:</p>
 <table class="table">
 <thead>
@@ -393,7 +390,7 @@ document.write(`
 <p>We use a Glorot normal initializer to initialize weights and a Glorot uniform initializer to initialize the biases.</p>
 </section>
 <section id="training">
-<h3>Training<a class="headerlink" href="#training" title="Permalink to this heading">#</a></h3>
+<h3>4.1.2 Training<a class="headerlink" href="#training" title="Permalink to this heading">#</a></h3>
 <p>The training set is constructed by drawing uniformly from the three-dimensional cube bounded by [<code class="docutils literal notranslate"><span class="pre">wMin</span></code>,<code class="docutils literal notranslate"><span class="pre">zMin</span></code>,<code class="docutils literal notranslate"><span class="pre">vMin</span></code>] and [<code class="docutils literal notranslate"><span class="pre">wMax</span></code>,<code class="docutils literal notranslate"><span class="pre">zMax</span></code>,<code class="docutils literal notranslate"><span class="pre">vMax</span></code>]. The loss function is given by the mean squared error of <span class="math notranslate nohighlight">\(L\)</span>, where:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -455,9 +452,8 @@ L = {L}^e_{HJB} + {L}^h_{HJB} + p{L}_{\kappa}
 </tbody>
 </table>
 </section>
-</section>
 <section id="model-parameters">
-<h2>Model Parameters<a class="headerlink" href="#model-parameters" title="Permalink to this heading">#</a></h2>
+<h3>4.1.3 Model Parameters<a class="headerlink" href="#model-parameters" title="Permalink to this heading">#</a></h3>
 <p>We also need to set model parameters. These will vary depending on the environment chosen from Section 5.1. By default, the following parameters are allowed as inputs to <code class="docutils literal notranslate"><span class="pre">main_BFGS</span></code>:</p>
 <table class="table">
 <thead>
@@ -518,6 +514,10 @@ L = {L}^e_{HJB} + {L}^h_{HJB} + p{L}_{\kappa}
 </tbody>
 </table>
 <p>In addition, the following parameters can be edited in the <code class="docutils literal notranslate"><span class="pre">utils_para</span></code> file. They do not vary across the models explored in the paper, but the user may wish to explore their own variations.</p>
+</section>
+</section>
+<section id="quick-start">
+<h2>4.2 Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading">#</a></h2>
 <p>We can build and train the neural network as follows. First, we import libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -1157,9 +1157,9 @@ Elapsed time for training 94.0623 sec
 <p>Now that we have a solution, we can compute variables of interest, which can subsequently be used to compute shock elasticities. By default, <code class="docutils literal notranslate"><span class="pre">main_variable</span></code> computes the following variables. Unless specified otherwise, the variables are evaluated on an array with dimension [<code class="docutils literal notranslate"><span class="pre">nWealth</span></code>,<code class="docutils literal notranslate"><span class="pre">nZ</span></code>,<code class="docutils literal notranslate"><span class="pre">nV</span></code>].</p>
 <table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Input</p></th>
+<tr class="row-odd"><th class="head"><p>Output</p></th>
 <th class="head"><p>Description</p></th>
-<th class="head"><p>Parameter used in paper</p></th>
+<th class="head"><p>Notation used in paper</p></th>
 </tr>
 </thead>
 <tbody>
@@ -1291,6 +1291,9 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 </div>
 </div>
+</section>
+<section id="plotting">
+<h2>4.3 Plotting<a class="headerlink" href="#plotting" title="Permalink to this heading">#</a></h2>
 <p>We can now plot the results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1343,10 +1346,45 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 </div>
 </section>
+<section id="finite-difference-method">
+<h2>4.4 Finite Difference Method<a class="headerlink" href="#finite-difference-method" title="Permalink to this heading">#</a></h2>
+<p>We employ a finite differences method from <code class="docutils literal notranslate"><span class="pre">mfrSuite</span></code> to solve Model IP from Section 5, which we cover briefly here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mfr.modelSoln</span> <span class="k">as</span> <span class="nn">m</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The model inputs are identical to the neural network solution above, except that: we abstract away from <span class="math notranslate nohighlight">\(Z^2\)</span>; we have to set <span class="math notranslate nohighlight">\(dt\)</span> as our false-transient time-step; and some inputs have been moved inside the <code class="docutils literal notranslate"><span class="pre">main_solve.py</span></code> script.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chiUnderline</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">a_e</span><span class="o">=</span><span class="mf">0.0922</span>
+<span class="n">a_h</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">gamma_e</span> <span class="o">=</span> <span class="mf">4.0</span>
+<span class="n">gamma_h</span><span class="o">=</span><span class="mf">4.0</span>
+<span class="n">delta_e</span><span class="o">=</span><span class="mf">0.0115</span>
+<span class="n">delta_h</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="n">lambda_d</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">rho_e</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">rho_h</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">nu</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">nWealth</span><span class="o">=</span><span class="mi">180</span>
+<span class="n">nZ</span><span class="o">=</span><span class="mi">30</span>
+<span class="n">shock_expo</span> <span class="o">=</span> <span class="s1">&#39;upper_triangular&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="finite-difference-method">
-<h1>Finite Difference Method<a class="headerlink" href="#finite-difference-method" title="Permalink to this heading">#</a></h1>
-<p>We employ finite differences to solve Model IP from Section 5.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1416,18 +1454,16 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4 Heterogeneous Agents</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">Solution Overview</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">Model Architecture</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-overview">4.1 Solution Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">4.1.1 Model Architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">4.1.2 Training</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters">4.1.3 Model Parameters</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters">Model Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">4.2 Quick Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting">4.3 Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-difference-method">4.4 Finite Difference Method</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finite-difference-method">Finite Difference Method</a></li>
-</ul>
-
   </nav></div>
 
 </div></div>
