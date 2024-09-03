@@ -320,7 +320,8 @@ C_t + I_t^1 + I_t^2 = \alpha K_t^a
 K_t^a = \left[(1-\zeta) \left(K_t^1\right)^{(1 - \tau)}  + \zeta \left( K_t^2\right)^{(1 - \tau)} \right]^
 {\frac 1 {1 - \tau}} 
 \]</div>
-<p>for <span class="math notranslate nohighlight">\(0 \le \zeta &lt; 1\)</span> and <span class="math notranslate nohighlight">\(\tau \ge 0\)</span>.  Agent preferences and the <span class="math notranslate nohighlight">\(Z^1\)</span> and <span class="math notranslate nohighlight">\(Z^2\)</span> processes are identical to the baseline model. The problem is very similar to the single-capital model except that we now have an additional endogenous state variable <span class="math notranslate nohighlight">\(\widehat Y_t = \log(K_t^2/K_t^1)\)</span>. In addition to the model inputs from Chapter 1, we also need to specify the following:</p>
+<p>for <span class="math notranslate nohighlight">\(0 \le \zeta &lt; 1\)</span> and <span class="math notranslate nohighlight">\(\tau \ge 0\)</span>.  Agent preferences and the <span class="math notranslate nohighlight">\(Z^1\)</span> and <span class="math notranslate nohighlight">\(Z^2\)</span> processes are identical to the baseline model. The problem is very similar to the single-capital model except that we now have an additional endogenous state variable <span class="math notranslate nohighlight">\(\widehat Y_t = \log(K_t^2/K_t^1)\)</span>.</p>
+<p>In addition to the model inputs from Chapter 1, we also need to specify the following:</p>
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Input</p></th>
@@ -347,7 +348,8 @@ K_t^a = \left[(1-\zeta) \left(K_t^1\right)^{(1 - \tau)}  + \zeta \left( K_t^2\ri
 </tr>
 </tbody>
 </table>
-<p>We have experienced convergence issues when solving the three-dimensional two-capital model directly, especially with <span class="math notranslate nohighlight">\(\rho \neq 1\)</span>. One way to overcome this is to first run a two-dimensional version of the two-capital (abstracting from <span class="math notranslate nohighlight">\(Z^2\)</span>) for <span class="math notranslate nohighlight">\(\rho=1\)</span> and use the solution to this model as an initial guess for more complex models. To this end we first we load the necessary libraries:</p>
+<p>We have experienced convergence issues when solving the three-dimensional two-capital model directly, especially with <span class="math notranslate nohighlight">\(\rho \neq 1\)</span>. One way to overcome this is to first run a two-dimensional version of the two-capital (abstracting from <span class="math notranslate nohighlight">\(Z^2\)</span>) for <span class="math notranslate nohighlight">\(\rho=1\)</span> and use the solution to this model as an initial guess for more complex models. Even the two-dimensional case may take several hours to run; therefore, we advise against using this Jupyter Notebook directly and instead direct users to use remote-computing resources as described on the GitHub repository.</p>
+<p>To solve the model, we first we load the necessary libraries:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s">&quot;src/3/main_twocapitals_two_dimensions.jl&quot;</span><span class="p">)</span>
