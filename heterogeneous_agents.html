@@ -379,7 +379,7 @@ document.write(`
 <h2>4.1 Solution Overview<a class="headerlink" href="#solution-overview" title="Permalink to this heading">#</a></h2>
 <section id="model-architecture">
 <h3>4.1.1 Model Architecture<a class="headerlink" href="#model-architecture" title="Permalink to this heading">#</a></h3>
-<p>We modify the <code class="docutils literal notranslate"><span class="pre">DeepGalerkinMethod</span></code> code from https://github.com/alialaradi/DeepGalerkinMethod. We construct a feedforward, fully-connected neural network to approximate <span class="math notranslate nohighlight">\(v^e\)</span>, <span class="math notranslate nohighlight">\(v^h\)</span> and <span class="math notranslate nohighlight">\(\kappa\)</span> as functions of the states.</p>
+<p>We modify the <code class="docutils literal notranslate"><span class="pre">DeepGalerkinMethod</span></code> code from the <a class="reference external" href="https://github.com/alialaradi/DeepGalerkinMethod">companion code to Correia et. al 2018</a>. We construct a feedforward, fully-connected neural network to approximate <span class="math notranslate nohighlight">\(v^e\)</span>, <span class="math notranslate nohighlight">\(v^h\)</span> and <span class="math notranslate nohighlight">\(\kappa\)</span> as functions of the states.</p>
 <figure class="align-default" id="neural-network">
 <img alt="_images/neural_network.png" src="_images/neural_network.png" />
 <figcaption>
@@ -923,12 +923,17 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">main_fdm</span><span class="p">(</span><span class="n">nW</span><span class="o">=</span><span class="n">nWealth</span><span class="p">,</span> <span class="n">nZ</span><span class="o">=</span><span class="n">nZ</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">a_e</span><span class="o">=</span><span class="n">a_e</span><span class="p">,</span> <span class="n">a_h</span><span class="o">=</span><span class="n">a_h</span><span class="p">,</span> <span class="n">rho_e</span><span class="o">=</span><span class="n">rho_e</span><span class="p">,</span> <span class="n">rho_h</span><span class="o">=</span><span class="n">rho_h</span><span class="p">,</span> <span class="n">gamma_e</span><span class="o">=</span><span class="n">gamma_e</span><span class="p">,</span> <span class="n">gamma_h</span><span class="o">=</span><span class="n">gamma_h</span><span class="p">,</span> <span class="n">chiUnderline</span><span class="o">=</span><span class="n">chiUnderline</span><span class="p">,</span> <span class="n">action_name</span><span class="o">=</span><span class="n">action_name</span><span class="p">,</span> <span class="n">shock_expo</span><span class="o">=</span><span class="n">shock_expo</span><span class="p">,</span> <span class="n">delta_e</span><span class="o">=</span><span class="n">delta_e</span><span class="p">,</span> <span class="n">delta_h</span><span class="o">=</span><span class="n">delta_h</span><span class="p">,</span> <span class="n">lambda_d</span><span class="o">=</span><span class="n">lambda_d</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">nu</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Program converged. Took 8081 iterations and 65.91 seconds. 2.47% of the time was spent on dealing with the linear systems.
 Parameter            Value     
@@ -1010,6 +1015,7 @@ Exporting matrices&#39; information
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <p>Before we can plot any variables of interest, we need to interpolate on our state space grid. Here we interpolate risk prices linearly using <code class="docutils literal notranslate"><span class="pre">scipy.interpolate.griddata</span></code>.</p>
 <div class="cell tag_hide-output docutils container">
@@ -1089,13 +1095,6 @@ interpolating kappa_final
 <img alt="_images/23cd57b9e9d8fa15e3448130774f1246aabb934b089b2bb9113fbfd34b8b1e86.png" src="_images/23cd57b9e9d8fa15e3448130774f1246aabb934b089b2bb9113fbfd34b8b1e86.png" />
 </div>
 </div>
-<p>We plot an example from the paper:</p>
-<figure class="align-default" id="two-capital">
-<img alt="_images/image_het_fdm.png" src="_images/image_het_fdm.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Example taken from Figure 11 of the paper.</span><a class="headerlink" href="#two-capital" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
 </section>
 </section>
 
