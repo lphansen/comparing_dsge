@@ -314,9 +314,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="elasticities">
+  <p><a href="https://colab.research.google.com/github/lphansen/comparing_dsge/blob/gh-pages/_sources/elasticities.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="elasticities">
 <h1>5 Elasticities<a class="headerlink" href="#elasticities" title="Permalink to this heading">#</a></h1>
-<p>Shock elasticites are computed by solving:</p>
+<p>This Python notebook covers shock elasticities. Shock elasticites are computed by solving:</p>
 <div class="math notranslate nohighlight">
 \[
 \varepsilon_M(t,x) = \nu(x) \cdot \left\{ \sigma_M(x) + \sigma_X(x) \cdot \frac{\partial}{\partial x} \log \mathbb{E}\left[ \left( \frac{M_t}{M_0} \right) \mid X_0 = x \right] \right\}
@@ -483,13 +484,13 @@ $<span class="math notranslate nohighlight">\(
 \end{split}\]</div>
 <p>Currently, this method is only implemented for the heterogeneous agents environment in Section 5, but the user can easily modify the code to adapt to the other environments.</p>
 <p>The solution scripts give us the objects we need: [<code class="docutils literal notranslate"><span class="pre">\mu_X</span></code>, <code class="docutils literal notranslate"><span class="pre">\sigma_X</span></code>, <code class="docutils literal notranslate"><span class="pre">\mulogM</span></code>, <code class="docutils literal notranslate"><span class="pre">\sigmalogM</span></code>, <code class="docutils literal notranslate"><span class="pre">\mulogS</span></code>, <code class="docutils literal notranslate"><span class="pre">\sigmalogS</span></code>] to perform simulations. These objects are interpolated on the state space grid using the <code class="docutils literal notranslate"><span class="pre">scipy.interpolate.RegularGridInterpolator</span></code> function. We initialize the states at <span class="math notranslate nohighlight">\(X_0\)</span> and simulate <code class="docutils literal notranslate"><span class="pre">sim_num</span></code>*100 independent Brownian motion processes <span class="math notranslate nohighlight">\({B_t}\)</span> with length <span class="math notranslate nohighlight">\(T\)</span>, use these to evaluate <span class="math notranslate nohighlight">\({X_t}\)</span>. Using the interpolations, we can compute <span class="math notranslate nohighlight">\({M_t/M_0}\)</span> and <span class="math notranslate nohighlight">\({S_t/S_0}\)</span> and thus estimate the expectation term.  We repeat this with initial state <span class="math notranslate nohighlight">\(X_0+dx\)</span> and use this to estimate the derivative of the expectation.</p>
-<p>Similar to the finite differences code, <code class="docutils literal notranslate"><span class="pre">main_sim_shock_elasticity</span></code> takes the same inputs as the main solution script, with the addition of [<code class="docutils literal notranslate"><span class="pre">W_percentile</span></code>,<code class="docutils literal notranslate"><span class="pre">Z_percentile</span></code>,<code class="docutils literal notranslate"><span class="pre">V_percentile</span></code>], which characterise the initial state <span class="math notranslate nohighlight">\(X_0\)</span>. We recommend using a remote computing resource to run this program, which may take around an hour per elasticity computed.</p>
+<p>Similar to the finite differences code, <code class="docutils literal notranslate"><span class="pre">main_sim_shock_elasticity</span></code> takes the same inputs as the main solution script, with the addition of the state percentiles [<code class="docutils literal notranslate"><span class="pre">W_percentile</span></code>,<code class="docutils literal notranslate"><span class="pre">Z_percentile</span></code>,<code class="docutils literal notranslate"><span class="pre">V_percentile</span></code>], which characterise the initial state <span class="math notranslate nohighlight">\(X_0\)</span>. We recommend using a remote computing resource to run this program, which may take around an hour per elasticity computed.</p>
 <p>In addition, the <code class="docutils literal notranslate"><span class="pre">main_sim_shock_elasticity</span></code> script can be edited to change the following parameters:</p>
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
 <th class="head"><p>Description</p></th>
-<th class="head"><p>Default Value</p></th>
+<th class="head"><p>Default Value for 3D case</p></th>
 </tr>
 </thead>
 <tbody>
@@ -543,16 +544,17 @@ $<span class="math notranslate nohighlight">\(
 </tr>
 </tbody>
 </table>
-<p>The script saves the <code class="docutils literal notranslate"><span class="pre">exposure_elasticity</span></code> and <code class="docutils literal notranslate"><span class="pre">price_elasticity</span></code>. There is a chance that the simulation fails as <span class="math notranslate nohighlight">\(X_t\)</span> may move outside the state space grid. The total number of successful simulations for <span class="math notranslate nohighlight">\(X_0\)</span> and <span class="math notranslate nohighlight">\(X_0+dx\)</span> are recorded as <code class="docutils literal notranslate"><span class="pre">initial_success_count</span></code> and <code class="docutils literal notranslate"><span class="pre">derivative_success_count</span></code>, respectively. By default, intermediate variables, such as <span class="math notranslate nohighlight">\(X_t/X_0\)</span>, are not saved; this can be altered by setting <code class="docutils literal notranslate"><span class="pre">return_type</span></code>=0. We now demonstrate the code:</p>
+<p>The script saves the <code class="docutils literal notranslate"><span class="pre">exposure_elasticity</span></code> and <code class="docutils literal notranslate"><span class="pre">price_elasticity</span></code>. There is a chance that the simulation fails as <span class="math notranslate nohighlight">\(X_t\)</span> may move outside the state space grid. The total number of successful simulations for <span class="math notranslate nohighlight">\(X_0\)</span> and <span class="math notranslate nohighlight">\(X_0+dx\)</span> are recorded as <code class="docutils literal notranslate"><span class="pre">initial_success_count</span></code> and <code class="docutils literal notranslate"><span class="pre">derivative_success_count</span></code>, respectively. By default, intermediate variables, such as <span class="math notranslate nohighlight">\(X_t/X_0\)</span>, are not saved; this can be altered by setting <code class="docutils literal notranslate"><span class="pre">return_type</span></code>=0.</p>
+<p>Now we demonstrate the code for the 2D Model IP case.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">interpolate</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;src/4&quot;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">main_sim_shock_elasticity</span> <span class="kn">import</span> <span class="n">main</span>
-<span class="kn">from</span> <span class="nn">plot</span> <span class="kn">import</span> <span class="n">return_sim_elasticity</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;src/5&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">main_sim_shock_elasticity</span> <span class="kn">import</span> <span class="n">main</span><span class="p">,</span> <span class="n">read_txt_stationary_density</span><span class="p">,</span> <span class="n">marginal_quantile_func_factory</span><span class="p">,</span><span class="n">read_dat_state</span>
+<span class="kn">from</span> <span class="nn">plot</span> <span class="kn">import</span> <span class="n">return_fdm_solution</span><span class="p">,</span> <span class="n">return_elasticity</span>
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;../..&quot;</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
@@ -565,56 +567,37 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 </div>
-<p>We provide example parameters which follow the default example in Chapter 4 of this notebook. For illustration, we initialize <span class="math notranslate nohighlight">\(W\)</span> and <span class="math notranslate nohighlight">\(Z^1\)</span> at their medians, and <span class="math notranslate nohighlight">\(Z^2\)</span> at its 90th percentile.</p>
-<div class="cell tag_hide-cell docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell content</span>
-<span class="expanded">Hide code cell content</span>
-</summary>
+<p>We provide example parameters which follow the default example in Chapter 4 of this notebook. For illustration, we initialize <span class="math notranslate nohighlight">\(W\)</span> at its median and and <span class="math notranslate nohighlight">\(Z^1\)</span> at its 90th percentile.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chiUnderline</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">gamma_e</span> <span class="o">=</span> <span class="mf">4.0</span>
-<span class="n">a_e</span> <span class="o">=</span> <span class="mf">0.0922</span>
-<span class="n">a_h</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="n">gamma_h</span> <span class="o">=</span> <span class="mf">4.0</span>
-<span class="n">delta_e</span> <span class="o">=</span> <span class="mf">0.0115</span>
-<span class="n">delta_h</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">lambda_d</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="n">rho_e</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">rho_h</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">nu</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">V_bar</span> <span class="o">=</span> <span class="mf">0.0000063030303030303026</span>
-<span class="n">sigma_K_norm</span> <span class="o">=</span> <span class="mf">3.1707442821755683</span>
-<span class="n">sigma_Z_norm</span> <span class="o">=</span> <span class="mf">19.835431735873996</span>
-<span class="n">sigma_V_norm</span> <span class="o">=</span> <span class="mf">0.0010882177801089308</span>
-<span class="n">wMin</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">wMax</span> <span class="o">=</span> <span class="mf">0.99</span>
-<span class="n">nWealth</span> <span class="o">=</span> <span class="mi">180</span>
-<span class="n">nZ</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="n">nV</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="n">seed</span> <span class="o">=</span> <span class="mi">256</span>
-<span class="n">n_layers</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">units</span> <span class="o">=</span> <span class="mi">16</span>
-<span class="n">points_size</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">iter_num</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">penalization</span> <span class="o">=</span> <span class="mi">10000</span>
-<span class="n">BFGS_maxiter</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">BFGS_maxfun</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">action_name</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
-<span class="n">shock_expo</span> <span class="o">=</span> <span class="s1">&#39;upper_triangular&#39;</span>
-<span class="n">W_percentile</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">Z_percentile</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">V_percentile</span> <span class="o">=</span> <span class="mf">0.9</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chiUnderline</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">a_e</span><span class="o">=</span><span class="mf">0.0922</span>
+<span class="n">a_h</span><span class="o">=</span><span class="mf">0.085</span>
+<span class="n">gamma_e</span><span class="o">=</span><span class="mf">2.0</span>
+<span class="n">gamma_h</span><span class="o">=</span><span class="mf">2.0</span>
+<span class="n">delta_e</span><span class="o">=</span><span class="mf">0.03</span>
+<span class="n">delta_h</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="n">lambda_d</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="n">rho_e</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">rho_h</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">nu</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="n">nW</span><span class="o">=</span><span class="mi">180</span>
+<span class="n">nZ</span><span class="o">=</span><span class="mi">30</span>
+<span class="n">shock_expo</span><span class="o">=</span><span class="s1">&#39;upper_triangular&#39;</span>
+<span class="n">action_name</span><span class="o">=</span><span class="s1">&#39;test&#39;</span>
+<span class="n">W_percentile</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">Z_percentile</span><span class="o">=</span><span class="mf">0.9</span>
+<span class="n">initial_index</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <p>Next, we run the simulation. This can take more than an hour using default settings.</p>
-<div class="cell tag_hide-output docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">main</span><span class="p">(</span><span class="n">chiUnderline</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">gamma_e</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">a_e</span> <span class="o">=</span> <span class="mf">0.0922</span><span class="p">,</span> <span class="n">a_h</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">gamma_h</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">delta_e</span> <span class="o">=</span> <span class="mf">0.0115</span><span class="p">,</span> <span class="n">delta_h</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">lambda_d</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">rho_e</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">rho_h</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">nu</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">V_bar</span> <span class="o">=</span> <span class="mf">0.0000063030303030303026</span><span class="p">,</span> <span class="n">sigma_K_norm</span> <span class="o">=</span> <span class="mf">3.1707442821755683</span><span class="p">,</span> <span class="n">sigma_Z_norm</span> <span class="o">=</span> <span class="mf">19.835431735873996</span><span class="p">,</span> <span class="n">sigma_V_norm</span> <span class="o">=</span> <span class="mf">0.0010882177801089308</span><span class="p">,</span> <span class="n">wMin</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">wMax</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">,</span> <span class="n">nWealth</span> <span class="o">=</span> <span class="mi">180</span><span class="p">,</span> <span class="n">nZ</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">nV</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span> <span class="n">n_layers</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="n">points_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">iter_num</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">penalization</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">BFGS_maxiter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">BFGS_maxfun</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">action_name</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">shock_expo</span> <span class="o">=</span> <span class="s1">&#39;upper_triangular&#39;</span><span class="p">,</span> <span class="n">W_percentile</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">Z_percentile</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">V_percentile</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">main</span><span class="p">(</span><span class="n">chiUnderline</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">a_e</span><span class="o">=</span><span class="mf">0.0922</span><span class="p">,</span> <span class="n">a_h</span><span class="o">=</span><span class="mf">0.085</span><span class="p">,</span> <span class="n">gamma_e</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">gamma_h</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">delta_e</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">delta_h</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">lambda_d</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+     <span class="n">rho_e</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">rho_h</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">nW</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">nZ</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">shock_expo</span><span class="o">=</span><span class="s1">&#39;upper_triangular&#39;</span><span class="p">,</span> <span class="n">action_name</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">W_percentile</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">Z_percentile</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">initial_index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -622,7 +605,7 @@ $<span class="math notranslate nohighlight">\(
 <p>We now load the results and plot an example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">return_sim_elasticity</span><span class="p">(</span><span class="n">shock_expo</span> <span class="o">=</span> <span class="n">shock_expo</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">,</span> <span class="n">chiUnderline</span> <span class="o">=</span> <span class="n">chiUnderline</span><span class="p">,</span> <span class="n">a_e</span> <span class="o">=</span> <span class="n">a_e</span><span class="p">,</span> <span class="n">a_h</span> <span class="o">=</span> <span class="n">a_h</span><span class="p">,</span> <span class="n">gamma_e</span> <span class="o">=</span> <span class="n">gamma_e</span><span class="p">,</span> <span class="n">gamma_h</span> <span class="o">=</span> <span class="n">gamma_h</span><span class="p">,</span> <span class="n">psi_e</span> <span class="o">=</span> <span class="n">rho_e</span><span class="p">,</span> <span class="n">psi_h</span> <span class="o">=</span> <span class="n">rho_h</span><span class="p">,</span> <span class="n">delta_e</span> <span class="o">=</span> <span class="n">delta_e</span><span class="p">,</span> <span class="n">delta_h</span> <span class="o">=</span> <span class="n">delta_h</span><span class="p">,</span> <span class="n">lambda_d</span> <span class="o">=</span> <span class="n">lambda_d</span><span class="p">,</span> <span class="n">nu</span> <span class="o">=</span> <span class="n">nu</span><span class="p">,</span> <span class="n">n_layers</span> <span class="o">=</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="n">units</span><span class="p">,</span> <span class="n">iter_num</span> <span class="o">=</span> <span class="n">iter_num</span><span class="p">,</span> <span class="n">points_size</span> <span class="o">=</span> <span class="n">points_size</span><span class="p">,</span> <span class="n">penalization</span> <span class="o">=</span> <span class="n">penalization</span><span class="p">,</span> <span class="n">action_name</span> <span class="o">=</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">W_percentile</span> <span class="o">=</span> <span class="n">W_percentile</span><span class="p">,</span> <span class="n">Z_percentile</span> <span class="o">=</span> <span class="n">Z_percentile</span><span class="p">,</span> <span class="n">V_percentile</span> <span class="o">=</span> <span class="n">V_percentile</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elasticity</span> <span class="o">=</span> <span class="n">return_elasticity</span><span class="p">(</span><span class="n">shock_expo</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">nW</span><span class="p">,</span> <span class="n">chiUnderline</span><span class="p">,</span> <span class="n">a_e</span><span class="p">,</span> <span class="n">a_h</span><span class="p">,</span> <span class="n">gamma_e</span><span class="p">,</span> <span class="n">gamma_h</span><span class="p">,</span> <span class="n">rho_e</span><span class="p">,</span> <span class="n">rho_h</span><span class="p">,</span> <span class="n">delta_e</span><span class="p">,</span> <span class="n">delta_h</span><span class="p">,</span> <span class="n">lambda_d</span><span class="p">,</span> <span class="n">nu</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">nZ</span><span class="p">,</span> <span class="n">W_percentile</span><span class="p">,</span> <span class="n">Z_percentile</span><span class="p">,</span> <span class="n">initial_index</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -631,11 +614,11 @@ $<span class="math notranslate nohighlight">\(
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">sim</span><span class="p">[</span><span class="s1">&#39;elasticity&#39;</span><span class="p">][</span><span class="s1">&#39;price_elasticity&#39;</span><span class="p">],</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">)</span>
-<span class="n">axes</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Model RF&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">elasticity</span><span class="p">[</span><span class="s1">&#39;exposure_elasticity&#39;</span><span class="p">],</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">)</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Model IP&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
 <span class="n">axes</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-<span class="c1"># axes.set_ylim([0,0.08])</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.25</span><span class="p">])</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -643,7 +626,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a6d978fa6b963388869a45e34cab5b087cc936cf5cb594f7c5f420c2574a7867.png" src="_images/a6d978fa6b963388869a45e34cab5b087cc936cf5cb594f7c5f420c2574a7867.png" />
+<img alt="_images/32252b748395a5b1007f6621f125cf20a4a3a07b671e1f56d81849649a4fbeb6.png" src="_images/32252b748395a5b1007f6621f125cf20a4a3a07b671e1f56d81849649a4fbeb6.png" />
 </div>
 </div>
 </section>

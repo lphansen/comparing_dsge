@@ -320,9 +320,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="heterogeneous-agents">
+  <p><a href="https://colab.research.google.com/github/lphansen/comparing_dsge/blob/gh-pages/_sources/heterogeneous_agents.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="heterogeneous-agents">
 <h1>4 Heterogeneous Agents<a class="headerlink" href="#heterogeneous-agents" title="Permalink to this heading">#</a></h1>
-<p>Consider the environment in section 5. We need to solve the following:</p>
+<p>This Python notebook covers the environment in section 5. We need to solve the following:</p>
 <ol class="arabic simple">
 <li><p>Expert’s HJB equation</p></li>
 </ol>
@@ -916,7 +917,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <span class="n">nu</span><span class="o">=</span><span class="mf">0.1</span>
 <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="n">nWealth</span><span class="o">=</span><span class="mi">180</span>
-<span class="n">nZ</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">nZ</span><span class="o">=</span><span class="mi">30</span>
 <span class="n">shock_expo</span> <span class="o">=</span> <span class="s1">&#39;upper_triangular&#39;</span>
 <span class="n">action_name</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
 </pre></div>
@@ -935,7 +936,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Program converged. Took 8081 iterations and 65.91 seconds. 2.47% of the time was spent on dealing with the linear systems.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Program converged. Took 8089 iterations and 199.59 seconds. 2.49% of the time was spent on dealing with the linear systems.
 Parameter            Value     
 nu_newborn           0.1       
 lambda_d             0.0       
@@ -950,7 +951,7 @@ sigma_Z_norm         0.049798518005773194
 sigma_V_norm         0.0       
 sigma_Vtilde_norm    0.0       
 nWealth              180       
-nZ                   10        
+nZ                   30        
 nV                   0         
 nVtilde              0         
 nDims                2         
@@ -981,7 +982,7 @@ numSds               5
 wMin                 0.001     
 wMax                 0.999     
 logW                 -1        
-folderName           output/test/upper_triangular/dt_0.1/nW_180_nZ_10/chiUnderline_1.000/a_e_0.092_a_h_0.085/gamma_e_2.000_gamma_h_2.000/rho_e_1.000_rho_h_1.000/delta_e_0.030_delta_h_0.010/lambda_d_0.000_nu_0.100
+folderName           output/test/upper_triangular/dt_0.1/nW_180_nZ_30/chiUnderline_1.000/a_e_0.092_a_h_0.085/gamma_e_2.000_gamma_h_2.000/rho_e_1.000_rho_h_1.000/delta_e_0.030_delta_h_0.010/lambda_d_0.000_nu_0.100
 overwrite            Yes       
 verbatim             -1        
 exportFreq           1000000   
