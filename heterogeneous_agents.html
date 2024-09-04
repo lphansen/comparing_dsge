@@ -531,7 +531,7 @@ L = {L}^e_{HJB} + {L}^h_{HJB} + p{L}_{\kappa}
 <td><p><span class="math notranslate nohighlight">\(\mu_2\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sigma_K_norm</span></code>, <code class="docutils literal notranslate"><span class="pre">sigma_Z_norm</span></code>, <code class="docutils literal notranslate"><span class="pre">sigma_V_norm</span></code></p></td>
-<td><p>Normalization for variances; these are multiplied by the covariance matrix specified in <code class="docutils literal notranslate"><span class="pre">utils_para</span></code> to yield <span class="math notranslate nohighlight">\(\sigma_k, \sigma_1, \sigma2\)</span></p></td>
+<td><p>Normalization for variances; these are multiplied by the covariance matrix specified in <code class="docutils literal notranslate"><span class="pre">utils_para</span></code> to yield <span class="math notranslate nohighlight">\(\sigma_k, \sigma_1, \sigma_2\)</span></p></td>
 <td></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">wMin</span></code>, <code class="docutils literal notranslate"><span class="pre">wMax</span></code></p></td>
@@ -596,12 +596,12 @@ L = {L}^e_{HJB} + {L}^h_{HJB} + p{L}_{\kappa}
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">zmin</span></code>,<code class="docutils literal notranslate"><span class="pre">zmax</span></code></p></td>
 <td><p>Grid boundaries for <span class="math notranslate nohighlight">\(Z^1\)</span></p></td>
 <td></td>
-<td><p><span class="math notranslate nohighlight">\(\mu_1 \pm SD Var{Z_1|Z_2=\mu_2}\)</span> where <span class="math notranslate nohighlight">\(S=\)</span><code class="docutils literal notranslate"><span class="pre">numSds</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu_1 \pm SD\cdot Var(Z_1|Z_2=\mu_2)\)</span> where <span class="math notranslate nohighlight">\(SD=\)</span><code class="docutils literal notranslate"><span class="pre">numSds</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">vmin</span></code>,<code class="docutils literal notranslate"><span class="pre">vmax</span></code></p></td>
 <td><p>Grid boundaries for <span class="math notranslate nohighlight">\(Z^2\)</span></p></td>
 <td></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">vmin</span></code> = <span class="math notranslate nohighlight">\(10^{-8}\)</span>,<code class="docutils literal notranslate"><span class="pre">vmax</span></code> = <span class="math notranslate nohighlight">\(\mu_2 + SD Var{Z_2|Z_2=\mu_2}\)</span> where <span class="math notranslate nohighlight">\(S=\)</span><code class="docutils literal notranslate"><span class="pre">numSds</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vmin</span></code> = <span class="math notranslate nohighlight">\(10^{-8}\)</span>,<code class="docutils literal notranslate"><span class="pre">vmax</span></code> = <span class="math notranslate nohighlight">\(\mu_2 + SD\cdot Var(Z_2|Z_2=\mu_2)\)</span> where <span class="math notranslate nohighlight">\(SD=\)</span><code class="docutils literal notranslate"><span class="pre">numSds</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -1059,7 +1059,7 @@ interpolating kappa_final
 <p>Here we plot the expert capital risk price and capital share as they vary with <span class="math notranslate nohighlight">\(W\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="n">W</span> <span class="o">=</span> <span class="n">fdm_result</span><span class="p">[</span><span class="s1">&#39;W&#39;</span><span class="p">][</span><span class="s1">&#39;W&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">W</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fdm_result</span><span class="p">[</span><span class="s1">&#39;PiE_final_capital&#39;</span><span class="p">],</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -1086,14 +1086,10 @@ interpolating kappa_final
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">])</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Expert capital share&quot;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;W&#39;)
-</pre></div>
-</div>
-<img alt="_images/23cd57b9e9d8fa15e3448130774f1246aabb934b089b2bb9113fbfd34b8b1e86.png" src="_images/23cd57b9e9d8fa15e3448130774f1246aabb934b089b2bb9113fbfd34b8b1e86.png" />
 </div>
 </div>
 </section>
