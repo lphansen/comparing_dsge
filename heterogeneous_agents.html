@@ -856,7 +856,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <p>We provide an example plot below. Notice that we use <code class="docutils literal notranslate"><span class="pre">results['eva_V_10']</span></code> and <code class="docutils literal notranslate"><span class="pre">results['eva_V_90']</span></code> to extract the variables of interest evaluated at <span class="math notranslate nohighlight">\(Z^1=0\)</span> and <span class="math notranslate nohighlight">\(Z^2\)</span> at its 10th and 90th percentiles, respectively.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mf">4.5</span><span class="p">))</span>
 <span class="n">W_dense</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;eva_V_50&#39;</span><span class="p">][</span><span class="s1">&#39;W&#39;</span><span class="p">])</span>
 <span class="n">W_sparse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;W&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">W_dense</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;eva_V_10&#39;</span><span class="p">][</span><span class="s1">&#39;PiE_NN&#39;</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">)</span>
@@ -871,13 +871,15 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">])</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Risk price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Model RF&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9897f50d4fc918af41a081f94fe662240899bf69494f7b016d1a6f8710a1d588.png" src="_images/9897f50d4fc918af41a081f94fe662240899bf69494f7b016d1a6f8710a1d588.png" />
+<img alt="_images/f58b3fd9d9a5e0ed1b75bbd2cad94788e77c19aa1767b22340bdd78602925c30.png" src="_images/f58b3fd9d9a5e0ed1b75bbd2cad94788e77c19aa1767b22340bdd78602925c30.png" />
 </div>
 </div>
 </section>
@@ -1090,6 +1092,9 @@ interpolating kappa_final
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7064e3b3e9bd67f19ce7dad9e2ada481ecf808af4fdb3939d9c992481f528898.png" src="_images/7064e3b3e9bd67f19ce7dad9e2ada481ecf808af4fdb3939d9c992481f528898.png" />
 </div>
 </div>
 </section>
