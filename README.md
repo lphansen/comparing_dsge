@@ -1,6 +1,8 @@
 # Macro Finance
 
-This repository contains the replication files for the research conducted by [Hansen, Khorrami, and Tourre (2024)](https://github.com/lphansen/macro-finance/blob/main/Comparing_DSGE_Models_June11.pdf). The files are organized into five subfolders, each corresponding to specific sections of the paper:
+This repository contains the replication files for the research conducted by [Hansen, Khorrami, and Tourre (2024)](https://github.com/lphansen/macro-finance/blob/main/Comparing_DSGE_Models_June11.pdf). Note that a separate Jupyter Book can be found [`here`](https://lphansen.github.io/comparing_dsge/intro.html), which provides a more beginner-friendly guide to the code. 
+
+The files are organized into five subfolders, each corresponding to specific sections of the paper:
 
 1. **Section 4.4:** [`1_single_capital_with_stochastic_volatility`](https://github.com/lphansen/macro-finance/tree/main/1_single_capital_with_stochastic_volatility)
 2. **Section 4.5:** [`2_single_capital_with_structure_ambiguity`](https://github.com/lphansen/macro-finance/tree/main/2_single_capital_with_structure_ambiguity)
